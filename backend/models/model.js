@@ -27,30 +27,37 @@ const userShema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const CartAccountUSer = new mongoose.Schema({
-  movieID: {
+const CartUser = new mongoose.Schema({
+  ProductID: {
     type: String,
     required: true,
   },
-  nameMovie: {
+  NameProduct: {
     type: String,
     required: true,
-    unique: true,
+  },
+  Image: {
+    type: String,
+    required: true,
   },
   price: {
     type: Number,
     required: true,
   },
-  showtime: {
+  Size: {
     type: String,
     required: true,
   },
-  author: {
+  Color: {
     type: String,
     required: true,
   },
-  Category: {
+  Type: {
     type: String,
+    required: true,
+  },
+  Amount: {
+    type: Number,
     required: true,
   },
   AccountUSer: {
@@ -59,17 +66,21 @@ const CartAccountUSer = new mongoose.Schema({
   },
 });
 
-const HistoryAccountUSer = new mongoose.Schema(
+const PurchaseHistory = new mongoose.Schema(
   {
     codeOrders: {
       type: Number,
       required: true,
     },
-    movieID: {
+    ProductID: {
       type: String,
       required: true,
     },
-    nameMovie: {
+    NameProduct: {
+      type: String,
+      required: true,
+    },
+    Image: {
       type: String,
       required: true,
     },
@@ -77,36 +88,24 @@ const HistoryAccountUSer = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    showtime: {
+    Size: {
       type: String,
       required: true,
     },
-    author: {
+    Color: {
       type: String,
       required: true,
     },
-    amount: {
+    Type: {
+      type: String,
+      required: true,
+    },
+    Amount: {
       type: Number,
       required: true,
     },
-    Category: {
-      type: String,
-      required: true,
-    },
-    total: {
+    Total: {
       type: Number,
-      required: true,
-    },
-    nameUser: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-    },
-    seats:{
-      type: Array,
       required: true,
     },
     AccountUSer: {
@@ -117,17 +116,25 @@ const HistoryAccountUSer = new mongoose.Schema(
   { timestamps: true }
 );
 
-const TicketMovie = new mongoose.Schema({
-  namemovie: {
+const Product = new mongoose.Schema({
+  NameProduct: {
     type: String,
     required: true,
     unique: true,
   },
-  background: {
+  image: {
+    type: Array,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  Size: {
     type: String,
     required: true,
   },
-  image: {
+  Color: {
     type: String,
     required: true,
   },
@@ -135,46 +142,18 @@ const TicketMovie = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  time: {
+  Introduce: {
     type: String,
     required: true,
   },
-  releasedate: {
-    type: String,
-    required: true,
-  },
-  showtime: {
-    type: Array,
-    required: true,
-  },
-  author: {
-    type: String,
-    required: true,
-  },
-  Category: {
-    type: String,
-    required: true,
-  },
-  introduce: {
-    type: String,
-    required: true,
-  },
-  seats: {
+  warehouse: {
     type: Number,
     required: true,
   },
-  Room:{
-    type: Number,
-    required: true,
-  },
-  seatsBooked: {
-    type: Array,
-    required: true,
-  },
-  commment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
+  comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
 });
 
-const commentMovie = new mongoose.Schema({
+const CommentProduct = new mongoose.Schema({
   nameUser: {
     type: String,
     required: true,
@@ -187,57 +166,55 @@ const commentMovie = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  idMovie: {
+  ProductID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Movies",
+    ref: "Products",
   },
 });
 
-const consolidation = new mongoose.Schema(
-  {
-    nameAccount: {
-      type: String,
-      required: true,
-    },
-    nameMovie: {
-      type: String,
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    dateTime:{
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    total: {
-      type: Number,
-      required: true,
-    },
-  }
-);
+const consolidation = new mongoose.Schema({
+  NameAccount: {
+    type: String,
+    required: true,
+  },
+  NameProduct: {
+    type: String,
+    required: true,
+  },
+  Amount: {
+    type: Number,
+    required: true,
+  },
+  dateTime: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true,
+  },
+});
 
 //user
 let Users = mongoose.model("AccountUSers", userShema);
-//movie
-let Movie = mongoose.model("Movies", TicketMovie);
+//Product
+let Products = mongoose.model("Products", Product);
 //cmt
-let Comment = mongoose.model("Comments", commentMovie);
+let Comment = mongoose.model("Comments", CommentProduct);
 //cart
-let Cart = mongoose.model("CartUSers", CartAccountUSer);
+let Cart = mongoose.model("CartUSers", CartUser);
 //histori order
-let Orderhistory = mongoose.model("HistoryUsers", HistoryAccountUSer);
+let Orderhistory = mongoose.model("HistoryUsers", PurchaseHistory);
 //sum order
 let OrderConsolidation = mongoose.model("TotalOdered", consolidation);
 
 module.exports = {
   Users,
-  Movie,
+  Products,
   Comment,
   Cart,
   OrderConsolidation,

@@ -6,7 +6,7 @@ const bodyparser = require("body-parser");
 const morgan = require("morgan");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
-const movieRouter = require("./routes/movie");
+const productRouter = require("./routes/product");
 const CommentRouter = require("./routes/cmt");
 const CartRouter = require("./routes/cart");
 const HistoryRouter = require("./routes/history");
@@ -20,7 +20,7 @@ app.use(morgan("common"));
 
 dotenv.config();
 
-moongoose.connect(process.env.MOOGODB_CONNECT_DATABASE_FIX, (err) => {
+moongoose.connect(process.env.MOOGODB_CONNECT_DATABASE, (err) => {
   if (err) {
     console.log("Error : " + err);
   } else {
@@ -34,10 +34,10 @@ app.listen(5000, () => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
-app.use("/api/movie", movieRouter);
+app.use("/api/product", productRouter);
 app.use("/api/comment", CommentRouter);
 app.use("/api/cart", CartRouter);
-app.use("/api/Historybought", HistoryRouter);
+app.use("/api/History", HistoryRouter);
 app.use("/api/TotalOrder", TotalRouter);
 
 
