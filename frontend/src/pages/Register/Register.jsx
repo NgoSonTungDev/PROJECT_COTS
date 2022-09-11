@@ -75,8 +75,8 @@ const Register = () => {
 
   const checkInputs = () => {
     setCheck(true);
-    if (usernameValue === "") {
-      setErrorFor(username, "Username cannot be blank");
+    if (usernameValue === "" || usernameValue.length < 10) {
+      setErrorFor(username, "Username cannot be blank or must have 10 characters");
       setCheck(false);
       a = false;
     } else {
@@ -97,8 +97,8 @@ const Register = () => {
       b = true;
     }
 
-    if (passwordValue === "") {
-      setErrorFor(password, "Password cannot be blank");
+    if (passwordValue === "" || passwordValue.length < 6 ) {
+      setErrorFor(password, "Password cannot be blank or must have 6 characters");
       setCheck(false);
       c = false;
     } else {
@@ -106,8 +106,8 @@ const Register = () => {
       c = true;
     }
 
-    if (password2Value === "") {
-      setErrorFor(password2, "Password2 cannot be blank");
+    if (password2Value === "" || password2Value.length < 6 ) {
+      setErrorFor(password2, "Password2 cannot be blank or must have 6 characters");
       setCheck(false);
       d = false;
     } else if (passwordValue !== password2Value) {
@@ -150,6 +150,7 @@ const Register = () => {
               <label for="username">Username</label>
               <input
                 type="text"
+                minLength="6"
                 placeholder="NguyenVanA"
                 id="username"
                 value={usernameValue}
@@ -163,7 +164,7 @@ const Register = () => {
               <label for="username">Email</label>
               <input
                 type="email"
-                placeholder="a@gmail.com"
+                placeholder="nguyenvana@gmail.com"
                 id="email"
                 value={emailValue}
                 onChange={(e) => setEmailValue(e.target.value)}
@@ -176,6 +177,7 @@ const Register = () => {
               <label for="username">Password</label>
               <input
                 type="password"
+                minLength="6"
                 placeholder="Password"
                 id="password"
                 value={passwordValue}
@@ -189,6 +191,7 @@ const Register = () => {
               <label for="username">Password check</label>
               <input
                 type="password"
+                minLength="6"
                 placeholder="Password two"
                 id="password2"
                 value={password2Value}

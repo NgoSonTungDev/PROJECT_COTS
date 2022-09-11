@@ -9,30 +9,58 @@ const Navbar = () => {
   return (
     <div>
       <div className="container_narbar">
-        <div className="container_narbar_logo">
-          <Link to="/home-page-ticket-movie">
-            <p>RIO cinema</p>
-          </Link>
+        <div className="container_narbar_intro">
+          <div className="container_narbar_intro_1">
+            <div className="container_narbar_intro_1_contact">
+              <span>
+                <i class="bx bx-envelope"></i>
+                <span>mafline@gamil.com</span>
+              </span>
+              <span>
+                <i class="bx bx-phone"></i>
+                <span>0386762927</span>
+              </span>
+            </div>
+            <div className="container_narbar_intro_1_contact">
+              <span>
+                <i class="bx bxl-twitter"></i>
+              </span>
+              <span>
+                <i class="bx bxl-facebook"></i>
+              </span>
+              <span>
+                <i class="bx bxl-instagram"></i>
+              </span>
+              <span>
+                <i class="bx bxl-skype"></i>
+              </span>
+            </div>
+          </div>
         </div>
-
-        {admin === "false" && (
-          <div className="container_narbar_content">
-            <div className="container_narbar_content_name">
-              <p>{username}</p>
-            </div>
-            <div className="container_narbar_content_user">
-            </div>
-          </div>
-        )}
-        {admin === "true" && (
-          <div className="container_narbar_content">
-            <div className="container_narbar_content_name">
-              <p>Tài khoản admin</p>
-            </div>
-            <div className="container_narbar_content_user"> 
-            </div>
-          </div>
-        )}
+        <div className="container_narbar_main">
+          <nav>
+            <label class="logo">MAFLINE</label>
+            <ul>
+              <li>
+                <a class="active" href="#">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#">Services</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">Feedback</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   );

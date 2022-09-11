@@ -1,165 +1,125 @@
 .container_narbar {
-  position: fixed;
-  z-index: 50;
   width: 100%;
-  height: 60px;
-  justify-content: space-between;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  z-index: 50;
+  position: fixed;
+  z-index: 100;
+  .container_narbar_intro {
+    width: 100%;
+    height: 40px;
+    transition: 0.5s all linear;
+    overflow: hidden;
+    background-color: black;
+    .container_narbar_intro_1 {
+      color: white;
+      align-items: center;
+      width: 75%;
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      margin-left: 12.5%;
+      .container_narbar_intro_1_contact {
+        // transform: translateY(0px);
+        i {
+          transform: translateY(2px);
 
-  .container_narbar_logo {
-    width: 250px;
-    height: 50px;
-    margin-left: 120px;
-    align-items: center;
-    display: flex;
-    // position: absolute;
-    img {
-      width: 50px;
-    }
-    a {
-      text-decoration: none;
-    }
-    p {
-      margin-top: 9px;
-      margin-left: 10px;
-      font-weight: 700;
-      font-size: 32px;
-      text-transform: uppercase;
-      color: #fff;
-
-      &:hover {
-        cursor: pointer;
-
-        color: #0984e3;
+          padding-bottom: 0;
+          font-size: 18px;
+        }
+        span {
+          margin-left: 12px;
+          align-items: center;
+        }
       }
     }
   }
-
-
-
-  .container_narbar_content {
-    display: flex;
-    margin-right: 40px;
-    margin-top: 8px;
-    .container_narbar_content_1 {
-      align-items: center;
-      ul {
-        display: flex;
-        padding: 10px 20px;
-        li {
-          .quanly {
-            margin-top: 20px;
-            position: absolute;
-            width: 220px;
-            height: 0;
-            overflow: hidden;
-            background-color: #3498db;
-            ul {
-              width: 90%;
-              margin-left: 0;
-              list-style: none;
-              text-decoration: none;
-              flex-direction: column;
-              li {
-                width: 100%;
-                font-size: 17px;
-                padding: 13px 0;
-                margin-left: 0;
-              }
-            }
-          }
-
-          &:hover {
-            color: #d63031;
-            text-decoration: underline;
-          }
-
-          cursor: pointer;
-          margin-right: 30px;
-          font-weight: 500;
-          font-size: 17px;
-          list-style: none;
-          text-decoration: none;
-          color: #fff;
-        }
-      }
+  .container_narbar_main {
+    width: 100%;
+    nav {
+      background: #333333;
+      height: 80px;
+      width: 100%;
     }
-    .container_narbar_content_user {
-      cursor: pointer;
-      right: 8px;
-      position: relative;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: url(https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      object-fit: cover;
-
-      a {
-        text-decoration: none;
-        color: #fff;
-      }
-
-      .container_narbar_content_2 {
-        display: none;
-        width: 220px;
-        // height: auto;
-        background-color: #0984e3;
-        position: absolute;
-        top:60px;
-        right: 0px;
-        background-color: #000;
-        .arrow-up {
-          position: absolute;
-          right: 10px;
-          top: -10px;
-          width: 0;
-          height: 0;
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          border-bottom: 10px solid #000;
-        }
-
-        .container_narbar_content_2_1 {
-          margin-top: 2px;
-          color: #fff;
-          width: 90%;
-          margin-left: 5%;
-          align-items: center;
-          height: 60px;
-          border-bottom: 1px solid white;
-          display: flex;
-          &:hover{
-            background-color: rgb(91, 91, 91);
-          }
-          i {
-            font-size: 20px;
-          }
-          p {
-            margin-top: 13px;
-            margin-left: 10px;
-            font-size: 18px;
-            text-transform: capitalize;
-          }
-
-          &:hover {
-            color: #0984e3;
-          }
-        }
-      }
+    label.logo {
+      color: white;
+      font-size: 35px;
+      line-height: 80px;
+      padding: 0 100px;
+      font-weight: bold;
     }
-
-    .container_narbar_content_name {
-      margin-top: 10px;
+    nav ul {
+      float: right;
       margin-right: 20px;
-      font-weight: 600;
-      color: #fff;
+    }
+    nav ul li {
+      display: inline-block;
+      line-height: 80px;
+      margin: 0 5px;
+    }
+    nav ul li a {
+      color: white;
+      font-size: 17px;
+      padding: 7px 13px;
+      border-radius: 3px;
+      text-decoration: none;
       text-transform: uppercase;
+    }
+    a.active,
+    a:hover {
+      background: #000;
+      transition: 0.5s;
+    }
+    .checkbtn {
+      font-size: 30px;
+      color: white;
+      float: right;
+      line-height: 80px;
+      margin-right: 40px;
+      cursor: pointer;
+      display: none;
+    }
+    #check {
+      display: none;
+    }
+    @media (max-width: 952px) {
+      label.logo {
+        font-size: 30px;
+        padding-left: 50px;
+      }
+      nav ul li a {
+        font-size: 16px;
+      }
+    }
+    @media (max-width: 858px) {
+      .checkbtn {
+        display: block;
+      }
+      ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all 0.5s;
+      }
+      nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+      }
+      nav ul li a {
+        font-size: 20px;
+      }
+      a:hover,
+      a.active {
+        background: none;
+        color: #0082e6;
+      }
+      #check:checked ~ ul {
+        left: 0;
+      }
     }
   }
 }
+
+

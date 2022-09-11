@@ -11,7 +11,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<Home />} />
 
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
