@@ -5,7 +5,6 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate } from "react-router-dom";
-import GoBack from "../../components/GoBack/GoBack";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -210,7 +209,6 @@ const Register = () => {
           </LoadingButton>
         </div>
       </div>
-      <GoBack />
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={story} sx={{ width: "100%" }}>
           {message}
