@@ -131,15 +131,11 @@ const Product = new mongoose.Schema({
     required: true,
   },
   Size: {
-    type: String,
+    type: Array,
     required: true,
   },
   Color: {
     type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
     required: true,
   },
   Introduce: {

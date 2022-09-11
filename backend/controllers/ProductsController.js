@@ -20,9 +20,10 @@ const ProductsController = {
   },
   GetAnProducts: async (req, res) => {
     try {
-      const Products = await Products.findById(req.params.id).populate("comment")
-      res.status(200).json(Products);
+      const Product = await Products.findById(req.params.id).populate("comment")
+      res.status(200).json(Product);
     } catch (error) {
+      console.log(error);
       res.status(500).json(error);
     }
   },
