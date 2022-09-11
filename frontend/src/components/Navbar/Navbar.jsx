@@ -14,7 +14,7 @@ const Navbar = () => {
             <div className="container_narbar_intro_1_contact">
               <span>
                 <i class="bx bx-envelope"></i>
-                <span>mafline@gamil.com</span>
+                <span>maflineclothing@gamil.com</span>
               </span>
               <span>
                 <i class="bx bx-phone"></i>
@@ -42,21 +42,21 @@ const Navbar = () => {
             <label class="logo">MAFLINE</label>
             <ul>
               <li>
-                <a class="active" href="#">
+                <a href="#">
                   Home
                 </a>
+              </li>
+              <li>
+                <a href="#">sale</a>
+              </li>
+              <li>
+                <a href="#">Size check</a>
               </li>
               <li>
                 <a href="#">About</a>
               </li>
               <li>
-                <a href="#">Services</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Feedback</a>
+                <a href="#">sign in</a>
               </li>
             </ul>
           </nav>
