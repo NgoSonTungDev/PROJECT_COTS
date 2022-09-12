@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 
 const userShema = new mongoose.Schema(
   {
+    image:{
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
-      minlength: 5,
+      minlength: 10,
     },
     email: {
       type: String,
@@ -96,10 +100,6 @@ const PurchaseHistory = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Type: {
-      type: String,
-      required: true,
-    },
     Amount: {
       type: Number,
       required: true,
@@ -108,9 +108,14 @@ const PurchaseHistory = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    Story: {
+      type: String,
+      required: true,
+    },
     AccountUSer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "AccountUSers",
+      required: true
     },
   },
   { timestamps: true }
@@ -135,6 +140,10 @@ const Product = new mongoose.Schema({
     required: true,
   },
   Color: {
+    type: Array,
+    required: true,
+  },
+  Story: {
     type: String,
     required: true,
   },

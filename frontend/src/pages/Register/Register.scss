@@ -4,10 +4,10 @@
   overflow: hidden;
   display: grid;
   place-items: center;
-background: url("https://images.pexels.com/photos/3137890/pexels-photo-3137890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
+  background: url("https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   .container_register_form {
     margin-top: 20px;
@@ -119,10 +119,23 @@ background-position: center;
       }
     }
   }
-  .buttonRegister{
+  .buttonRegister {
+    margin-left: 15px;
     margin-bottom: 10px;
     font-weight: 600;
-    left: 50%;
-    transform: translateX(-50%);
+    // left: 50%;
+    // transform: translateX(-50%);
+  }
+
+  .buttonBack {
+    margin-left: 30%;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #636e72;
+    border: 1px solid #636e72;
+    &:hover {
+      color: #2d3436;
+      border: 1px solid #2d3436;
+    }
   }
 }

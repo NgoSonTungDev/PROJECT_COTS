@@ -1,7 +1,10 @@
 import React from "react";
 import Icon from "../../components/Icon/Icon";
 import Navbar from "../../components/Navbar/Navbar";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import DataImage from "./image";
 import "./Home.scss";
+import CardHome from "../../components/CardHome/CardHome";
 const Home = () => {
   return (
     <div>
@@ -19,8 +22,28 @@ const Home = () => {
             <button>GET STARTED</button>
           </div>
         </div>
+        <div className="container_home_product">
+          <h1>NEW ARRIVAL</h1>
+          <div className="container_home_product_card">
+            <CardHome/>
+          </div>
+          <h1>BEST SELLER </h1>
+          <div className="container_home_product_card"></div>
+          <h1>INSTAGRAM : MAFLINE </h1>
+          <div className="container_home_product_card_image">
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+            >
+              <Masonry>
+                {DataImage.map((item) => (
+                  <img src={item} alt="" />
+                ))}
+              </Masonry>
+            </ResponsiveMasonry>
+          </div>
+        </div>
       </div>
-      <Icon/>
+      <Icon />
     </div>
   );
 };

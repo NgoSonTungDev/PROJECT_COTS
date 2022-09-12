@@ -45,6 +45,8 @@ const Register = () => {
   const handleRegister = () => {
     axios
       .post("http://localhost:5000/api/auth/register", {
+        image:
+          "https://anhdep123.com/wp-content/uploads/2020/11/avatar-facebook-mac-dinh-nam.jpeg",
         username: usernameValue,
         password: passwordValue,
         email: emailValue,
@@ -55,7 +57,7 @@ const Register = () => {
         setMessage("Đăng Kí Thành công !!!");
         setStory("success");
         setTimeout(() => {
-          navigation("/page-login-ticket-movie");
+          navigation("");
         }, 2000);
       })
       .catch(function (error) {
@@ -69,21 +71,24 @@ const Register = () => {
   const handleOnClickButtonRegister = () => {
     checkInputs();
     if (a === true && b === true && c === true && d === true) {
+      setCheck(true);
       handleRegister();
     }
   };
 
   const checkInputs = () => {
-    setCheck(true);
-    if (usernameValue === "" || usernameValue.length < 10) {
-      setErrorFor(username, "Username cannot be blank or must have 10 characters");
+    if (usernameValue === "" && usernameValue.length < 10) {
+      setErrorFor(
+        username,
+        "Username cannot be blank or must have 10 characters"
+      );
       setCheck(false);
       a = false;
     } else {
       setSuccessFor(username);
       a = true;
     }
-    
+
     if (emailValue === "") {
       setErrorFor(email, "Email cannot be blank");
       setCheck(false);
@@ -97,8 +102,11 @@ const Register = () => {
       b = true;
     }
 
-    if (passwordValue === "" || passwordValue.length < 6 ) {
-      setErrorFor(password, "Password cannot be blank or must have 6 characters");
+    if (passwordValue === "" || passwordValue.length < 6) {
+      setErrorFor(
+        password,
+        "Password cannot be blank or must have 6 characters"
+      );
       setCheck(false);
       c = false;
     } else {
@@ -106,8 +114,11 @@ const Register = () => {
       c = true;
     }
 
-    if (password2Value === "" || password2Value.length < 6 ) {
-      setErrorFor(password2, "Password2 cannot be blank or must have 6 characters");
+    if (password2Value === "" || password2Value.length < 6) {
+      setErrorFor(
+        password2,
+        "Password2 cannot be blank or must have 6 characters"
+      );
       setCheck(false);
       d = false;
     } else if (passwordValue !== password2Value) {
@@ -202,6 +213,15 @@ const Register = () => {
               <small>Error message</small>
             </div>
           </form>
+          <LoadingButton
+            className="buttonBack"
+            onClick={()=>{
+              navigation("/home")
+            }}
+            variant="outlined"
+          >
+            Back
+          </LoadingButton>
           <LoadingButton
             className="buttonRegister"
             onClick={handleOnClickButtonRegister}

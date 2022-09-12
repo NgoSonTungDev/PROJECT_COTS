@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import "./Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigation = useNavigate()
   const [check, setCheck] = useState(true);
   const username = localStorage.getItem("username");
   const admin = localStorage.getItem("admin");
+
+  const movelogin = () =>{
+    navigation("/login")
+  }
 
   return (
     <div>
@@ -55,7 +60,7 @@ const Navbar = () => {
               <li>
                 <a href="#">About</a>
               </li>
-              <li>
+              <li onClick={movelogin}>
                 <a href="#">sign in</a>
               </li>
             </ul>
