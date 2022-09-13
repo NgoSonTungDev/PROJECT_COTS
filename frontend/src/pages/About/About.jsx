@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./About.scss";
 import anh1 from "./img/anh1.png";
@@ -63,6 +64,7 @@ const About = () => {
         </div>
         <div className="about-right"></div>
       </div>
+      <Footer/>
     </div>
   );
 };

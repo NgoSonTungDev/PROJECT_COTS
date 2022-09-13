@@ -6,7 +6,7 @@ const Footer = () => {
     <div>
       <div className="container_footer">
         <div className="footer_Top">
-          <h2>MAFLINE</h2>
+          <h2>MAF<span>LINE</span></h2>
           <h4> THIẾT KẾ VÀ THỜI TRANG </h4>
         </div>
         <div className="footer_Main">
@@ -49,7 +49,7 @@ const Footer = () => {
               <ul>
                 <li>
                   <a href="">MAFLINE tự hào là local đầu tiên đưa sản
-                    phẩm về mức giá #SALE 99k</a>
+                    phẩm về mức giá <br /> #SALE 99k</a>
                 </li>
               </ul>
 
