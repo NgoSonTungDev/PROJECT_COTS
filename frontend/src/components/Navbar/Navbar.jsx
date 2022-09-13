@@ -58,7 +58,7 @@ const Navbar = () => {
                 <a href="#">Size check</a>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href="#" onClick={navigation("/about")}>About</a>
               </li>
               <li onClick={movelogin}>
                 <a href="#">sign in</a>
