@@ -5,7 +5,6 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import LoadingButton from "@mui/lab/LoadingButton";
-import GoBack from "../../components/GoBack/GoBack";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -130,13 +129,13 @@ const Login = () => {
               </tr>
             </table>
           </div>
-          <div className="forgot">
+          <div className="back_home">
             <p
               onClick={() => {
-                navigation("/forgot-password");
+                navigation("/home");
               }}
             >
-              đổi mật khẩu
+              về trang chủ
             </p>
           </div>
           <LoadingButton
@@ -159,7 +158,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-      <GoBack />
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={story} sx={{ width: "100%" }}>
           {message}

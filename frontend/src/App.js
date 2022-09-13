@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Register from "./pages/Register/Register";
 import "./App.scss";
 import Home from "./pages/Home/Home";
-import Footter from "./components/Footer/Footer";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   const admin = localStorage.getItem("admin");
@@ -12,7 +11,10 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Footter />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
