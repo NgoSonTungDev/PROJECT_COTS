@@ -16,7 +16,7 @@ const CardHome = () => {
         </div>{" "}
         <div className="container_card_name">
             <p>HARD MODE BASIC TEE / BEIGE</p>
-            <i>180.000₫ </i><span>180.000₫</span>
+            <i>180.000₫ </i> <span>59.000₫</span>
         </div>
       </div>
     </div>
