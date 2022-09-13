@@ -1,28 +1,13 @@
 .container_footer {
   width: 100%;
   // padding: 30px;
+  // padding-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  // margin-top: 50px;
+  margin-top: 50px;
   background-color: rgb(24, 21, 21);
 
-  // overflow: hidden;
-  // background-image: url(https://images.pexels.com/photos/9827295/pexels-photo-9827295.jpeg);
-  // background-position: center;
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // p {
-  //   text-align: center;
-  //   width: 100%;
-  //   height: 50px;
-  //   background-color: black;
-  //   color: white;
-  //   font-size: 30px;
-  //   font-weight: 800;
-  //   mix-blend-mode: multiply;
-  //   margin-bottom: 0;
-  // }
   .footer_Top {
     h2 {
       color: #ffff;
@@ -134,28 +119,61 @@
       margin-left: 30px;
 
       span {
-        font-size: 25px;
-        background-color: #ffff;
-        margin: 2px;
-        border-radius: 0.3rem;
+        cursor: pointer;
+      
+        margin-left: 15px;
+        
+        i{
+          border-radius: 6px;
+          font-size: 22px;
+          height: 30px;
+          width: 30px;
+          padding: 5px;
+          padding-bottom: 0px;
+        }
         .bxl-twitter {
           color: #1DA1F2;
+          &:hover{
+            color: #fff;
+            background: rgb(21, 166, 252);
+            background: linear-gradient(
+              90deg,
+              rgba(21, 166, 252, 1) 0%,
+              rgba(2, 105, 227, 1) 100%
+            );
+          
+          }
         }
 
         .bxl-facebook {
-          color: #426482;
+          color: #0984e3;
+          &:hover{
+          color: #fff;
+          background-color: #00acee;
+          }
         }
 
         .bxl-instagram {
           color: #E1306C;
+          &:hover{
+            color: #fff;
+            background: rgb(249, 237, 50);
+            background: linear-gradient(
+              50deg,
+              rgba(249, 237, 50, 1) 0%,
+              rgba(238, 42, 123, 1) 49%,
+              rgba(0, 42, 255, 1) 100%
+            );
+          }
         }
 
         .bxl-skype {
           color: #1DA1F2;
+          &:hover{
+          color: #fff;background-color: #0984e3;
+          }
         }
-        &:hover{
-          background-color: rgb(62, 207, 96);
-        }
+        
       }
     }
 
@@ -173,54 +191,3 @@
 
   }
 }
-
-
-
-// .footer {
-//   background-color: rgb(186, 186, 186);
-//   padding-bottom: 10px;
-
-//   .designer {
-//       display: flex;
-//       justify-content: flex-end;
-//       margin-right: 10px;
-//       font-style: italic;
-//   }
-// }
-
-// .footer-content {
-//   padding: 30px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-around;
-//   margin-top: 50px;
-
-//   span {
-//       font-size: 18px;
-//       font-weight: 600;
-//   }
-
-//   .footer-info {
-//       width: 300px;
-
-//       ul li {
-//           margin-top: 7px;
-//       }
-//   }
-
-//   .footer-location {
-//       width: 300px;
-
-//       ul li {
-//           margin-top: 7px;
-//       }
-//   }
-
-//   .footer-social {
-//       width: 300px;
-
-//       .footer-icon {
-//           margin-top: 10px;
-//       }
-//   }
-// }

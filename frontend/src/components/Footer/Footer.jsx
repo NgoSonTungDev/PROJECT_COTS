@@ -6,39 +6,39 @@ const Footer = () => {
     <div>
       <div className="container_footer">
         <div className="footer_Top">
-          <h2>T-Shirt</h2>
-          <h4> THIẾT KẾ VÀ THỜI TRANG Hard Mode</h4>
+          <h2>MAFLINE</h2>
+          <h4> THIẾT KẾ VÀ THỜI TRANG </h4>
         </div>
         <div className="footer_Main">
           <div className="footer_Main_left">
             <span>Contact</span>
             <ul>
               <li>Address : <a href="">137 Nguyễn Chí Thanh TP ĐN</a></li>
-              <li>Email : <a href="">hardmode.vn@gmail.com</a> </li>
-              <li>Phone : <a href="">0835129812</a> </li>
+              <li>Email : <a href="">maflineclothing@gamil.com</a> </li>
+              <li>Phone : <a href="">0386762927</a> </li>
             </ul>
           </div>
           <div className="footer_Main_container">
             <span>Useful Links</span>
             <ul>
               <li>
-              <i class="fa-solid fa-reply"></i>
+                <i class="fa-solid fa-reply"></i>
                 <a href="">Home</a>
               </li>
               <li>
-              <i class="fa-solid fa-reply"></i>
+                <i class="fa-solid fa-reply"></i>
                 <a href="">About</a>
               </li>
               <li>
-              <i class="fa-solid fa-reply"></i>
+                <i class="fa-solid fa-reply"></i>
                 <a href="">Services</a>
               </li>
               <li>
-              <i class="fa-solid fa-reply"></i>
+                <i class="fa-solid fa-reply"></i>
                 <a href="">Team</a>
               </li>
               <li>
-              <i class="fa-solid fa-reply"></i>
+                <i class="fa-solid fa-reply"></i>
                 <a href="">Contact</a>
               </li>
             </ul>
@@ -48,14 +48,14 @@ const Footer = () => {
               <span>Our Social NetWorks</span>
               <ul>
                 <li>
-                  <a href="">Hard Mode tự hào là local đầu tiên đưa sản
+                  <a href="">MAFLINE tự hào là local đầu tiên đưa sản
                     phẩm về mức giá #SALE 99k</a>
                 </li>
               </ul>
 
             </div>
             <div className="icon">
-            <span>
+              <span>
                 <i class="bx bxl-twitter"></i>
               </span>
               <span>
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="deSign">
-          <p>Copyright © 2022 HARD MODE.</p>
+          <p>Copyright © 2022 MAFLINE.</p>
         </div>
       </div>
     </div>
