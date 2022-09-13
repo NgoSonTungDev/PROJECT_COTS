@@ -44,7 +44,7 @@ const Register = () => {
 
   const handleRegister = () => {
     axios
-      .post("http://localhost:5000/api/auth/register", {
+      .post("http://localhost:8000/api/auth/register", {
         image:
           "https://anhdep123.com/wp-content/uploads/2020/11/avatar-facebook-mac-dinh-nam.jpeg",
         username: usernameValue,

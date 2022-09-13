@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState , useEffect} from "react";
 import Icon from "../../components/Icon/Icon";
 import Navbar from "../../components/Navbar/Navbar";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import DataImage from "./image";
 import "./Home.scss";
 import CardHome from "../../components/CardHome/CardHome";
+import Footer from "../../components/Footer/Footer";
 const Home = () => {
+
+  useEffect(() => {
+  }, [])
+  
+
+    useEffect(() => {
+
+    }, []);
+
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className="container_home">
         <div className="container_home_top">
           <div className="container_home_top_content">
@@ -44,6 +54,7 @@ const Home = () => {
         </div>
       </div>
       <Icon />
+     <Footer></Footer>
     </div>
   );
 };

@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "./Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
+
 const Navbar = () => {
-  const navigation = useNavigate()
-  const [check, setCheck] = useState(true);
+  const navigation = useNavigate();
+  const [offset, setOffset] = useState(0);
   const username = localStorage.getItem("username");
   const admin = localStorage.getItem("admin");
 
-  const movelogin = () =>{
-    navigation("/login")
-  }
+  const movelogin = () => {
+    navigation("/login");
+  };
+
+  useEffect(() => {
+    const onScroll = () => setOffset(window.pageYOffset);
+    // clean up code
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    console.log("window.pageYOffset: ", window.pageYOffset);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [])
+  
 
   return (
     <div>
       <div className="container_narbar">
-        <div className="container_narbar_intro">
+        <div className={`container_narbar_intro ${offset > 200 && 'hide'}`}>
           <div className="container_narbar_intro_1">
             <div className="container_narbar_intro_1_contact">
               <span>
@@ -28,7 +39,7 @@ const Navbar = () => {
             </div>
             <div className="container_narbar_intro_1_contact">
               <span>
-                <i class="bx bxl-twitter"></i>
+                <i class="bx bxl-github"></i>
               </span>
               <span>
                 <i class="bx bxl-facebook"></i>
@@ -47,9 +58,7 @@ const Navbar = () => {
             <label class="logo">MAFLINE</label>
             <ul>
               <li>
-                <a href="#">
-                  Home
-                </a>
+                <a href="#">Home</a>
               </li>
               <li>
                 <a href="#">sale</a>
