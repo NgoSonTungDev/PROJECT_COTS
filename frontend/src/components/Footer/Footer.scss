@@ -13,14 +13,15 @@
       color: #ffff;
       text-align: center;
       padding-top: 30px;
-
+      font-weight: 600;
+      font-size: 40px;
     }
 
-    h4 {
+    p {
       color: #ffff;
       text-align: center;
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 400;
     }
   }
 
@@ -79,7 +80,7 @@
             color: rgb(62, 207, 96);
           }
         }
-        i{
+        i {
           font-size: 12px;
           margin: 2px;
           font-weight: 600;
@@ -89,7 +90,6 @@
 
       width: 400px;
     }
-
 
     .footer_Main_right {
       .icon1 {
@@ -109,7 +109,6 @@
             font-weight: 600;
           }
         }
-
       }
 
       width: 400px;
@@ -120,10 +119,10 @@
 
       span {
         cursor: pointer;
-      
+
         margin-left: 15px;
-        
-        i{
+
+        i {
           border-radius: 6px;
           font-size: 22px;
           height: 30px;
@@ -132,8 +131,8 @@
           padding-bottom: 0px;
         }
         .bxl-twitter {
-          color: #1DA1F2;
-          &:hover{
+          color: #1da1f2;
+          &:hover {
             color: #fff;
             background: rgb(21, 166, 252);
             background: linear-gradient(
@@ -141,21 +140,20 @@
               rgba(21, 166, 252, 1) 0%,
               rgba(2, 105, 227, 1) 100%
             );
-          
           }
         }
 
         .bxl-facebook {
           color: #0984e3;
-          &:hover{
-          color: #fff;
-          background-color: #00acee;
+          &:hover {
+            color: #fff;
+            background-color: #00acee;
           }
         }
 
         .bxl-instagram {
-          color: #E1306C;
-          &:hover{
+          color: #e1306c;
+          &:hover {
             color: #fff;
             background: rgb(249, 237, 50);
             background: linear-gradient(
@@ -168,26 +166,23 @@
         }
 
         .bxl-skype {
-          color: #1DA1F2;
-          &:hover{
-          color: #fff;background-color: #0984e3;
+          color: #1da1f2;
+          &:hover {
+            color: #fff;
+            background-color: #0984e3;
           }
         }
-        
       }
     }
-
   }
 
   .deSign {
     p {
       font-style: italic;
-
       text-align: center;
       color: #ffff;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 500;
     }
-
   }
 }

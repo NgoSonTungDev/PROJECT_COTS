@@ -7,14 +7,14 @@ const Footer = () => {
       <div className="container_footer">
         <div className="footer_Top">
           <h2>MAFLINE</h2>
-          <h4> THIẾT KẾ VÀ THỜI TRANG </h4>
+          <p> THIẾT KẾ VÀ THỜI TRANG </p>
         </div>
         <div className="footer_Main">
           <div className="footer_Main_left">
             <span>Contact</span>
             <ul>
               <li>Address : <a href="">137 Nguyễn Chí Thanh TP ĐN</a></li>
-              <li>Email : <a href="">maflineclothing@gamil.com</a> </li>
+              <li>Email : <a href="">maflineclothing@gmail.com</a> </li>
               <li>Phone : <a href="">0386762927</a> </li>
             </ul>
           </div>
@@ -49,7 +49,7 @@ const Footer = () => {
               <ul>
                 <li>
                   <a href="">MAFLINE tự hào là local đầu tiên đưa sản
-                    phẩm về mức giá #SALE 99k</a>
+                    phẩm về mức giá <br /> #SALE 99k</a>
                 </li>
               </ul>
 
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="deSign">
-          <p>Copyright © 2022 MAFLINE.</p>
+          <p>Copyright © 2022 MAFLINE</p>
         </div>
       </div>
     </div>

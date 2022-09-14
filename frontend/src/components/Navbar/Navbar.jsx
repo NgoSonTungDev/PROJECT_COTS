@@ -30,7 +30,7 @@ const Navbar = () => {
             <div className="container_narbar_intro_1_contact">
               <span>
                 <i class="bx bx-envelope"></i>
-                <span>maflineclothing@gamil.com</span>
+                <span>maflineclothing@gmail.com</span>
               </span>
               <span>
                 <i class="bx bx-phone"></i>
@@ -67,7 +67,7 @@ const Navbar = () => {
                 <a href="#">Size check</a>
               </li>
               <li>
-                <a href="#">About</a>
+                <a href="#" onClick={navigation("/about")}>About</a>
               </li>
               <li onClick={movelogin}>
                 <a href="#">sign in</a>
