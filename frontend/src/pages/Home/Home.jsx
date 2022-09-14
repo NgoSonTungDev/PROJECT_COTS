@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "../../components/Icon/Icon";
 import Navbar from "../../components/Navbar/Navbar";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -7,18 +7,13 @@ import "./Home.scss";
 import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
 const Home = () => {
-
   useEffect(() => {
-  }, [])
-  
-
-    useEffect(() => {
-
-    }, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="container_home">
         <div className="container_home_top">
           <div className="container_home_top_content">
@@ -35,7 +30,7 @@ const Home = () => {
         <div className="container_home_product">
           <h1>NEW ARRIVAL</h1>
           <div className="container_home_product_card">
-            <CardHome/>
+            <CardHome />
           </div>
           <h1>BEST SELLER </h1>
           <div className="container_home_product_card"></div>
@@ -54,7 +49,7 @@ const Home = () => {
         </div>
       </div>
       <Icon />
-     <Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 };

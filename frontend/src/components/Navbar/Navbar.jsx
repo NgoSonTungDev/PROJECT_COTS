@@ -57,20 +57,20 @@ const Navbar = () => {
           <nav>
             <label class="logo">MAFLINE</label>
             <ul>
-              <li>
-                <a href="#">Home</a>
+              <li onClick={()=>{navigation("/home")}}>
+                <p>Home</p>
               </li>
               <li>
-                <a href="#">sale</a>
+                <p>sale</p>
               </li>
               <li>
-                <a href="#">Size check</a>
+                <p>Size check</p>
               </li>
               <li>
-                <a href="#" onClick={navigation("/about")}>About</a>
+                <p onClick={()=>{navigation("/about")}}>About</p>
               </li>
               <li onClick={movelogin}>
-                <a href="#">sign in</a>
+                <p>sign in</p>
               </li>
             </ul>
           </nav>

@@ -1,7 +1,6 @@
 .container_footer {
   width: 100%;
-  // padding: 30px;
-  // padding-top: 50px;
+ overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -9,19 +8,36 @@
   background-color: rgb(24, 21, 21);
 
   .footer_Top {
+    margin-top: 100px;
     h2 {
       color: #ffff;
       text-align: center;
-      padding-top: 30px;
-      font-weight: 600;
       font-size: 40px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      position: relative;
+      &::after {
+        content: "";
+        height: 3px;
+        margin-left: 75px;
+        width: 100px;
+        background: #fff;
+        position: absolute;
+        left: 0%;
+        bottom: -5px;
+      }
+      span{
+        color: #00a78e;
+      }
     }
 
-    p {
+    h4 {
+      transform: translateY(10px);
       color: #ffff;
       text-align: center;
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 300;
+      letter-spacing: 8px;
     }
   }
 
@@ -45,7 +61,7 @@
         list-style: none;
         color: #ffff;
 
-        a {
+        span {
           color: #ffff;
           text-decoration: none;
           font-size: 12px;
@@ -70,7 +86,7 @@
       ul li {
         list-style: none;
 
-        a {
+        span {
           color: #ffff;
           text-decoration: none;
           font-size: 12px;
@@ -102,7 +118,7 @@
         ul li {
           list-style: none;
 
-          a {
+          p {
             color: #ffff;
             text-decoration: none;
             font-size: 12px;
@@ -182,7 +198,7 @@
       text-align: center;
       color: #ffff;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 800;
     }
   }
 }
