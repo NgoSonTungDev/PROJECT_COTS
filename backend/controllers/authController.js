@@ -34,19 +34,7 @@ const authControllers = {
       res.status(500).json(error);
     }
   },
-  checkPassword: async (req, res) => {
-    try {
-      const user = await Users.findById(req.params.id);
-      const password = await bcrypt.compare(req.body.password, user.password);
-      if (!password) {
-        res.status(404).json("Wrong password !!!");
-      } else {
-        res.status(202).json("Correct password");
-      }
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
+
 };
 
 module.exports = authControllers;

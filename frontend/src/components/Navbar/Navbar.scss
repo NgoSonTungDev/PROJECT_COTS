@@ -90,10 +90,11 @@
     nav ul li {
       display: inline-block;
       line-height: 80px;
-      margin: 0 5px;
+      transform: translateY(-6px);
+      margin-left: 5px;
     }
 
-    nav ul li a {
+    nav ul li p {
       color: white;
       font-size: 17px;
       padding: 7px 13px;
@@ -104,6 +105,7 @@
       font-weight: 400;
 
       &:hover {
+        cursor: pointer;
         color: #00a78e;
       }
 
@@ -114,7 +116,7 @@
         background: #00a78e;
         position: absolute;
         left: 0%;
-        bottom: -5px;
+        bottom: 20px;
         transition: 0.2s;
       }
 
@@ -129,7 +131,8 @@
         padding-left: 50px;
       }
 
-      nav ul li a {
+      nav ul li p {
+        cursor: pointer;
         font-size: 16px;
       }
     }
@@ -156,7 +159,7 @@
         line-height: 30px;
       }
 
-      nav ul li a {
+      nav ul li p {
         font-size: 20px;
       }
 

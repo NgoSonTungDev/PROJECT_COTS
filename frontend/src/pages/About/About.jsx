@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./About.scss";
@@ -7,6 +7,11 @@ import anh2 from "./img/anh2.png";
 import anh3 from "./img/anh3.png";
 
 const About = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -57,14 +62,14 @@ const About = () => {
               không phải chỉ riêng khoảnh khắc này
             </p>
             <p>
-              Hãy cùng nhau đón chờ những sản phẩm mới nhất từ HARDMODE nhé. Cảm
+              Hãy cùng nhau đón chờ những sản phẩm mới nhất từ MAFLINE nhé. Cảm
               ơn các bạn rất nhiều!
             </p>
           </div>
         </div>
         <div className="about-right"></div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

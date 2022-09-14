@@ -13,9 +13,9 @@ const Footer = () => {
           <div className="footer_Main_left">
             <span>Contact</span>
             <ul>
-              <li>Address : <a href="">137 Nguyễn Chí Thanh TP ĐN</a></li>
-              <li>Email : <a href="">maflineclothing@gamil.com</a> </li>
-              <li>Phone : <a href="">0386762927</a> </li>
+              <li>Address : <span>137 Nguyễn Chí Thanh TP ĐN</span></li>
+              <li>Email : <span>maflineclothing@gmail.com</span> </li>
+              <li>Phone : <span>0386762927</span> </li>
             </ul>
           </div>
           <div className="footer_Main_container">
@@ -23,23 +23,23 @@ const Footer = () => {
             <ul>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <a href="">Home</a>
+                <span>Home</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <a href="">About</a>
+                <span>About</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <a href="">Services</a>
+                <span>Services</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <a href="">Team</a>
+                <span>Team</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <a href="">Contact</a>
+                <span>Contact</span>
               </li>
             </ul>
           </div>
@@ -48,8 +48,8 @@ const Footer = () => {
               <span>Our Social NetWorks</span>
               <ul>
                 <li>
-                  <a href="">MAFLINE tự hào là local đầu tiên đưa sản
-                    phẩm về mức giá <br /> #SALE 99k</a>
+                  <p>MAFLINE tự hào là local đầu tiên đưa sản
+                    phẩm về mức giá <br /> #SALE 99k</p>
                 </li>
               </ul>
 
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="deSign">
-          <p>Copyright © 2022 MAFLINE.</p>
+          <p>Copyright © 2022 MAFLINE</p>
         </div>
       </div>
     </div>

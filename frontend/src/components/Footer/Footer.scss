@@ -61,7 +61,7 @@
         list-style: none;
         color: #ffff;
 
-        a {
+        span {
           color: #ffff;
           text-decoration: none;
           font-size: 12px;
@@ -86,7 +86,7 @@
       ul li {
         list-style: none;
 
-        a {
+        span {
           color: #ffff;
           text-decoration: none;
           font-size: 12px;
@@ -118,7 +118,7 @@
         ul li {
           list-style: none;
 
-          a {
+          p {
             color: #ffff;
             text-decoration: none;
             font-size: 12px;
@@ -195,7 +195,6 @@
   .deSign {
     p {
       font-style: italic;
-
       text-align: center;
       color: #ffff;
       font-size: 12px;

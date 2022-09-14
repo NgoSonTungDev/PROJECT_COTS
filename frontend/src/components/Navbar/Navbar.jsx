@@ -30,7 +30,7 @@ const Navbar = () => {
             <div className="container_narbar_intro_1_contact">
               <span>
                 <i class="bx bx-envelope"></i>
-                <span>maflineclothing@gamil.com</span>
+                <span>maflineclothing@gmail.com</span>
               </span>
               <span>
                 <i class="bx bx-phone"></i>
@@ -57,20 +57,20 @@ const Navbar = () => {
           <nav>
             <label class="logo">MAFLINE</label>
             <ul>
-              <li>
-                <a href="#">Home</a>
+              <li onClick={()=>{navigation("/home")}}>
+                <p>Home</p>
               </li>
               <li>
-                <a href="#">sale</a>
+                <p>sale</p>
               </li>
               <li>
-                <a href="#" onClick={navigation("/size-check")}>Size check</a>
+                <p>Size check</p>
               </li>
               <li>
-                <a href="#" onClick={navigation("/about")}>About</a>
+                <p onClick={()=>{navigation("/about")}}>About</p>
               </li>
               <li onClick={movelogin}>
-                <a href="#">sign in</a>
+                <p>sign in</p>
               </li>
             </ul>
           </nav>
