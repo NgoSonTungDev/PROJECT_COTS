@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Register from "./pages/Register/Register";
+import Sale from "./pages/Sale/Sale";
 import Sizecheck from "./pages/Sizecheck/Sizecheck";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
           <Route path="/size-check" element={<Sizecheck />} />
+          <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

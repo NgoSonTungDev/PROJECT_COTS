@@ -31,11 +31,16 @@
         color: #ddd;
       }
       button {
+        outline: none;
+        border: 2px solid #00a78e;
         margin-top: 12px;
         padding: 5px 15px;
         background-color: #00a78e;
         color: #fff;
         font-weight: 600;
+        &:hover{
+          border: 2px solid #fff;
+        }
       }
     }
   }

@@ -60,8 +60,8 @@ const Navbar = () => {
               <li onClick={()=>{navigation("/home")}}>
                 <p>Home</p>
               </li>
-              <li>
-                <p>sale</p>
+              <li onClick={()=>{navigation("/sale")}}>
+                <p >sale</p>
               </li>
               <li>
                 <p>Size check</p>

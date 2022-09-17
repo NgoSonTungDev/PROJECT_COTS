@@ -1,6 +1,7 @@
 .container_narbar {
   width: 100%;
   z-index: 100;
+  overflow: hidden;
   position: fixed;
 
   .container_narbar_intro {
@@ -67,8 +68,8 @@
 
   .container_narbar_main {
     width: 100%;
-
     nav {
+      overflow: hidden;
       background: #333333;
       height: 80px;
       width: 100%;

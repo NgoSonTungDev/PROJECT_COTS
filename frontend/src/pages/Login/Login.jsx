@@ -64,11 +64,12 @@ const Login = () => {
           const checkAdmin = response.data.admin;
           if (checkAdmin === false) {
             localStorage.setItem("username", response.data.username);
+            localStorage.setItem("image", response.data.image);
             localStorage.setItem("IdUser", response.data._id);
             localStorage.setItem("admin", response.data.admin);
             localStorage.setItem("email", response.data.email);
             setTimeout(() => {
-              navigation("/home-page-ticket-movie");
+              navigation("/home");
             }, 1000);
           } else {
             localStorage.setItem("admin", response.data.admin);

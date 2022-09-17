@@ -57,7 +57,7 @@ const Register = () => {
         setMessage("Đăng Kí Thành công !!!");
         setStory("success");
         setTimeout(() => {
-          navigation("");
+          navigation("/login");
         }, 2000);
       })
       .catch(function (error) {
