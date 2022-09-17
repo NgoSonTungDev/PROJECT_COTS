@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Footer.scss";
+import ProductDeail from "../../pages/ProductDetail/ProductDeail";
 const Footer = () => {
 
   return (
@@ -74,6 +75,7 @@ const Footer = () => {
           <p>Copyright © 2022 MAFLINE</p>
         </div>
       </div>
+     <ProductDeail/>
     </div>
   );
 };
