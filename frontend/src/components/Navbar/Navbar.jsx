@@ -64,7 +64,7 @@ const Navbar = () => {
                 <p>sale</p>
               </li>
               <li>
-                <p>Size check</p>
+                <p  onClick={()=>{navigation("/size-check")}}>Size check</p>
               </li>
               <li>
                 <p onClick={()=>{navigation("/about")}}>About</p>
