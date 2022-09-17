@@ -1,9 +1,8 @@
 .sizecheck-container {
   width: 100%;
-  height: 1000px;
   display: flex;
   transform: translateY(120px);
-    background-color: aqua;
+  margin-bottom: 30px;
 
   .sizecheck-left {
     width: 20%;
@@ -18,6 +17,16 @@
         height: auto;
         margin-left: 50px;
         margin-top: 20px;
+      }
+
+      .sizecheck-images {
+        margin: 50px 130px;
+        padding-bottom: 50px;
+
+        .sizecheck-images-image{
+          margin-top: 30px;
+        }
+
       }
   }
 
