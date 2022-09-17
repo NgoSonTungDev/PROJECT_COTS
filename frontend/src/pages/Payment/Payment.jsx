@@ -1,5 +1,5 @@
 import React from 'react';
-import "./ProductDetail.scss"
+import "./Payment.scss"
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -23,11 +23,11 @@ const responsive = {
     }
 };
 
-const ProductDeail = () => {
+const Payment = () => {
     return (
         <div>
-            <div className="productDetail">
-                <div className="productDetail_top">
+            <div className="Payment">
+                <div className="Payment_top">
                     <div className="image">
                         <img src="https://product.hstatic.net/200000260587/product/b6cab97b491cbc42e50d_6d85a7f0498b4442832b5c0e3789bec0_master.jpg" alt="" />
                     </div>
@@ -46,7 +46,7 @@ const ProductDeail = () => {
                         </div>
                     </div>
                 </div>
-                <div className="productDetail_conten">
+                <div className="Payment_conten">
                     <table>
                         <tr>
                             <th>SẢN PHẨM</th>
@@ -72,8 +72,8 @@ const ProductDeail = () => {
                     </div>
                 </div>
                 <hr style={{ width: "55%", marginLeft: "20px" }} />
-                <div className="productDetail-main">
-                    <div className="productDetail_left">
+                <div className="Payment-main">
+                    <div className="Payment_left">
                         <b>THÔNG TIN THANH TOÁN</b>
                         <div className="data_username">
                             <table>
@@ -112,7 +112,7 @@ const ProductDeail = () => {
 
                         </div>
                     </div>
-                    <div className="productDetail_right">
+                    <div className="Payment_right">
                         <b>ĐƠN HÀNG CỦA BẠN</b>
                         <table>
                             <tr>
@@ -156,4 +156,4 @@ const ProductDeail = () => {
     );
 };
 
-export default ProductDeail;
+export default Payment;

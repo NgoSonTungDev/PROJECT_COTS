@@ -8,7 +8,9 @@ import Register from "./pages/Register/Register";
 import Sale from "./pages/Sale/Sale";
 import Sizecheck from "./pages/Sizecheck/Sizecheck";
 import Footer from "./components/Footer/Footer";
-import ProductDeail from "./pages/ProductDetail/ProductDeail";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Payment from "./pages/Payment/Payment";
+
 function App() {
   const admin = localStorage.getItem("admin");
 
@@ -22,6 +24,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
           <Route path="/size-check" element={<Sizecheck />} />
+          <Route path="/productDetail/:id" element={<ProductDetail />} />
+          <Route path="/productDetail/payment/:id" element={<Payment />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />

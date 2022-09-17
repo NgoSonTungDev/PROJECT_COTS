@@ -6,6 +6,7 @@ const authControllers = {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       const newUSer = await new Users({
+        image : req.body.image,
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
@@ -14,6 +15,7 @@ const authControllers = {
       res.status(200).json(accountUser);
     } catch (error) {
       res.status(500).json(error);
+      console.log(error);
     }
   },
   login: async (req, res) => {

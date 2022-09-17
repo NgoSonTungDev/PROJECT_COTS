@@ -11,7 +11,7 @@ const DataImage = [
   "https://file.hstatic.net/200000260587/file/asset_9-100_9b420b7cdad741e7a8bec2651f8bc52f.jpg",
   "https://file.hstatic.net/200000260587/file/asset_10-100_43ba33c17ab341e2b1f74623b67ec3a3.jpg",
   `${image3}`,
-  // `${image2}`,
+  `${image2}`,
   `${image1}`,
   `${image5}`,
   `${image4}`,

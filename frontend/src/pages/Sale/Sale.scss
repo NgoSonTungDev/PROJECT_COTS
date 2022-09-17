@@ -3,16 +3,16 @@
   height: auto;
   .container_sale_top {
     width: 70%;
-    height: 190px;
+    height: 180px;
     margin-left: 15%;
     position: relative;
     .container_sale_top_search {
       position: absolute;
-      bottom: 0;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       width: 630px;
-      height: 64px;
+      height: 40px;
       display: flex;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
       .container_sale_top_search_1 {
@@ -20,8 +20,8 @@
         height: 64px;
         align-items: center;
         i {
-          padding: 20px;
-          font-size: 25px;
+          padding: 12px;
+          font-size: 18px;
           color: rgb(158 158 167);
         }
         input {
@@ -34,7 +34,7 @@
       }
       .container_sale_top_search_2 {
         width: 150px;
-        height: 64px;
+        height: 40px;
         border-left: 1px solid;
         display: flex;
         flex-wrap: wrap;
@@ -49,5 +49,11 @@
         }
       }
     }
+  }
+
+  .container_sale_product_card{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
 }

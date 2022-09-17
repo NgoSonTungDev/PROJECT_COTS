@@ -6,22 +6,22 @@ const CarouselSuppage = () => {
   const data = [
     {
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1200px-GoldenGateBridge-001.jpg",
+        "//product.hstatic.net/200000260587/product/zve03228_4aa827cfe25c4633bb58bb4c061f9e95_master.png",
 
     },
     {
       image:
-        "https://cdn.britannica.com/s:800x450,c:crop/35/204435-138-2F2B745A/Time-lapse-hyper-lapse-Isle-Skye-Scotland.jpg",
+        "//product.hstatic.net/200000260587/product/zve03230_3233ff487e9543c288978f51190f4a64_compact.png",
 
     },
     {
       image:
-        "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
+        "//product.hstatic.net/200000260587/product/zve03232_ce37f0d97b5f4b7d9f7f804d21111b65_compact.png",
 
     },
     {
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
+        "//product.hstatic.net/200000260587/product/zve03233_ff32793a78e141528320965bfa0b4ab5_compact.png",
     
     },
 

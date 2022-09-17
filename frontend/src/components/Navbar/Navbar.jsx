@@ -14,10 +14,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
-    // clean up code
     window.removeEventListener('scroll', onScroll);
     window.addEventListener('scroll', onScroll, { passive: true });
-    console.log("window.pageYOffset: ", window.pageYOffset);
     return () => window.removeEventListener('scroll', onScroll);
   }, [])
   

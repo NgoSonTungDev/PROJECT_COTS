@@ -31,9 +31,21 @@ const Home = () => {
           <h1>NEW ARRIVAL</h1>
           <div className="container_home_product_card">
             <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
           </div>
           <h1>BEST SELLER </h1>
-          <div className="container_home_product_card"></div>
+          <div className="container_home_product_card">
+          <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
+            <CardHome />
+          </div>
           <h1>INSTAGRAM : MAFLINE </h1>
           <div className="container_home_product_card_image">
             <ResponsiveMasonry

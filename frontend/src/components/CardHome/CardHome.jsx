@@ -1,10 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./CardHome.scss";
 
 const CardHome = () => {
+  const navigation = useNavigate();
+
   return (
     <div>
-      <div className="container_card">
+      <div className="container_card" onClick={()=>{
+        navigation("/productDetail/16787368234fsd")
+      }}>
         <div className="container_card_img">
           <img
             src="//product.hstatic.net/200000260587/product/6d4dde0b2e6cdb32827d_870d1239d5b845938ed732170e02851f_master.jpg"

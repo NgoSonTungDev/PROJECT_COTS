@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const userShema = new mongoose.Schema(
   {
-    image:{
+    image: {
       type: String,
       required: true,
     },
@@ -115,7 +115,7 @@ const PurchaseHistory = new mongoose.Schema(
     AccountUSer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "AccountUSers",
-      required: true
+      required: true,
     },
   },
   { timestamps: true }
@@ -167,9 +167,13 @@ const CommentProduct = new mongoose.Schema({
     type: String,
     required: true,
   },
-  like: {
-    type: Number,
-    default: 0,
+  rating: {
+    type: String,
+    required: true,
+  },
+  datetime: {
+    type: String,
+    required: true,
   },
   ProductID: {
     type: mongoose.Schema.Types.ObjectId,

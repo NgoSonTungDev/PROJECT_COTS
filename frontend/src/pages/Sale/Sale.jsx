@@ -1,11 +1,13 @@
 import React from "react";
 import "./Sale.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import CardHome from "../../components/CardHome/CardHome";
+import Footer from "../../components/Footer/Footer";
 
 const Sale = () => {
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
-    if (keyPressed == 13) {
+    if (keyPressed === 13) {
       alert("akjshdakjh");
       keyPressed = null;
     } else {
@@ -33,12 +35,16 @@ const Sale = () => {
                 <option value="">New</option>
                 <option value="">Sale</option>
                 <option value="">Giá Tăng dần</option>
-                <option value="">Giá giảm dần</option>        
+                <option value="">Giá giảm dần</option>
               </select>
             </div>
           </div>
         </div>
+        <div className="container_sale_product_card">
+          <CardHome />
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 };
