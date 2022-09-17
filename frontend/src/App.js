@@ -7,7 +7,8 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Register from "./pages/Register/Register";
 import Sale from "./pages/Sale/Sale";
 import Sizecheck from "./pages/Sizecheck/Sizecheck";
-
+import Footer from "./components/Footer/Footer";
+import ProductDeail from "./pages/ProductDetail/ProductDeail";
 function App() {
   const admin = localStorage.getItem("admin");
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/size-check" element={<Sizecheck />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/footer" element={<Footer />} />
         </Routes>
       </BrowserRouter>
     </div>
