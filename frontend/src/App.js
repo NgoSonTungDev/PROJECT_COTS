@@ -10,6 +10,7 @@ import Sizecheck from "./pages/Sizecheck/Sizecheck";
 import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Payment from "./pages/Payment/Payment";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   const admin = localStorage.getItem("admin");
@@ -29,6 +30,9 @@ function App() {
           <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/cart" element={<Cart />} />
+
+
         </Routes>
       </BrowserRouter>
     </div>
