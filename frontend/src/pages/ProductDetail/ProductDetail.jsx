@@ -4,9 +4,36 @@ import Navbar from "../../components/Navbar/Navbar";
 import Icon from "../../components/Icon/Icon";
 import Footer from "../../components/Footer/Footer";
 import CarouselSuppage from "../../components/Carousel/Carousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import CardCarouselDetail from "../../components/CardCarouselDetail/CardCarouselDetail";
+import CommentProduct from "../../components/Comment/Comment";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 4,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
 
 const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
+
+const color = [ "do" , "den" , "nau"]
 
   const handleSeeMore = () => {
     if (seeMore === false) {
@@ -62,13 +89,17 @@ const ProductDetail = () => {
                 <tr>
                   <td>Màu sản phẩm sẳn có</td>
                   <td>
-                    <span>đỏ</span> <span>cam</span> <span>vàng</span>
+                    {/* {???.map((item)=>(
+                      <span>{item},</span>
+                    )
+                    )} */}
+                    <span>đỏ,</span> <span>cam,</span> <span>vàng,</span>
                   </td>
                 </tr>
                 <tr>
                   <td>Kích Cỡ</td>
                   <td>
-                    <span>S</span> <span>L</span> <span>XL</span>
+                    <span>S,</span> <span>L,</span> <span>XL,</span>
                   </td>
                 </tr>
                 <tr>
@@ -238,7 +269,37 @@ const ProductDetail = () => {
               </p>
             </div>
             <div className="container_productDetail_intro_product_one_comment">
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
+              <CommentProduct/>
 
+            </div>
+          </div>
+        </div>
+
+        <div className="container_productDetail_intro_product">
+          <div className="container_productDetail_intro_product_one">
+            <div className="container_productDetail_intro_product_one_details">
+              <p style={{ textAlign: "center", fontWeight: "600" }}>
+                Các mẫu thiết kế mới
+              </p>
+            </div>
+            <div className="container_productDetail_intro_product_one_newbrand">
+              <Carousel responsive={responsive}>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+                <CardCarouselDetail/>
+              </Carousel>
             </div>
           </div>
         </div>
