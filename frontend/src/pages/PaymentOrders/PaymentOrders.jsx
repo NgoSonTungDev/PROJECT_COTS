@@ -64,9 +64,6 @@ const PaymentOrders = () => {
           <span id="PAYING">Đang Thanh Toán . . .</span>
         </div>
       </div>
-      <br />
-      <br />
-
       <div className="logo">
         <div className="image">
           <img

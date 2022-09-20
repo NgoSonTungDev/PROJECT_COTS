@@ -1,17 +1,29 @@
 import React from "react";
 import "./Icon.scss";
+import { useNavigate } from "react-router-dom";
+
 const Icon = () => {
+  const navigation = useNavigate();
+
   return (
     <div>
       <div className="container_icon">
+
         <div className="container_icon_cart">
           <i class="bx bx-history"></i>
           <span>0</span>
         </div>
+
         <div className="container_icon_cart">
-          <i class="bx bx-cart-alt"></i>
-          <span style={{transform:"translateY(70px)"}}>0</span>
+          <i
+            onClick={() => {
+              navigation("/cart");
+            }}
+            class="bx bx-cart-alt"
+          ></i>
+          <span style={{ transform: "translateY(70px)" }}>0</span>
         </div>
+        
       </div>
     </div>
   );

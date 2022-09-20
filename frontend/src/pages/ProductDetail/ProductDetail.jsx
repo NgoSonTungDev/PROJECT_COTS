@@ -44,11 +44,14 @@ const ProductDetail = () => {
     if (seeMore === false) {
       setSeeMore(true);
       document.getElementById("checkHandleMore").style.height = "1100px";
+      document.getElementById("xemthem").innerHTML ="Thu Nhỏ";
     } else {
       document.getElementById("checkHandleMore").style.height = "600px";
       setSeeMore(false);
     }
   };
+
+
 
   useEffect(() => {
     // window.scrollTo(0, 0);
@@ -261,7 +264,7 @@ const ProductDetail = () => {
             className="container_productDetail_intro_product_one_details_3"
             onClick={handleSeeMore}
           >
-            <p>Xem Thêm</p>
+            <p id="xemthem">Xem Thêm</p>
           </div>
         </div>
 
