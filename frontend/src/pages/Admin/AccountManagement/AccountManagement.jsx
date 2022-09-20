@@ -1,5 +1,6 @@
 import React from "react";
 import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
+
 import "./AccountManagement.scss";
 
 const AccountManagement = () => {
@@ -18,7 +19,7 @@ const AccountManagement = () => {
     <div>
       <div className="container_AccountManagement">
         <div className="container_AccountManagement_menu">
-          <MenuAdmin />
+          <MenuAdmin/>
         </div>
         <div className="container_AccountManagement_body">
           <div className="container_AccountManagement_body_search">

@@ -34,9 +34,8 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/admin" element={<AccountManagement />} />
-
-
+          <Route path="/admin/account" element={<AccountManagement />} />
+          <Route path="/admin/order" element={<AccountManagement />} />
         </Routes>
       </BrowserRouter>
     </div>
