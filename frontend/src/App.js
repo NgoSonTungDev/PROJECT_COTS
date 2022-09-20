@@ -10,6 +10,7 @@ import Sizecheck from "./pages/Sizecheck/Sizecheck";
 import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Payment from "./pages/Payment/Payment";
+import PaymentOrders from "./pages/PaymentOrders/PaymentOrders";
 
 function App() {
   const admin = localStorage.getItem("admin");
@@ -26,6 +27,7 @@ function App() {
           <Route path="/size-check" element={<Sizecheck />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/productDetail/payment/:id" element={<Payment />} />
+          <Route path="/productDetail/order/payment/:id" element={<PaymentOrders />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />

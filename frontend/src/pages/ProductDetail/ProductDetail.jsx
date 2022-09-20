@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardCarouselDetail from "../../components/CardCarouselDetail/CardCarouselDetail";
 import CommentProduct from "../../components/Comment/Comment";
+import { useNavigate } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -29,11 +30,15 @@ const responsive = {
   },
 };
 
+const color = ["do", "den", "nau"];
 
 const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
+  const navigate = useNavigate();
 
-const color = [ "do" , "den" , "nau"]
+  const handleMoveBuy = () => {
+    navigate("/productDetail/payment/16787368234fsd");
+  };
 
   const handleSeeMore = () => {
     if (seeMore === false) {
@@ -108,7 +113,9 @@ const color = [ "do" , "den" , "nau"]
                 <br />
                 <tr>
                   <td>
-                    <button className="buy">MUA HÀNG</button>
+                    <button className="buy" onClick={handleMoveBuy}>
+                      MUA HÀNG
+                    </button>
                   </td>
                   <td>
                     <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
@@ -266,16 +273,15 @@ const color = [ "do" , "den" , "nau"]
               </p>
             </div>
             <div className="container_productDetail_intro_product_one_comment">
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-              <CommentProduct/>
-
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
+              <CommentProduct />
             </div>
           </div>
         </div>
@@ -289,13 +295,13 @@ const color = [ "do" , "den" , "nau"]
             </div>
             <div className="container_productDetail_intro_product_one_newbrand">
               <Carousel responsive={responsive}>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
-                <CardCarouselDetail/>
+                <CardCarouselDetail />
+                <CardCarouselDetail />
+                <CardCarouselDetail />
+                <CardCarouselDetail />
+                <CardCarouselDetail />
+                <CardCarouselDetail />
+                <CardCarouselDetail />
               </Carousel>
             </div>
           </div>
