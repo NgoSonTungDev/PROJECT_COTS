@@ -1,8 +1,10 @@
 .container_adminhistory {
     width: 100%;
     height: 100vh;
-    padding-top: 140px;
+    padding-top: 120px;
     display: flex;
+
+
 
     .container_adminhistory_card {
         width: 25%;
@@ -55,31 +57,43 @@
                     }
                 }
 
-                // .texts {
-                //     display: flex;
-                //     width: 100%;
+                .texts {
+                    display: flex;
+                    width: 100%;
 
-                //     .text1 {
-                //         width: 26%;
-                //         h6 {
-                //             margin-left: 10px;
+                    .text1 {
+                        width: 26%;
 
-                //         }
-                //     }
+                        h6 {
+                            margin-left: 10px;
 
-                //     .text2 {
-                //         width: 70%;
+                        }
+                    }
+
+                    .text2 {
+                        width: 70%;
 
 
-                //     }
-                // }
+                    }
+                }
             }
         }
 
     }
 
     .container_adminhistory_right {
+
         // background-color: green;
+        .container_history_text {
+            h4 {
+                margin-top: 10px;
+                font-size: 16px;
+                text-transform: uppercase;
+
+            }
+
+        }
+
         width: 70%;
         margin-left: 2%;
         height: 640px;

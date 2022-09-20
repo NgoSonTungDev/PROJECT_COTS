@@ -6,6 +6,7 @@ const History = () => {
         <div>
             <Navbar />
             <div className="container_adminhistory">
+                
                 <div className="container_adminhistory_card">
                     <div className="container_adminhistory_card_text">
                         <h6>Thông tin khách hàng</h6>
@@ -16,9 +17,9 @@ const History = () => {
                         </div>
                         <div className="container_adminhistory_card_img_text">
                             <div className="container_adminhistory_card_img_text_name">
-                                <h6>tiểu nhỏ</h6>
+                                <h6>tiểu nhỏ nhỏ</h6>
                             </div>
-                            {/* <div className="texts">
+                            <div className="texts">
                                 <div className="text1"><h6>Ho tên :</h6></div>
                                 <div className="text2"><span>Phan tấn phú</span></div>
                             </div>
@@ -33,11 +34,14 @@ const History = () => {
                             <div className="texts">
                                 <div className="text1"><h6>Email :</h6></div>
                                 <div className="text2"><span>phantanphu1505@gmail.com</span></div>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="container_adminhistory_right">
+                    <div className="container_history_text">
+                        <h4>Lịch sử mua hàng</h4>
+                    </div>
                     <table>
                         <tr>
                             <th>Mã đơn hàng</th>
