@@ -12,7 +12,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Payment from "./pages/Payment/Payment";
 import PaymentOrders from "./pages/PaymentOrders/PaymentOrders";
 import Cart from "./pages/Cart/Cart";
-
+import History from "./pages/History/History";
 function App() {
   const admin = localStorage.getItem("admin");
 
@@ -33,6 +33,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </BrowserRouter>
     </div>
