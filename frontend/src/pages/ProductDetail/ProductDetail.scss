@@ -29,7 +29,6 @@
             text-transform: capitalize;
             span {
               font-weight: 400;
-              border: 1px solid #333;
               padding: 0 10px;
               text-transform: capitalize;
             }
@@ -193,7 +192,7 @@
       }
       .container_productDetail_intro_product_one_comment{
         width: 100%;
-        margin-top: 5px;
+        margin-top: 10px;
         height: 510px;
         overflow-y: scroll;
         &::-webkit-scrollbar {
@@ -204,6 +203,13 @@
             background-color: #000000;
         }
       }
+
+      .container_productDetail_intro_product_one_newbrand{
+        width: 100%;
+        height: 450px;
+        margin-top: 5%;
+      }
+      
     }
     .container_productDetail_intro_product_one_details_3 {
       position: absolute;
@@ -230,3 +236,6 @@
   }
 }
 
+.react-multi-carousel-list{
+  height: 400px;
+}

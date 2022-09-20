@@ -3,16 +3,16 @@ const { Products } = require("../models/model");
 const ProductsController = {
   addProducts: async (req, res) => {
     try {
-        const newProducts = new Products(req.body)
-        const saveProducts = await newProducts.save()
+      const newProducts = new Products(req.body);
+      const saveProducts = await newProducts.save();
       res.status(200).json(saveProducts);
     } catch (error) {
       res.status(500).json(error);
     }
   },
-  getAll : async (req,res) =>{
+  getAll: async (req, res) => {
     try {
-      const allProducts = await Products.find()
+      const allProducts = await Products.find();
       res.status(200).json(allProducts);
     } catch (error) {
       res.status(500).json(error);
@@ -20,7 +20,9 @@ const ProductsController = {
   },
   GetAnProducts: async (req, res) => {
     try {
-      const Product = await Products.findById(req.params.id).populate("comment")
+      const Product = await Products.findById(req.params.id).populate(
+        "comment"
+      );
       res.status(200).json(Product);
     } catch (error) {
       console.log(error);
@@ -38,12 +40,38 @@ const ProductsController = {
   },
   deleteProducts: async (req, res) => {
     try {
-      await Products.findByIdAndDelete(req.params.id)
+      await Products.findByIdAndDelete(req.params.id);
       res.status(200).json("Delete Succesfully !!!");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  functionProduct: async (req, res) => {
+    try {
+      // var page = req.query.page;
+      var nameproduct = req.query.nameproduct;
+
+      if (nameproduct) {
+        // console.log(result);
+        const result = await Products.find({
+          NameProduct: nameproduct,
+        });
+        res.status(200).json(result);
+      } else {
+        const allProducts = await Products.find();
+        res.status(200).json(allProducts);
+      }
+
+      // if (page) {
+      //   page = parseInt(page);
+      //   var SkipNumber = (page - 1) * 6;
+      //   const result = await Products.find().skip(SkipNumber).limit(6);
+      //   res.status(200).json(result);
+      // }
     } catch (error) {
       res.status(500).json(error);
     }
   },
 };
 
-module.exports = ProductsController
+module.exports = ProductsController;

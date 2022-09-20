@@ -11,7 +11,9 @@ import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Payment from "./pages/Payment/Payment";
 import History from "./pages/History/History";
-import AdminHistory from "./pages/AdminHistory/AdminHistory";
+import PaymentOrders from "./pages/PaymentOrders/PaymentOrders";
+import Cart from "./pages/Cart/Cart";
+
 function App() {
   const admin = localStorage.getItem("admin");
 
@@ -28,10 +30,11 @@ function App() {
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/productDetail/payment/:id" element={<Payment />} />
           <Route path="/history" element={<History />} />
-          <Route path="/adminHistory" element={<AdminHistory />} />
+          <Route path="/productDetail/order/payment/:id" element={<PaymentOrders />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </div>
