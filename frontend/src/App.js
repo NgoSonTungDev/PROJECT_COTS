@@ -13,6 +13,7 @@ import Payment from "./pages/Payment/Payment";
 import PaymentOrders from "./pages/PaymentOrders/PaymentOrders";
 import Cart from "./pages/Cart/Cart";
 import AccountManagement from "./pages/Admin/AccountManagement/AccountManagement";
+import History from "./pages/History/History";
 
 function App() {
   const admin = localStorage.getItem("admin");
@@ -36,6 +37,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin/account" element={<AccountManagement />} />
           <Route path="/admin/order" element={<AccountManagement />} />
+          <Route path="/history" element={<History />} />
         </Routes>
       </BrowserRouter>
     </div>
