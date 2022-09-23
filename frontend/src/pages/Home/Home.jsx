@@ -6,9 +6,23 @@ import DataImage from "./image";
 import "./Home.scss";
 import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
+import axios from "axios";
+
 const Home = () => {
+  const [data, setData] = useState([]);
+  const newProduct = data.filter((item) => item.story === "NEW");
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    axios
+      .get("http://localhost:8000/api/product/allproduct")
+      .then(function (response) {
+        // console.log(response.data);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -24,26 +38,25 @@ const Home = () => {
               We are a team of talented designers who create the best clothing
               products in Vietnam
             </h2>
-            <button>GET STARTED</button>
+            <button
+              onClick={() => {
+                // console.log(data);
+                console.log(newProduct);
+              }}
+            >
+              GET STARTED
+            </button>
           </div>
         </div>
         <div className="container_home_product">
           <h1>NEW ARRIVAL</h1>
           <div className="container_home_product_card">
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
+            {newProduct.map((item) => (
+              <CardHome datacard={item} />
+            ))}
           </div>
           <h1>BEST SELLER </h1>
           <div className="container_home_product_card">
-          <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
-            <CardHome />
             <CardHome />
           </div>
           <h1>INSTAGRAM : MAFLINE </h1>
