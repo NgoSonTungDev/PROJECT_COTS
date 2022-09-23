@@ -4,16 +4,16 @@ import Navbar from "../../components/Navbar/Navbar";
 import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
 
-const Sale = () => {
-  const onPress_ENTER = (event) => {
-    var keyPressed = event.keyCode || event.which;
-    if (keyPressed === 13) {
-      alert("akjshdakjh");
-      keyPressed = null;
-    } else {
-      return false;
-    }
-  };
+const SalePage = () => {
+  // const onPress_ENTER = (event) => {
+  //   var keyPressed = event.keyCode || event.which;
+  //   if (keyPressed === 13) {
+  //     alert("akjshdakjh");
+  //     keyPressed = null;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   return (
     <div>
@@ -22,11 +22,11 @@ const Sale = () => {
         <div className="container_sale_top">
           <div className="container_sale_top_search">
             <div className="container_sale_top_search_1">
-              <i class="bx bx-search-alt-2"></i>
+              <i className="bx bx-search-alt-2"></i>
               <input
                 type="text"
                 placeholder="Search . . ."
-                onKeyDown={(e) => onPress_ENTER(e)}
+                // onKeyDown={(e) => onPress_ENTER(e)}
               />
             </div>
             <div className="container_sale_top_search_2">
@@ -49,4 +49,4 @@ const Sale = () => {
   );
 };
 
-export default Sale;
+export default SalePage;

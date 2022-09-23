@@ -10,7 +10,8 @@ import axios from "axios";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const newProduct = data.filter((item) => item.story === "NEW");
+  const NewProduct = data.filter((item) => item.story === "NEW");
+  const SaleProduct = data.filter((item) => item.story === "SALE");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,7 +42,7 @@ const Home = () => {
             <button
               onClick={() => {
                 // console.log(data);
-                console.log(newProduct);
+                // console.log(newProduct);
               }}
             >
               GET STARTED
@@ -51,13 +52,17 @@ const Home = () => {
         <div className="container_home_product">
           <h1>NEW ARRIVAL</h1>
           <div className="container_home_product_card">
-            {newProduct.map((item) => (
+            {/* <CardHome /> */}
+
+            {NewProduct.map((item) => (
               <CardHome datacard={item} />
             ))}
           </div>
           <h1>BEST SELLER </h1>
           <div className="container_home_product_card">
-            <CardHome />
+          {/* {SaleProduct.map((item) => (
+              <CardHome datacard={item} />
+            ))} */}
           </div>
           <h1>INSTAGRAM : MAFLINE </h1>
           <div className="container_home_product_card_image">

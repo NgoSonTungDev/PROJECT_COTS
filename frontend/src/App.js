@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Register from "./pages/Register/Register";
-import Sale from "./pages/Sale/Sale";
+import SalePage from "./pages/Sale/Sale";
 import Sizecheck from "./pages/Sizecheck/Sizecheck";
 import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
@@ -32,7 +32,7 @@ function App() {
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/productDetail/payment/:id" element={<Payment />} />
           <Route path="/productDetail/order/payment/:id" element={<PaymentOrders />} />
-          <Route path="/sale" element={<Sale />} />
+          <Route path="/sale-product" element={<SalePage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
