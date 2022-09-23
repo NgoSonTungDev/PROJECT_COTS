@@ -22,7 +22,7 @@ const userController = {
     }
   },
   updateUser: async (req, res) => {
-    console.log("er",req.body);
+    console.log("er", req.body);
     try {
       const user = await Users.findById(req.params.id);
       // await user.updateOne({ $set: req.body });
@@ -37,7 +37,7 @@ const userController = {
 
       res.status(200).json("Update Successfully !");
     } catch (error) {
-      console.log("err" , error);
+      console.log("err", error);
       res.status(500).json(error);
     }
   },
@@ -45,6 +45,38 @@ const userController = {
     try {
       await Users.findByIdAndDelete(req.params.id);
       res.status(200).json("Delete Successfully !");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  functionUser: async (req, res) => {
+    try {
+      // START REGION
+      const userName = req.query?.userName;
+      var condition = userName
+        ? { username: { $regex: new RegExp(userName), $options: "i" } }
+        : {};
+      Users.find(condition)
+        .then((data) => {
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving users.",
+          });
+        });
+
+      // END REGION
+
+      var page = req.query?.pageNumber;
+      if (page) {
+        page = parseInt(page);
+        var SkipNumber = (page - 1) * 6;
+        const result = await Users.find().skip(SkipNumber).limit(6);
+        res.status(200).json(result);
+      }
+      // END REGION
     } catch (error) {
       res.status(500).json(error);
     }

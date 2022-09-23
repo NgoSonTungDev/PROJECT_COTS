@@ -25,7 +25,7 @@ const OrderhistoryController = {
   },
   GetAnHistory: async (req, res) => {
     try {
-      const History = await Orderhistory.findById(req.params.id)
+      const History = await Orderhistory.findById(req.params.id);
       res.status(200).json(History);
     } catch (error) {
       res.status(500).json(error);
@@ -47,6 +47,39 @@ const OrderhistoryController = {
       );
       await Orderhistory.findByIdAndDelete(req.params.id);
       res.status(200).json("Delete successfully!");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  functionHistory: async (req, res) => {
+    try {
+      // START REGION
+      const codeOrders = req.query?.codeOrders;
+      var condition = codeOrders
+        ? { NameProduct: { $regex: new RegExp(codeOrders), $options: "i" } }
+        : {};
+
+      Orderhistory.find(condition)
+        .then((data) => {
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving products.",
+          });
+        });
+
+      // END REGION
+
+      var page = req.query?.page;
+      if (page) {
+        page = parseInt(page);
+        var SkipNumber = (page - 1) * 6;
+        const result = await Orderhistory.find().skip(SkipNumber).limit(6);
+        res.status(200).json(result);
+      }
+      // END REGION
     } catch (error) {
       res.status(500).json(error);
     }

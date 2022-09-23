@@ -48,26 +48,34 @@ const ProductsController = {
   },
   functionProduct: async (req, res) => {
     try {
-      // var page = req.query.page;
-      var nameproduct = req.query.nameproduct;
+      // START REGION
+      const productName = req.query?.nameproduct;
+      var condition = productName
+        ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
+        : {};
 
-      if (nameproduct) {
-        // console.log(result);
-        const result = await Products.find({
-          NameProduct: nameproduct,
+      Products.find(condition)
+        .then((data) => {
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving products.",
+          });
         });
+
+      // END REGION
+
+      var page = req.query?.page;
+      if (page) {
+        page = parseInt(page);
+        var SkipNumber = (page - 1) * 6;
+        const result = await Products.find().skip(SkipNumber).limit(6);
         res.status(200).json(result);
-      } else {
-        const allProducts = await Products.find();
-        res.status(200).json(allProducts);
       }
 
-      // if (page) {
-      //   page = parseInt(page);
-      //   var SkipNumber = (page - 1) * 6;
-      //   const result = await Products.find().skip(SkipNumber).limit(6);
-      //   res.status(200).json(result);
-      // }
+      // END REGION
     } catch (error) {
       res.status(500).json(error);
     }
