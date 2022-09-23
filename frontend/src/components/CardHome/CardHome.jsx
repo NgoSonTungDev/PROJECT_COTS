@@ -4,14 +4,17 @@ import "./CardHome.scss";
 
 const CardHome = ({ datacard }) => {
   const navigation = useNavigate();
+  const movePageDetail = (e) => {
+    navigation(`/productDetail/${e}`);
+  };
 
   return (
     <div>
       <div
         className="container_card"
         onClick={() => {
-          console.log("jshdjakh", datacard.image[0]);
-          // navigation("/productDetail/16787368234fsd");
+          movePageDetail(datacard._id);
+          console.log("jshdjakh", datacard._id);
         }}
       >
         <div className="container_card_img">
