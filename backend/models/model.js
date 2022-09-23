@@ -149,11 +149,7 @@ const Product = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  Story: {
-    type: String,
-    required: true,
-  },
-  Introduce: {
+  story:{
     type: String,
     required: true,
   },
