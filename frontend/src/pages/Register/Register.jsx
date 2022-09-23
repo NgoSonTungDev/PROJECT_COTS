@@ -50,6 +50,8 @@ const Register = () => {
         username: usernameValue,
         password: passwordValue,
         email: emailValue,
+        address: "",
+        numberPhone: "",
       })
       .then(function (response) {
         setCheck(false);
@@ -215,8 +217,8 @@ const Register = () => {
           </form>
           <LoadingButton
             className="buttonBack"
-            onClick={()=>{
-              navigation("/home")
+            onClick={() => {
+              navigation("/home");
             }}
             variant="outlined"
           >

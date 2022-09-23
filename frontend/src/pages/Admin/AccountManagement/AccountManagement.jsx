@@ -4,7 +4,6 @@ import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
 import "./AccountManagement.scss";
 
 const AccountManagement = () => {
-
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
@@ -19,7 +18,7 @@ const AccountManagement = () => {
     <div>
       <div className="container_AccountManagement">
         <div className="container_AccountManagement_menu">
-          <MenuAdmin/>
+          <MenuAdmin />
         </div>
         <div className="container_AccountManagement_body">
           <div className="container_AccountManagement_body_search">
