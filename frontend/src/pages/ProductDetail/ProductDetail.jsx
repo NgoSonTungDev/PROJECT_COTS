@@ -8,7 +8,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardCarouselDetail from "../../components/CardCarouselDetail/CardCarouselDetail";
 import CommentProduct from "../../components/Comment/Comment";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const responsive = {
   superLargeDesktop: {
@@ -30,11 +31,19 @@ const responsive = {
   },
 };
 
-const color = ["do", "den", "nau"];
+const vidu = ["do", "den", "nau", "hong"];
 
 const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
+  const [dataSize, setDataSize] = useState([]);
+  const [dataColor, setDataColor] = useState([]);
+  const [dataImage, setDataImage] = useState([]);
+  const NewProduct = data2.filter((item) => item.story === "SALE");
 
   const handleMoveBuy = () => {
     navigate("/productDetail/payment/16787368234fsd");
@@ -44,17 +53,35 @@ const ProductDetail = () => {
     if (seeMore === false) {
       setSeeMore(true);
       document.getElementById("checkHandleMore").style.height = "1100px";
-      document.getElementById("xemthem").innerHTML ="Thu Nhỏ";
+      document.getElementById("xemthem").innerHTML = "Thu Nhỏ";
     } else {
       document.getElementById("checkHandleMore").style.height = "600px";
       setSeeMore(false);
     }
   };
 
-
-
   useEffect(() => {
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+    axios
+      .get(`http://localhost:8000/api/product/${id}`)
+      .then(function (response) {
+        setData(response.data);
+        setDataColor(response.data.Color);
+        setDataSize(response.data.Size);
+        setDataImage(response.data.image);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:8000/api/product/allproduct")
+      .then(function (response) {
+        setData2(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -63,11 +90,11 @@ const ProductDetail = () => {
       <div className="container_productDetail">
         <div className="container_productDetail_top">
           <div className="container_productDetail_top_carousel">
-            <CarouselSuppage />
+            <CarouselSuppage dataImage={dataImage} />
           </div>
           <div className="container_productDetail_top_introduce">
-            <p>TAG ME TEE / WHITE COLOR</p>
-            <span>Kho : 100 sản phẩm có sẵn</span>
+            <p>{data.NameProduct}</p>
+            <span>Kho : {data.warehouse} sản phẩm có sẵn</span>
             <hr />
             <div className="container_productDetail_top_introduce_2">
               <table>
@@ -94,23 +121,23 @@ const ProductDetail = () => {
                 <tr>
                   <td>Màu sản phẩm sẳn có</td>
                   <td>
-                    {/* {???.map((item)=>(
+                    {dataColor.map((item) => (
                       <span>{item},</span>
-                    )
-                    )} */}
-                    <span>đỏ,</span> <span>cam,</span> <span>vàng,</span>
+                    ))}
                   </td>
                 </tr>
                 <tr>
                   <td>Kích Cỡ</td>
                   <td>
-                    <span>S,</span> <span>L,</span> <span>XL,</span>
+                    {dataSize.map((item) => (
+                      <span>{item},</span>
+                    ))}
                   </td>
                 </tr>
                 <tr>
-                  <td>Giá</td>
+                  <td>Giá:</td>
                   <td>
-                    <i>180.000₫ </i> <b>59.000₫</b>
+                    <i>180.000₫ </i> <b>{data.price}</b>
                   </td>
                 </tr>
                 <br />
@@ -298,13 +325,9 @@ const ProductDetail = () => {
             </div>
             <div className="container_productDetail_intro_product_one_newbrand">
               <Carousel responsive={responsive}>
-                <CardCarouselDetail />
-                <CardCarouselDetail />
-                <CardCarouselDetail />
-                <CardCarouselDetail />
-                <CardCarouselDetail />
-                <CardCarouselDetail />
-                <CardCarouselDetail />
+                {NewProduct.map((item) => (
+                  <CardCarouselDetail dataNewCardCarousel={item} />
+                ))}
               </Carousel>
             </div>
           </div>

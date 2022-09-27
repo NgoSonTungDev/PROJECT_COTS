@@ -1,19 +1,28 @@
 import React from "react";
-import "./CardCarouselDetail.scss"
+import "./CardCarouselDetail.scss";
+import { useNavigate } from "react-router-dom";
 
-const CardCarouselDetail = () => {
+const CardCarouselDetail = ({ dataNewCardCarousel }) => {
+  const navigation = useNavigate();
+
+  const movePageDetail = (e) => {
+    navigation(`/productDetail/${e}`);
+    window.location.reload()
+  };
   return (
     <div>
-      <div className="container_CardCarouselDetail">
+      <div
+        className="container_CardCarouselDetail"
+        onClick={() => {
+          movePageDetail(dataNewCardCarousel._id);
+        }}
+      >
         <div className="container_CardCarouselDetail_img">
-          <img
-            src="https://product.hstatic.net/200000260587/product/6d4dde0b2e6cdb32827d_870d1239d5b845938ed732170e02851f_master.jpg"
-            alt=""
-          />
+          <img src={dataNewCardCarousel.image[1]} alt="" />
         </div>
         <div className="container_CardCarouselDetail_name">
-            <p>HARD MODE BASIC TEE / BLACK</p>
-            <i>180.000₫ </i> <span>59.000₫</span>
+          <p>{dataNewCardCarousel.NameProduct}</p>
+          <i>180.000₫ </i> <span>{dataNewCardCarousel.price}₫</span>
         </div>
       </div>
     </div>

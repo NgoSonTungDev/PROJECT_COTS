@@ -60,9 +60,9 @@ const Home = () => {
           </div>
           <h1>BEST SELLER </h1>
           <div className="container_home_product_card">
-          {/* {SaleProduct.map((item) => (
+            {SaleProduct.map((item) => (
               <CardHome datacard={item} />
-            ))} */}
+            ))}
           </div>
           <h1>INSTAGRAM : MAFLINE </h1>
           <div className="container_home_product_card_image">
