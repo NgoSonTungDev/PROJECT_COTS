@@ -9,7 +9,4 @@ routes.put("/:id", userController.updateUser);
 
 routes.delete("/:id", userController.deleteUser);
 
-routes.get("/", userController.functionUser);
-
-
 module.exports = routes;
