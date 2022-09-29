@@ -4,8 +4,35 @@ const bcrypt = require("bcrypt");
 const userController = {
   getAllUser: async (req, res) => {
     try {
-      const allUSer = await Users.find();
-      res.status(200).json(allUSer);
+      var userName = req.query?.userName;
+      var page = req.query?.pageNumber;
+
+      if (!page && !userName) {
+        const allUSer = await Users.find();
+        return res.status(200).json(allUSer);
+      }
+
+      if (page) {
+        page = parseInt(page);
+        var SkipNumber = (page - 1) * 6;
+        const result = await Products.find().skip(SkipNumber).limit(6);
+        return res.status(200).json(result);
+      }
+
+      var condition = userName
+        ? { username: { $regex: new RegExp(userName), $options: "i" } }
+        : {};
+
+      Users.find(condition)
+        .then((data) => {
+          return res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving products.",
+          });
+        });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -45,38 +72,6 @@ const userController = {
     try {
       await Users.findByIdAndDelete(req.params.id);
       res.status(200).json("Delete Successfully !");
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-  functionUser: async (req, res) => {
-    try {
-      // START REGION
-      const userName = req.query?.userName;
-      var condition = userName
-        ? { username: { $regex: new RegExp(userName), $options: "i" } }
-        : {};
-      Users.find(condition)
-        .then((data) => {
-          res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving users.",
-          });
-        });
-
-      // END REGION
-
-      var page = req.query?.pageNumber;
-      if (page) {
-        page = parseInt(page);
-        var SkipNumber = (page - 1) * 6;
-        const result = await Users.find().skip(SkipNumber).limit(6);
-        res.status(200).json(result);
-      }
-      // END REGION
     } catch (error) {
       res.status(500).json(error);
     }

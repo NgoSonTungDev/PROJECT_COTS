@@ -1,27 +1,17 @@
 import React from "react";
-import "./Sale.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
+import "./SaleProduct.scss"
+import CardHome from "../../components/CardHome/CardHome";
 
-const SalePage = () => {
-  // const onPress_ENTER = (event) => {
-  //   var keyPressed = event.keyCode || event.which;
-  //   if (keyPressed === 13) {
-  //     alert("akjshdakjh");
-  //     keyPressed = null;
-  //   } else {
-  //     return false;
-  //   }
-  // };
-
+const SaleProduct = () => {
   return (
     <div>
       <Navbar />
-      <div className="container_sale">
-        <div className="container_sale_top">
-          <div className="container_sale_top_search">
-            <div className="container_sale_top_search_1">
+      <div className="container_SaleProduct">
+        <div className="container_SaleProduct_top">
+          <div className="container_SaleProduct_top_search">
+            <div className="container_SaleProduct_top_search_1">
               <i className="bx bx-search-alt-2"></i>
               <input
                 type="text"
@@ -29,7 +19,7 @@ const SalePage = () => {
                 // onKeyDown={(e) => onPress_ENTER(e)}
               />
             </div>
-            <div className="container_sale_top_search_2">
+            <div className="container_SaleProduct_top_search_2">
               <select name="" id="">
                 <option value="">All</option>
                 <option value="">New</option>
@@ -40,13 +30,13 @@ const SalePage = () => {
             </div>
           </div>
         </div>
-        <div className="container_sale_product_card">
-          <CardHome />
+        <div className="container_SaleProduct_product_card">
+          {/* <CardHome /> */}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
 
-export default SalePage;
+export default SaleProduct;

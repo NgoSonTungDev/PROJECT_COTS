@@ -11,6 +11,4 @@ router.put("/:id",OrderhistoryController.UpdateHistory)
 
 router.delete("/:id",OrderhistoryController.DeleteFromOrderhistory)
 
-router.delete("/",OrderhistoryController.functionHistory)
-
 module.exports = router
