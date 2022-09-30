@@ -4,35 +4,32 @@ const bcrypt = require("bcrypt");
 const userController = {
   getAllUser: async (req, res) => {
     try {
-      var userName = req.query?.userName;
-      var page = req.query?.pageNumber;
+      const allUSer = await Users.find();
+      return res.status(200).json(allUSer);
 
-      if (!page && !userName) {
-        const allUSer = await Users.find();
-        return res.status(200).json(allUSer);
-      }
+      // var userName = req.query?.userName;
+      // var page = req.query?.pageNumber;
+      // if (page) {
+      //   page = parseInt(page);
+      //   var SkipNumber = (page - 1) * 6;
+      //   const result = await Products.find().skip(SkipNumber).limit(6);
+      //   return res.status(200).json(result);
+      // }
 
-      if (page) {
-        page = parseInt(page);
-        var SkipNumber = (page - 1) * 6;
-        const result = await Products.find().skip(SkipNumber).limit(6);
-        return res.status(200).json(result);
-      }
+      // var condition = userName
+      //   ? { username: { $regex: new RegExp(userName), $options: "i" } }
+      //   : {};
 
-      var condition = userName
-        ? { username: { $regex: new RegExp(userName), $options: "i" } }
-        : {};
-
-      Users.find(condition)
-        .then((data) => {
-          return res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving products.",
-          });
-        });
+      // Users.find(condition)
+      //   .then((data) => {
+      //     return res.send(data);
+      //   })
+      //   .catch((err) => {
+      //     res.status(500).send({
+      //       message:
+      //         err.message || "Some error occurred while retrieving products.",
+      //     });
+      //   });
     } catch (error) {
       res.status(500).json(error);
     }

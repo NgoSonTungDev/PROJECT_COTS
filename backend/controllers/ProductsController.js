@@ -12,35 +12,31 @@ const ProductsController = {
   },
   getAll: async (req, res) => {
     try {
-      var productName = req.query?.productName;
-      var page = req.query?.pageNumber;
+      const allProducts = await Products.find();
+      return res.status(200).json(allProducts);
+      // var productName = req.query?.productName;
+      // var page = req.query?.pageNumber;
+      // if (page) {
+      //   page = parseInt(page);
+      //   var SkipNumber = (page - 1) * 6;
+      //   const result = await Products.find().skip(SkipNumber).limit(6);
+      //   return res.status(200).json(result);
+      // }
 
-      if (!page && !NameStaff) {
-        const allProducts = await Products.find();
-        return res.status(200).json(allProducts);
-      }
+      // var condition = productName
+      //   ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
+      //   : {};
 
-      if (page) {
-        page = parseInt(page);
-        var SkipNumber = (page - 1) * 6;
-        const result = await Products.find().skip(SkipNumber).limit(6);
-        return res.status(200).json(result);
-      }
-
-      var condition = productName
-        ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
-        : {};
-
-      Products.find(condition)
-        .then((data) => {
-          return res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving products.",
-          });
-        });
+      // Products.find(condition)
+      //   .then((data) => {
+      //     return res.send(data);
+      //   })
+      //   .catch((err) => {
+      //     res.status(500).send({
+      //       message:
+      //         err.message || "Some error occurred while retrieving products.",
+      //     });
+      //   });
     } catch (error) {
       res.status(500).json(error);
     }
