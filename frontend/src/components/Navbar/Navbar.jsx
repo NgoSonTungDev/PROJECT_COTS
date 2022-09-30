@@ -1,12 +1,11 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigation = useNavigate();
   const [offset, setOffset] = useState(0);
-  const username = localStorage.getItem("username");
-  const admin = localStorage.getItem("admin");
+  const user = JSON.parse(localStorage.getItem("dataUser"));
 
   const movelogin = () => {
     navigation("/login");
@@ -14,16 +13,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [])
-  
+    window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div>
       <div className="container_narbar">
-        <div className={`container_narbar_intro ${offset > 200 && 'hide'}`}>
+        <div className={`container_narbar_intro ${offset > 200 && "hide"}`}>
           <div className="container_narbar_intro_1">
             <div className="container_narbar_intro_1_contact">
               <span>
@@ -55,21 +53,52 @@ const Navbar = () => {
           <nav>
             <label class="logo">MAFLINE</label>
             <ul>
-              <li onClick={()=>{navigation("/home")}}>
+              <li
+                onClick={() => {
+                  navigation("/home");
+                }}
+              >
                 <p>Home</p>
               </li>
-              <li onClick={()=>{navigation("/sale")}}>
-                <p >sale</p>
+              <li
+                onClick={() => {
+                  navigation("/sale");
+                }}
+              >
+                <p>sale</p>
               </li>
               <li>
-                <p  onClick={()=>{navigation("/size-check")}}>Size check</p>
+                <p
+                  onClick={() => {
+                    navigation("/size-check");
+                  }}
+                >
+                  Size check
+                </p>
               </li>
               <li>
-                <p onClick={()=>{navigation("/about")}}>About</p>
+                <p
+                  onClick={() => {
+                    navigation("/about");
+                  }}
+                >
+                  About
+                </p>
               </li>
-              <li onClick={movelogin}>
-                <p>sign in</p>
-              </li>
+              {user === null ? (
+                <li onClick={movelogin}>
+                  <p>sign in</p>
+                </li>
+              ) : (
+                <li
+                  onClick={() => {
+                    window.location.reload();
+                    localStorage.clear();
+                  }}
+                >
+                  <p>sign out</p>
+                </li>
+              )}
             </ul>
           </nav>
         </div>

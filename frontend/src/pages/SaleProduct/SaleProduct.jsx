@@ -5,6 +5,15 @@ import "./SaleProduct.scss"
 import CardHome from "../../components/CardHome/CardHome";
 
 const SaleProduct = () => {
+    // const onPress_ENTER = (event) => {
+  //   var keyPressed = event.keyCode || event.which;
+  //   if (keyPressed === 13) {
+  //     alert("akjshdakjh");
+  //     keyPressed = null;
+  //   } else {
+  //     return false;
+  //   }
+  // };
   return (
     <div>
       <Navbar />
