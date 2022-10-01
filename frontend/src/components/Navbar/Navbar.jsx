@@ -58,7 +58,7 @@ const Navbar = () => {
               <li onClick={()=>{navigation("/home")}}>
                 <p>Home</p>
               </li>
-              <li onClick={()=>{navigation("/sale")}}>
+              <li onClick={()=>{navigation("/sale-product")}}>
                 <p >sale</p>
               </li>
               <li>

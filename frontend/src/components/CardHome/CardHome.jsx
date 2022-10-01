@@ -4,6 +4,7 @@ import "./CardHome.scss";
 
 const CardHome = ({ datacard }) => {
   const navigation = useNavigate();
+  
   const movePageDetail = (e) => {
     navigation(`/productDetail/${e}`);
   };

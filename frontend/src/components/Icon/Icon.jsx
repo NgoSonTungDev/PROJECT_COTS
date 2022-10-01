@@ -9,21 +9,23 @@ const Icon = () => {
     <div>
       <div className="container_icon">
 
-        <div className="container_icon_cart">
+        <div className="container_icon_cart"
+          onClick={() => {
+            navigation("/history");
+          }}>
           <i class="bx bx-history"></i>
           <span>0</span>
         </div>
-
-        <div className="container_icon_cart">
+        <div className="container_icon_cart" onClick={() => {
+          navigation("/cart");
+        }}>
           <i
-            onClick={() => {
-              navigation("/cart");
-            }}
+
             class="bx bx-cart-alt"
           ></i>
           <span style={{ transform: "translateY(70px)" }}>0</span>
         </div>
-        
+
       </div>
     </div>
   );

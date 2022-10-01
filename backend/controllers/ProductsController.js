@@ -50,6 +50,8 @@ const ProductsController = {
     try {
       // START REGION
       const productName = req.query?.nameproduct;
+      var page = req.query?.page;
+      
       var condition = productName
         ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
         : {};
@@ -67,7 +69,6 @@ const ProductsController = {
 
       // END REGION
 
-      var page = req.query?.page;
       if (page) {
         page = parseInt(page);
         var SkipNumber = (page - 1) * 6;
