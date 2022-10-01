@@ -1,53 +1,60 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Payment.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Footer from "../../components/Footer/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-
-const color = ["Đỏ", "Xanh", "Trắng"];
-const size = ["S", "L", "XL"];
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Payment = () => {
+  const [data, setData] = useState([]);
   const [Amount, setAmount] = useState(1);
-  const [Color, setColor] = useState("");
-  const [Size, setSize] = useState("");
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
+  const [colorOption, setColorOption] = useState([]);
+  const [sizeOption, setSizeOption] = useState([]);
+  const [image, setImage] = useState([]);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
   const [Address, setAddress] = useState("");
   const [NumberPhone, setNumberPhone] = useState(0);
+  const [ship, setShip] = useState(30000);
   const [Check, setCheck] = useState(false);
+  const [buttonPayCheck, setButtonPayCheck] = useState("option_one");
   const address = document.getElementById("address");
   const numberPhone = document.getElementById("numberPhone");
-  const [buttonPayCheck, setButtonPayCheck] = useState("option_one");
+  const user = JSON.parse(localStorage.getItem("dataUser"));
   const refColor = useRef([]);
   const refSize = useRef([]);
-  const navigation = useNavigate()
+  const location = useLocation();
+  const navigation = useNavigate();
+  const ProductID = location.pathname.split("/")[3];
 
   var a = false,
     b = false,
     c = false;
 
-    const movePaymentOrder = () =>{
-      navigation("/productDetail/order/payment/1367563524")
-    }
+  const movePaymentOrder = () => {
+    navigation("/productDetail/order/payment/1367563524");
+  };
 
   const handleOnClickButtonGetInformation = () => {
     checkOption();
     if (a === true && b === true && c === true) {
       setCheck(true);
+      toast.success("Đủ thông tin !", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       document.getElementById("tablePayment").style.height = "570px";
       setTimeout(() => {
         setCheck(false);
-      }, 1000);
+      }, 2000);
     }
   };
 
   const checkOption = () => {
-    if (Amount === "" || Size === "" || Color === "") {
-      toast.error("Vui lòng chọn đầy đủ : (Màu) , (Kích Cở)", {
+    if (Amount === "" || size === "" || color === "") {
+      toast.error("Vui lòng chọn đầy đủ : (Màu) , (Kích Cở) !!!", {
         position: toast.POSITION.BOTTOM_LEFT,
       });
     } else {
@@ -64,7 +71,7 @@ const Payment = () => {
       b = true;
     }
 
-    if (Address === "") {
+    if (NumberPhone === "") {
       setErrorFor(numberPhone, "Number Phone cannot be blank ");
     } else {
       setSuccessFor(numberPhone);
@@ -104,6 +111,77 @@ const Payment = () => {
     });
   };
 
+  var totalOrder = Amount * data.price + ship;
+
+  const handleOrder = () => {
+    // var min = 1000;
+    // var max = 9000;
+    // var rand = parseInt(min + Math.random() * (max - min));
+    // axios
+    //   .post("http://localhost:8000/api/History/addToHistory", {
+    //     codeOrders: rand,
+    //     ProductID: ProductID,
+    //     NameProduct: data.NameProduct,
+    //     Image: data.image[0],
+    //     price: data.price,
+    //     Size: size,
+    //     Color: color,
+    //     Amount: Amount,
+    //     Total: totalOrder,
+    //     Story: "Chờ xác nhận",
+    //     AccountUSer: user._id,
+    //   })
+    //   .then(function (response) {
+    //     toast.success("Đặt hàng thành công !", {
+    //       position: toast.POSITION.BOTTOM_LEFT,
+    //     });
+    //     if (user.address === "" && user.numberPhone === "") {
+    //       axios
+    //         .put(`http://localhost:8000/api/user/${user._id}`, {
+    //           address: Address,
+    //           numberPhone: NumberPhone,
+    //         })
+    //         .then(function (response) {
+    //           toast.success("Đã cập nhật địa chỉ và số điện thoại cho bạn !", {
+    //             position: toast.POSITION.BOTTOM_LEFT,
+    //           });
+    //         })
+    //         .catch(function (error) {
+    //           toast.error("Không cập nhật được địa chỉ và số điện thoại cho bạn ! ", {
+    //             position: toast.POSITION.BOTTOM_LEFT,
+    //           });
+    //         });
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     toast.error("Lỗi mất rồi, làm lại nha 😉", {
+    //       position: toast.POSITION.BOTTOM_LEFT,
+    //     });
+    //     console.log(error);
+    //   });
+  };
+
+  const fetchData = () => {
+    axios
+      .get(`http://localhost:8000/api/product/632d91aece17662045bee299`)
+      .then(function (response) {
+        console.log(response.data);
+        setData(response.data);
+        setColorOption(response.data.Color);
+        setSizeOption(response.data.Size);
+        setImage(response.data.image);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+    setAddress(user.address);
+    setNumberPhone(user.numberPhone);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -111,14 +189,11 @@ const Payment = () => {
         <div className="container_payment_top">
           <div className="container_payment_top_content">
             <div className="container_payment_top_content_img">
-              <img
-                src="//product.hstatic.net/200000260587/product/6d4dde0b2e6cdb32827d_870d1239d5b845938ed732170e02851f_master.jpg"
-                alt=""
-              />
+              <img src={image[0]} alt="" />
             </div>
 
             <div className="container_payment_top_content_option">
-              <p>TAG ME TEE / WHITE COLOR</p>
+              <p>{data.NameProduct}</p>
               <hr />
               <table>
                 <tr>
@@ -128,14 +203,23 @@ const Payment = () => {
                       type="number"
                       min="1"
                       value={Amount}
-                      onChange={(e) => setAmount(e.target.value)}
+                      onClick={() => {
+                        if (Amount >= 3) {
+                          setShip(0);
+                        } else if (Amount <= 2) {
+                          setShip(30000);
+                        }
+                      }}
+                      onChange={(e) => {
+                        setAmount(e.target.value);
+                      }}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>Màu : </td>
                   <td>
-                    {color.map((item, index) => (
+                    {colorOption.map((item, index) => (
                       <span
                         ref={(e) => {
                           refColor.current[index] = e;
@@ -154,7 +238,7 @@ const Payment = () => {
                 <tr>
                   <td>Kích cở: </td>
                   <td>
-                    {size.map((item, index) => (
+                    {sizeOption.map((item, index) => (
                       <span
                         ref={(e) => {
                           refSize.current[index] = e;
@@ -170,6 +254,12 @@ const Payment = () => {
                     ))}
                   </td>
                 </tr>
+                <tr>
+                  <td>Giá sản phẩm: </td>
+                  <td style={{ color: "#d63031", fontWeight: "500" }}>
+                    {data.price}₫
+                  </td>
+                </tr>
               </table>
               <div className="container_payment_top_content_choose">
                 <img
@@ -181,6 +271,7 @@ const Payment = () => {
             </div>
           </div>
         </div>
+        <br />
         <hr />
         <div className="container_payment_body">
           <div className="container_payment_body_input">
@@ -188,11 +279,11 @@ const Payment = () => {
               <form id="form" class="form">
                 <div class="form-control">
                   <label for="username">Tên Khách Hàng</label>
-                  <p>Ngo Son Tung</p>
+                  <p>{user.username}</p>
                 </div>
                 <div class="form-control">
                   <label for="username">Email</label>
-                  <p>Nguyenvana@gmail.com</p>
+                  <p>{user.email}</p>
                 </div>
                 <div class="form-control">
                   <label for="username">Địa Chỉ</label>
@@ -247,44 +338,48 @@ const Payment = () => {
                   </tr>
                   <tr>
                     <td>Tên Khách hàng</td>
-                    <td>ngo son tung</td>
+                    <td>{user.username}</td>
                   </tr>
                   <tr>
                     <td>Địa chỉ</td>
-                    <td>217 nguyễn phước nguyên</td>
+                    <td>{Address}</td>
                   </tr>
                   <tr>
                     <td>Số điện thoại</td>
-                    <td>0522564268</td>
+                    <td>{NumberPhone}</td>
                   </tr>
                   <tr>
                     <td>Tên Sản phẩm</td>
-                    <td>TAG ME TEE</td>
+                    <td>{data.NameProduct}</td>
                   </tr>
                   <tr>
                     <td>Số lượng </td>
-                    <td>3</td>
+                    <td>{Amount}</td>
                   </tr>
                   <tr>
                     <td>màu</td>
-                    <td>Đen</td>
+                    <td>{color}</td>
                   </tr>
                   <tr>
                     <td>Size</td>
-                    <td>XL</td>
+                    <td>{size}</td>
                   </tr>
                   <tr>
                     <td>giá sản phẩm</td>
-                    <td>3000 (VND)</td>
+                    <td style={{ color: "#d63031", fontWeight: "500" }}>
+                      {data.price}₫
+                    </td>
                   </tr>
                   <tr>
                     <td>Tiền vận chuyển</td>
-                    <td>30.000 (VND)</td>
+                    <td style={{ color: "#d63031", fontWeight: "500" }}>
+                      {ship}₫
+                    </td>
                   </tr>
                   <tr>
                     <td style={{ fontWeight: "700" }}>Tổng Tiền thanh toán</td>
-                    <td style={{ color: "#e84118", fontWeight: "bold" }}>
-                      200.000 (VND)
+                    <td style={{ color: "#e84118", fontWeight: "600" }}>
+                      {totalOrder}₫
                     </td>
                   </tr>
                   <tr>
@@ -314,7 +409,7 @@ const Payment = () => {
                 </table>
                 <div className="container_payment_body_order_btn">
                   {buttonPayCheck === "option_one" ? (
-                    <button>Đặt hàng</button>
+                    <button onClick={handleOrder}>Đặt hàng</button>
                   ) : (
                     <button onClick={movePaymentOrder}>Thanh Toán</button>
                   )}
@@ -324,11 +419,10 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={1000} />
       <Footer />
     </div>
   );
 };
 
 export default Payment;
-//500px

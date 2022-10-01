@@ -31,8 +31,6 @@ const responsive = {
   },
 };
 
-const vidu = ["do", "den", "nau", "hong"];
-
 const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
   const navigate = useNavigate();
@@ -43,10 +41,10 @@ const ProductDetail = () => {
   const [dataSize, setDataSize] = useState([]);
   const [dataColor, setDataColor] = useState([]);
   const [dataImage, setDataImage] = useState([]);
-  const NewProduct = data2.filter((item) => item.story === "SALE");
+  const NewProduct = data2.filter((item) => item.story === "NEW");
 
   const handleMoveBuy = () => {
-    navigate("/productDetail/payment/16787368234fsd");
+    navigate(`/productDetail/payment/${id}`);
   };
 
   const handleSeeMore = () => {

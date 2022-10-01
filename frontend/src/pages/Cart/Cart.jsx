@@ -48,7 +48,6 @@ const Cart = () => {
             <tr>
               <td> HARD MODE BASIC TEE / BEIGE</td>
               <td className="cart_product">
-               
                 <img
                   src="https://product.hstatic.net/200000260587/product/b6cab97b491cbc42e50d_6d85a7f0498b4442832b5c0e3789bec0_grande.jpg"
                   alt=""
@@ -59,12 +58,8 @@ const Cart = () => {
               <td>Đỏ</td>
               <td>120</td>
               <td className="cart_btn">
-                <button>
-                  Xem chi tiết
-                </button>
-                <button>
-                  Xóa
-                </button>
+                <button>Xem chi tiết</button>
+                <button>Xóa</button>
               </td>
             </tr>
           </table>

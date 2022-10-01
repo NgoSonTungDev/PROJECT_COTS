@@ -9,7 +9,8 @@ const userShema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      minlength: 10,
+      unique: true,
+      minlength: 6,
     },
     email: {
       type: String,
@@ -73,6 +74,7 @@ const PurchaseHistory = new mongoose.Schema(
     codeOrders: {
       type: Number,
       required: true,
+      unique: true,
     },
     ProductID: {
       type: String,
@@ -112,8 +114,8 @@ const PurchaseHistory = new mongoose.Schema(
     },
     AccountUSer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "AccountUSers",
       required: true,
+      ref: "AccountUSers",
     },
   },
   { timestamps: true }
