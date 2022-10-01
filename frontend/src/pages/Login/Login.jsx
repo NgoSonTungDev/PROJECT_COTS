@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import axios from "axios";
@@ -18,6 +18,7 @@ const Login = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [story, setStory] = useState("");
+  var a = [];
 
   const handleClick = () => {
     setOpen(true);
@@ -34,13 +35,12 @@ const Login = () => {
   function onPress_ENTER(event) {
     var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
-      handleLogin()
+      handleLogin();
       keyPressed = null;
     } else {
       return false;
     }
   }
-
 
   const handleLogin = () => {
     setCheck(true);
@@ -63,20 +63,18 @@ const Login = () => {
           setStory("success");
           const checkAdmin = response.data.admin;
           if (checkAdmin === false) {
-            localStorage.setItem("username", response.data.username);
-            localStorage.setItem("image", response.data.image);
-            localStorage.setItem("IdUser", response.data._id);
             localStorage.setItem("admin", response.data.admin);
-            localStorage.setItem("email", response.data.email);
+            var dataUser = JSON.stringify(response.data);
+            a.push(dataUser);
+            localStorage.setItem("dataUser", a);
             setTimeout(() => {
               navigation("/home");
             }, 1000);
           } else {
             localStorage.setItem("admin", response.data.admin);
-            console.log(localStorage.getItem("admin"));
             localStorage.setItem("username", response.data.username);
             setTimeout(() => {
-              navigation("/home-page-ticket-movie");
+              navigation("/admin/home");
             }, 1500);
           }
         })

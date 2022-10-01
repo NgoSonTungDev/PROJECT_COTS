@@ -6,7 +6,20 @@ import "./SaleProduct.scss"
 import CardProduct from "../../components/CardProduct/CardProduct";
 
 const SaleProduct = () => {
+
   const [data, setData] = useState([]);
+
+ 
+
+  // const onPress_ENTER = (event) => {
+  //   var keyPressed = event.keyCode || event.which;
+  //   if (keyPressed === 13) {
+  //     alert("akjshdakjh");
+  //     keyPressed = null;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);

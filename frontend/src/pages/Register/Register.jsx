@@ -70,16 +70,16 @@ const Register = () => {
       });
   };
 
-  const handleOnClickButtonRegister = () => {
-    checkInputs();
+  const handleOnClickButtonRegister = async () => {
+    await checkInputs();
     if (a === true && b === true && c === true && d === true) {
-      setCheck(true);
+      setCheck(true)
       handleRegister();
     }
   };
 
   const checkInputs = () => {
-    if (usernameValue === "" && usernameValue.length < 10) {
+    if (usernameValue === "" || usernameValue.length < 10) {
       setErrorFor(
         username,
         "Username cannot be blank or must have 10 characters"
@@ -87,6 +87,7 @@ const Register = () => {
       setCheck(false);
       a = false;
     } else {
+      setCheck(false);
       setSuccessFor(username);
       a = true;
     }
@@ -100,6 +101,7 @@ const Register = () => {
       setCheck(false);
       b = false;
     } else {
+      setCheck(false);
       setSuccessFor(email);
       b = true;
     }
@@ -112,6 +114,7 @@ const Register = () => {
       setCheck(false);
       c = false;
     } else {
+      setCheck(false);
       setSuccessFor(password);
       c = true;
     }
@@ -128,6 +131,7 @@ const Register = () => {
       setCheck(false);
       d = false;
     } else {
+      setCheck(false);
       setSuccessFor(password2);
       d = true;
     }

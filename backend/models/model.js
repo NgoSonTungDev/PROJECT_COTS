@@ -55,19 +55,11 @@ const CartUser = new mongoose.Schema({
     required: true,
   },
   Size: {
-    type: String,
+    type: Array,
     required: true,
   },
   Color: {
-    type: String,
-    required: true,
-  },
-  Type: {
-    type: String,
-    required: true,
-  },
-  Amount: {
-    type: Number,
+    type: Array,
     required: true,
   },
   AccountUSer: {

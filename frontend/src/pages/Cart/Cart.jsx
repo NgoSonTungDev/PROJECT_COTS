@@ -1,7 +1,6 @@
 import React from "react";
 import "./Cart.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 
 const Cart = () => {
   return (
@@ -38,29 +37,27 @@ const Cart = () => {
         <div className="cart_right">
           <table>
             <tr>
-              <th>Mã đơn hàng</th>
               <th>Tên sản phẩm</th>
+              <th>Hình ảnh</th>
               <th>Số lượng</th>
-              <th>Giá bán</th>
               <th>Size</th>
               <th>Màu</th>
-              <th>Tổng tiền</th>
+              <th>Giá bán</th>
               <th>Chức năng</th>
             </tr>
             <tr>
-              <td>m01</td>
+              <td> HARD MODE BASIC TEE / BEIGE</td>
               <td className="cart_product">
-                HARD MODE BASIC TEE / BEIGE
+               
                 <img
                   src="https://product.hstatic.net/200000260587/product/b6cab97b491cbc42e50d_6d85a7f0498b4442832b5c0e3789bec0_grande.jpg"
                   alt=""
                 />
               </td>
               <td>5</td>
-              <td>120</td>
               <td>L</td>
               <td>Đỏ</td>
-              <td>600</td>
+              <td>120</td>
               <td className="cart_btn">
                 <button>
                   Xem chi tiết
@@ -73,7 +70,6 @@ const Cart = () => {
           </table>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

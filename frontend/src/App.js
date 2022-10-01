@@ -33,13 +33,13 @@ function App() {
           <Route path="/productDetail/payment/:id" element={<Payment />} />
           <Route path="/productDetail/order/payment/:id" element={<PaymentOrders />} />
           <Route path="/sale-product" element={<SaleProduct />} />
-          <Route path="*" element={<PageNotFound />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/account" element={<AccountManagement />} />
           <Route path="/admin/order" element={<AccountManagement />} />
           <Route path="/history" element={<History />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

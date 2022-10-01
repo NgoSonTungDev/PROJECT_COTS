@@ -13,7 +13,30 @@ const ProductsController = {
   getAll: async (req, res) => {
     try {
       const allProducts = await Products.find();
-      res.status(200).json(allProducts);
+      return res.status(200).json(allProducts);
+      // var productName = req.query?.productName;
+      // var page = req.query?.pageNumber;
+      // if (page) {
+      //   page = parseInt(page);
+      //   var SkipNumber = (page - 1) * 6;
+      //   const result = await Products.find().skip(SkipNumber).limit(6);
+      //   return res.status(200).json(result);
+      // }
+
+      // var condition = productName
+      //   ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
+      //   : {};
+
+      // Products.find(condition)
+      //   .then((data) => {
+      //     return res.send(data);
+      //   })
+      //   .catch((err) => {
+      //     res.status(500).send({
+      //       message:
+      //         err.message || "Some error occurred while retrieving products.",
+      //     });
+      //   });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -42,41 +65,6 @@ const ProductsController = {
     try {
       await Products.findByIdAndDelete(req.params.id);
       res.status(200).json("Delete Succesfully !!!");
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
-  functionProduct: async (req, res) => {
-    try {
-      // START REGION
-      const productName = req.query?.nameproduct;
-      var page = req.query?.page;
-      
-      var condition = productName
-        ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
-        : {};
-
-      Products.find(condition)
-        .then((data) => {
-          res.send(data);
-        })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving products.",
-          });
-        });
-
-      // END REGION
-
-      if (page) {
-        page = parseInt(page);
-        var SkipNumber = (page - 1) * 6;
-        const result = await Products.find().skip(SkipNumber).limit(6);
-        res.status(200).json(result);
-      }
-
-      // END REGION
     } catch (error) {
       res.status(500).json(error);
     }
