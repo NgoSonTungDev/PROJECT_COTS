@@ -2,9 +2,7 @@ import React from "react";
 import "./History.scss";
 import Navbar from "../../components/Navbar/Navbar";
 
-
 const History = () => {
-
   return (
     <div>
       <Navbar />
@@ -16,54 +14,36 @@ const History = () => {
           <div className="container_card">
             <div className="container_history_user_card_img">
               <img
-                className="image"
                 src="https://anhdep123.com/wp-content/uploads/2020/11/avatar-facebook-mac-dinh-nam.jpeg"
                 alt=""
               />
             </div>
             <div className="container_history_user_card_img_text">
               <div className="container_history_user_card_img_text_name">
-                <p>tiểu nhỏ nhỏ</p>
+                <p>NgoSonTung</p>
                 <p>user</p>
               </div>
-              <div className="texts">
-                <div className="text1">
-                  <h6>Ho tên </h6>
+              <div className="container_history_user_card_information">
+                <div className="container_history_user_card_information_text">
+                  <b>Email:</b>
+                  <i>ngosontung0309@gmail.com</i>
                 </div>
-                <div className="text2">
-                  <span>Phan tấn phú</span>
+                <div className="container_history_user_card_information_text">
+                  <b>số điện thoại:</b>
+                  <i>012345678</i>
                 </div>
-              </div>
-              <div className="texts">
-                <div className="text1">
-                  <h6>SĐT </h6>
-                </div>
-                <div className="text2">
-                  <span>0835129813</span>
-                </div>
-              </div>
-              <div className="texts">
-                <div className="text1">
-                  <h6>Địa chỉ</h6>
-                </div>
-                <div className="text2">
-                  <span>242 tô hiệu</span>
-                </div>
-              </div>
-              <div className="texts">
-                <div className="text1">
-                  <h6>Email </h6>
-                </div>
-                <div className="text2">
-                  <span>phantanphu1505@gmail.com</span>
+                <div className="container_history_user_card_information_text">
+                  <b>Địa chỉ:</b>
+                  <i>225/10 Nguyễn phước nguyên</i>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="container_history_user_right">
           <div className="container_history_text">
-            <h4>Lịch sử mua hàng</h4>
+            <h4>Lịch Sử Mua Hàng</h4>
           </div>
           <div className="container_history_user_right_table">
             <table>
@@ -116,7 +96,6 @@ const History = () => {
               </tr>
             </table>
           </div>
-
         </div>
       </div>
     </div>

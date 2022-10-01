@@ -62,7 +62,7 @@ const Navbar = () => {
               </li>
               <li
                 onClick={() => {
-                  navigation("/sale");
+                  navigation("/sale-product");
                 }}
               >
                 <p>product</p>
