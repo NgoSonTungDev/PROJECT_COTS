@@ -6,10 +6,7 @@ import "./SaleProduct.scss"
 import CardProduct from "../../components/CardProduct/CardProduct";
 
 const SaleProduct = () => {
-
   const [data, setData] = useState([]);
-
- 
 
   // const onPress_ENTER = (event) => {
   //   var keyPressed = event.keyCode || event.which;
