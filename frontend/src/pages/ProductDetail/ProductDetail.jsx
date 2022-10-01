@@ -42,6 +42,7 @@ const ProductDetail = () => {
   const [dataColor, setDataColor] = useState([]);
   const [dataImage, setDataImage] = useState([]);
   const NewProduct = data2.filter((item) => item.story === "NEW");
+  const user = JSON.parse(localStorage.getItem("dataUser"));
 
   const handleMoveBuy = () => {
     navigate(`/productDetail/payment/${id}`);
@@ -141,12 +142,34 @@ const ProductDetail = () => {
                 <br />
                 <tr>
                   <td>
-                    <button className="buy" onClick={handleMoveBuy}>
-                      MUA HÀNG
-                    </button>
+                    {user != null ? (
+                      <button className="buy" onClick={handleMoveBuy}>
+                        MUA HÀNG
+                      </button>
+                    ) : (
+                      <button
+                        className="buy"
+                        onClick={() => {
+                          alert("Bạn cần đăng nhập ?");
+                        }}
+                      >
+                        MUA HÀNG
+                      </button>
+                    )}
                   </td>
                   <td>
-                    <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
+                    {user != null ? (
+                      <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
+                    ) : (
+                      <button
+                        className="addcart"
+                        onClick={() => {
+                          alert("Bạn cần đăng nhập ?");
+                        }}
+                      >
+                        THÊM VÀO GIỎ HÀNG
+                      </button>
+                    )}
                   </td>
                 </tr>
               </table>

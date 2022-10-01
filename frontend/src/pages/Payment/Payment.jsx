@@ -20,6 +20,7 @@ const Payment = () => {
   const [NumberPhone, setNumberPhone] = useState(0);
   const [ship, setShip] = useState(30000);
   const [Check, setCheck] = useState(false);
+  const [Check2, setCheck2] = useState(false);
   const [buttonPayCheck, setButtonPayCheck] = useState("option_one");
   const address = document.getElementById("address");
   const numberPhone = document.getElementById("numberPhone");
@@ -114,56 +115,75 @@ const Payment = () => {
   var totalOrder = Amount * data.price + ship;
 
   const handleOrder = () => {
-    // var min = 1000;
-    // var max = 9000;
-    // var rand = parseInt(min + Math.random() * (max - min));
-    // axios
-    //   .post("http://localhost:8000/api/History/addToHistory", {
-    //     codeOrders: rand,
-    //     ProductID: ProductID,
-    //     NameProduct: data.NameProduct,
-    //     Image: data.image[0],
-    //     price: data.price,
-    //     Size: size,
-    //     Color: color,
-    //     Amount: Amount,
-    //     Total: totalOrder,
-    //     Story: "Chờ xác nhận",
-    //     AccountUSer: user._id,
-    //   })
-    //   .then(function (response) {
-    //     toast.success("Đặt hàng thành công !", {
-    //       position: toast.POSITION.BOTTOM_LEFT,
-    //     });
-    //     if (user.address === "" && user.numberPhone === "") {
-    //       axios
-    //         .put(`http://localhost:8000/api/user/${user._id}`, {
-    //           address: Address,
-    //           numberPhone: NumberPhone,
-    //         })
-    //         .then(function (response) {
-    //           toast.success("Đã cập nhật địa chỉ và số điện thoại cho bạn !", {
-    //             position: toast.POSITION.BOTTOM_LEFT,
-    //           });
-    //         })
-    //         .catch(function (error) {
-    //           toast.error("Không cập nhật được địa chỉ và số điện thoại cho bạn ! ", {
-    //             position: toast.POSITION.BOTTOM_LEFT,
-    //           });
-    //         });
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     toast.error("Lỗi mất rồi, làm lại nha 😉", {
-    //       position: toast.POSITION.BOTTOM_LEFT,
-    //     });
-    //     console.log(error);
-    //   });
+    setCheck2(true);
+    if (Address === "" || NumberPhone === "") {
+      toast.error("Vui lòng nhập địa chỉ và số điện thoại !!!", {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
+    } else {
+      var min = 1000;
+      var max = 9000;
+      var rand = parseInt(min + Math.random() * (max - min));
+      axios
+        .post("http://localhost:8000/api/History/addToHistory", {
+          codeOrders: rand,
+          ProductID: ProductID,
+          NameProduct: data.NameProduct,
+          Image: image[0],
+          price: data.price,
+          Size: size,
+          Color: color,
+          Amount: Amount,
+          Total: totalOrder,
+          Story: "Chờ xác nhận",
+          AccountUSer: user._id,
+        })
+        .then(function (response) {
+          setCheck2(false);
+          toast.success("Đặt hàng thành công !", {
+            position: toast.POSITION.BOTTOM_LEFT,
+          });
+          if (user.address === "" && user.numberPhone === "") {
+            axios
+              .put(`http://localhost:8000/api/user/${user._id}`, {
+                address: Address,
+                numberPhone: NumberPhone,
+              })
+              .then(function (response) {
+                toast.success(
+                  "Đã cập nhật địa chỉ và số điện thoại cho bạn !",
+                  {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                  }
+                );
+                alert(
+                  "Chúng tôi vừa cập nhật thông tin cho bạn. Bạn cần đăng nhập lại được đảm bảo dử liệu !!!"
+                );
+                localStorage.clear();
+                navigation("/login");
+              })
+              .catch(function (error) {
+                toast.error(
+                  "Không cập nhật được địa chỉ và số điện thoại cho bạn ! ",
+                  {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                  }
+                );
+              });
+          }
+        })
+        .catch(function (error) {
+          toast.error("Lỗi mất rồi, làm lại nha 😉", {
+            position: toast.POSITION.BOTTOM_LEFT,
+          });
+          console.log(error);
+        });
+    }
   };
 
   const fetchData = () => {
     axios
-      .get(`http://localhost:8000/api/product/632d91aece17662045bee299`)
+      .get(`http://localhost:8000/api/product/${ProductID}`)
       .then(function (response) {
         console.log(response.data);
         setData(response.data);
@@ -180,6 +200,10 @@ const Payment = () => {
     fetchData();
     setAddress(user.address);
     setNumberPhone(user.numberPhone);
+    if(Address!= "" && NumberPhone!=""){
+      setSuccessFor(address);
+      setSuccessFor(numberPhone);
+    }
   }, []);
 
   return (
@@ -409,7 +433,14 @@ const Payment = () => {
                 </table>
                 <div className="container_payment_body_order_btn">
                   {buttonPayCheck === "option_one" ? (
-                    <button onClick={handleOrder}>Đặt hàng</button>
+                    <LoadingButton
+                      className="buttonCheckOrder"
+                      onClick={handleOrder}
+                      loading={Check2}
+                      variant="outlined"
+                    >
+                      Đặt hàng
+                    </LoadingButton>
                   ) : (
                     <button onClick={movePaymentOrder}>Thanh Toán</button>
                   )}

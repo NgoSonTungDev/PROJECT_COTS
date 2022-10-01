@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div>
       <div className="container_narbar">
-        <div className={`container_narbar_intro ${offset > 200 && "hide"}`}>
+        <div className={`container_narbar_intro ${offset > 100 && "hide"}`}>
           <div className="container_narbar_intro_1">
             <div className="container_narbar_intro_1_contact">
               <span>
@@ -92,6 +92,7 @@ const Navbar = () => {
               ) : (
                 <li
                   onClick={() => {
+                    navigation("/home")
                     window.location.reload();
                     localStorage.clear();
                   }}

@@ -49,16 +49,17 @@ const userController = {
     console.log("er", req.body);
     try {
       const user = await Users.findById(req.params.id);
-      // await user.updateOne({ $set: req.body });
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      await user.updateOne({
-        $set: {
-          username: req.body.username,
-          email: req.body.email,
-          password: hashedPassword,
-        },
-      });
-
+      await user.updateOne({ $set: req.body });
+      // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      // await user.updateOne({
+      //   $set: {
+      //     username: req.body.username,
+      //     email: req.body.email,
+      //     password: hashedPassword,
+      //     address: req.body.address,
+      //     numberPhone: req.body.numberPhone,
+      //   },
+      // });
       res.status(200).json("Update Successfully !");
     } catch (error) {
       console.log("err", error);
