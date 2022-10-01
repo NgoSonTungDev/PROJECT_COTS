@@ -65,7 +65,7 @@ const Navbar = () => {
                   navigation("/sale");
                 }}
               >
-                <p>sale</p>
+                <p>product</p>
               </li>
               <li>
                 <p
