@@ -43,25 +43,36 @@ const PaymentOrders = () => {
     handleShow();
   };
 
-  const handleOpenModal = () => {
-    var loader = document.querySelector(".loader-payments");
-    var text = document.getElementById("PAYING");
-    loader.style.display = "block";
-    var dateTime = `${datenow} ${timenow}`;
-    setShow(false);
-    setTimeout(() => {
-      loader.style.display = "none";
-      text.innerHTML = "Thanh Toán Thành Công";
-    }, 2000);
-  };
+  const handleOpenModal = () => {};
 
   return (
     <div className="paymentOrders-container">
-      <Navbar />
-      <div className="loader-payments">
-        <div className="loader-payments_two">
-          <span className="loader"></span>
-          <span id="PAYING">Đang Thanh Toán . . .</span>
+      <div className="container_paymentOrders_intro">
+        <div className="container_paymentOrders_intro_1">
+          <div className="container_paymentOrders_intro_1_contact">
+            <span>
+              <i class="bx bx-envelope"></i>
+              <span>maflineclothing@gmail.com</span>
+            </span>
+            <span>
+              <i class="bx bx-phone"></i>
+              <span>0386762927</span>
+            </span>
+          </div>
+          <div className="container_paymentOrders_intro_1_contact">
+            <span>
+              <i class="bx bxl-github"></i>
+            </span>
+            <span>
+              <i class="bx bxl-facebook"></i>
+            </span>
+            <span>
+              <i class="bx bxl-instagram"></i>
+            </span>
+            <span>
+              <i class="bx bxl-skype"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div className="logo">

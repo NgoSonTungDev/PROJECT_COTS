@@ -31,8 +31,6 @@ const responsive = {
   },
 };
 
-const vidu = ["do", "den", "nau", "hong"];
-
 const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
   const navigate = useNavigate();
@@ -43,10 +41,11 @@ const ProductDetail = () => {
   const [dataSize, setDataSize] = useState([]);
   const [dataColor, setDataColor] = useState([]);
   const [dataImage, setDataImage] = useState([]);
-  const NewProduct = data2.filter((item) => item.story === "SALE");
+  const NewProduct = data2.filter((item) => item.story === "NEW");
+  const user = JSON.parse(localStorage.getItem("dataUser"));
 
   const handleMoveBuy = () => {
-    navigate("/productDetail/payment/16787368234fsd");
+    navigate(`/productDetail/payment/${id}`);
   };
 
   const handleSeeMore = () => {
@@ -143,12 +142,34 @@ const ProductDetail = () => {
                 <br />
                 <tr>
                   <td>
-                    <button className="buy" onClick={handleMoveBuy}>
-                      MUA HÀNG
-                    </button>
+                    {user != null ? (
+                      <button className="buy" onClick={handleMoveBuy}>
+                        MUA HÀNG
+                      </button>
+                    ) : (
+                      <button
+                        className="buy"
+                        onClick={() => {
+                          alert("Bạn cần đăng nhập ?");
+                        }}
+                      >
+                        MUA HÀNG
+                      </button>
+                    )}
                   </td>
                   <td>
-                    <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
+                    {user != null ? (
+                      <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
+                    ) : (
+                      <button
+                        className="addcart"
+                        onClick={() => {
+                          alert("Bạn cần đăng nhập ?");
+                        }}
+                      >
+                        THÊM VÀO GIỎ HÀNG
+                      </button>
+                    )}
                   </td>
                 </tr>
               </table>
