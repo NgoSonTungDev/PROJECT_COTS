@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import axios from "axios";
 import "./SaleProduct.scss"
-import CardHome from "../../components/CardHome/CardHome";
+import CardProduct from "../../components/CardProduct/CardProduct";
 
 const SaleProduct = () => {
-    // const onPress_ENTER = (event) => {
+  const [data, setData] = useState([]);
+
+  // const onPress_ENTER = (event) => {
   //   var keyPressed = event.keyCode || event.which;
   //   if (keyPressed === 13) {
   //     alert("akjshdakjh");
@@ -14,6 +17,19 @@ const SaleProduct = () => {
   //     return false;
   //   }
   // };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    axios
+      .get("http://localhost:8000/api/product/allproduct")
+      .then(function (response) {
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -25,7 +41,7 @@ const SaleProduct = () => {
               <input
                 type="text"
                 placeholder="Search . . ."
-                // onKeyDown={(e) => onPress_ENTER(e)}
+              // onKeyDown={(e) => onPress_ENTER(e)}
               />
             </div>
             <div className="container_SaleProduct_top_search_2">
@@ -40,7 +56,11 @@ const SaleProduct = () => {
           </div>
         </div>
         <div className="container_SaleProduct_product_card">
-          {/* <CardHome /> */}
+          {
+            data.map((item) => (
+              <CardProduct dataProduct={item} />
+            ))
+          }
         </div>
       </div>
       <Footer />
