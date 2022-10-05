@@ -2,44 +2,44 @@ const { Users } = require("../models/model");
 const bcrypt = require("bcrypt");
 
 const userController = {
-  // getAllUser: async (req, res) => {
-  //   try {
-  //     var userName = req.query?.userName;
-  //     var page = req.query?.pageNumber;
+  getAllUser: async (req, res) => {
+    try {
+      var userName = req.query?.userName;
+      var page = req.query?.pageNumber;
 
-  //     if (userName || page) {
-  //       if (page) {
-  //         page = parseInt(page);
-  //         var SkipNumber = (page - 1) * 6;
-  //         const result = await Products.find().skip(SkipNumber).limit(6);
-  //         return res.status(200).json(result);
-  //       }
+      if (userName || page) {
+        if (page) {
+          page = parseInt(page);
+          var SkipNumber = (page - 1) * 6;
+          const result = await Products.find().skip(SkipNumber).limit(6);
+          return res.status(200).json(result);
+        }
 
-  //       if (userName) {
-  //         var condition = userName
-  //           ? { username: { $regex: new RegExp(userName), $options: "i" } }
-  //           : {};
+        if (userName) {
+          var condition = userName
+            ? { username: { $regex: new RegExp(userName), $options: "i" } }
+            : {};
 
-  //         Users.find(condition)
-  //           .then((data) => {
-  //             return res.send(data);
-  //           })
-  //           .catch((err) => {
-  //             res.status(500).send({
-  //               message:
-  //                 err.message ||
-  //                 "Some error occurred while retrieving products.",
-  //             });
-  //           });
-  //       }
-  //     } else {
-  //       const allUSer = await Users.find();
-  //       return res.status(200).json(allUSer);
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json(error);
-  //   }
-  // },
+          Users.find(condition)
+            .then((data) => {
+              return res.send(data);
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving user.",
+              });
+            });
+        }
+      } else {
+        const allUSer = await Users.find();
+        return res.status(200).json(allUSer);
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   getAnUser: async (req, res) => {
     try {
       const user = await Users.findById(req.params.id).populate([

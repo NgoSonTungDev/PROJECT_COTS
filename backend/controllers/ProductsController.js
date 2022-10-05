@@ -10,46 +10,46 @@ const ProductsController = {
       res.status(500).json(error);
     }
   },
-  // getAll: async (req, res) => {
-  //   try {
-  //     var productName = req.query?.productName;
-  //     var page = req.query?.pageNumber;
+  getAll: async (req, res) => {
+    try {
+      var productName = req.query?.productName;
+      var page = req.query?.pageNumber;
 
-  //     if (productName || page) {
-  //       if (page) {
-  //         page = parseInt(page);
-  //         var SkipNumber = (page - 1) * 6;
-  //         const result = await Products.find().skip(SkipNumber).limit(9);
-  //         return res.status(200).json(result);
-  //       }
+      if (productName || page) {
+        if (page) {
+          page = parseInt(page);
+          var SkipNumber = (page - 1) * 6;
+          const result = await Products.find().skip(SkipNumber).limit(9);
+          return res.status(200).json(result);
+        }
 
-  //       if (productName) {
-  //         var condition = productName
-  //           ? {
-  //               NameProduct: { $regex: new RegExp(productName), $options: "i" },
-  //             }
-  //           : {};
+        if (productName) {
+          var condition = productName
+            ? {
+                NameProduct: { $regex: new RegExp(productName), $options: "i" },
+              }
+            : {};
 
-  //         Products.find(condition)
-  //           .then((data) => {
-  //             return res.send(data);
-  //           })
-  //           .catch((err) => {
-  //             res.status(500).send({
-  //               message:
-  //                 err.message ||
-  //                 "Some error occurred while retrieving products.",
-  //             });
-  //           });
-  //       }
-  //     } else {
-  //       const allProducts = await Products.find();
-  //       return res.status(200).json(allProducts);
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json(error);
-  //   }
-  // },
+          Products.find(condition)
+            .then((data) => {
+              return res.send(data);
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving products.",
+              });
+            });
+        }
+      } else {
+        const allProducts = await Products.find();
+        return res.status(200).json(allProducts);
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   GetAnProducts: async (req, res) => {
     try {
       const Product = await Products.findById(req.params.id).populate(
