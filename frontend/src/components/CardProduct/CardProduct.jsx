@@ -15,12 +15,12 @@ const CardProduct = ({ dataProduct }) => {
             <div
                 className="container_CardProduct"
                 onClick={() => {
-                    // movePageDetail(dataProduct._id);
+                    movePageDetail(dataProduct._id);
                     console.log(dataProduct);
                 }}
             >
                 <div className="container_CardProduct_img">
-                    <img src={dataProduct.image[0]} alt={dataProduct.image[0]} />s
+                    <img src={dataProduct.image[0]} alt={dataProduct.image[0]} />
                 </div>
                 <div class="container_CardProduct_arrow-up">
                     <p>{dataProduct.story}</p>
@@ -30,7 +30,7 @@ const CardProduct = ({ dataProduct }) => {
                     <i>180.000₫ </i> <span>{dataProduct.price}₫</span>
                 </div>
             </div>
-
+           
         </div>
     );
 };
