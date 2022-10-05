@@ -24,12 +24,12 @@ const SaleProduct = () => {
 
   const onPress_ENTER = (e) => {
     var keyPressed = e.keyCode || e.which;
+    setSearch(e.target.value);
     if (keyPressed = setSearch) {
-      setSearch(e.target.value);
       console.log(e.target.value);
-      alert("thanh cong");
+      // alert("thanh cong");
     } else {
-      alert("that bai");
+      // alert("that bai");
     }
   };
 
