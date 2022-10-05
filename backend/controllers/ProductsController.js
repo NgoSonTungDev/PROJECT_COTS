@@ -12,31 +12,40 @@ const ProductsController = {
   },
   getAll: async (req, res) => {
     try {
-      const allProducts = await Products.find();
-      return res.status(200).json(allProducts);
-      // var productName = req.query?.productName;
-      // var page = req.query?.pageNumber;
-      // if (page) {
-      //   page = parseInt(page);
-      //   var SkipNumber = (page - 1) * 6;
-      //   const result = await Products.find().skip(SkipNumber).limit(6);
-      //   return res.status(200).json(result);
-      // }
+      var productName = req.query?.productName;
+      var page = req.query?.pageNumber;
 
-      // var condition = productName
-      //   ? { NameProduct: { $regex: new RegExp(productName), $options: "i" } }
-      //   : {};
+      if (productName || page) {
+        if (page) {
+          page = parseInt(page);
+          var SkipNumber = (page - 1) * 6;
+          const result = await Products.find().skip(SkipNumber).limit(9);
+          return res.status(200).json(result);
+        }
 
-      // Products.find(condition)
-      //   .then((data) => {
-      //     return res.send(data);
-      //   })
-      //   .catch((err) => {
-      //     res.status(500).send({
-      //       message:
-      //         err.message || "Some error occurred while retrieving products.",
-      //     });
-      //   });
+        if (productName) {
+          var condition = productName
+            ? {
+                NameProduct: { $regex: new RegExp(productName), $options: "i" },
+              }
+            : {};
+
+          Products.find(condition)
+            .then((data) => {
+              return res.send(data);
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving products.",
+              });
+            });
+        }
+      } else {
+        const allProducts = await Products.find();
+        return res.status(200).json(allProducts);
+      }
     } catch (error) {
       res.status(500).json(error);
     }

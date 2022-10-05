@@ -33,33 +33,37 @@ const OrderhistoryController = {
   },
   getAllHistory: async (req, res) => {
     try {
-      const allOrderhistory = await Orderhistory.find();
-      return res.status(200).json(allOrderhistory);
+      var codeOrders = req.query?.codeOrders;
+      var page = req.query?.pageNumber;
 
-      // var codeOrders = req.query?.codeOrders;
-      // var page = req.query?.pageNumber;
+      if (codeOrders || page) {
+        if (page) {
+          page = parseInt(page);
+          var SkipNumber = (page - 1) * 6;
+          const result = await Orderhistory.find().skip(SkipNumber).limit(6);
+          return res.status(200).json(result);
+        }
+        if (codeOrders) {
+          var condition = codeOrders
+            ? { codeOrders: { $regex: new RegExp(codeOrders), $options: "i" } }
+            : {};
 
-      // if (page) {
-      //   page = parseInt(page);
-      //   var SkipNumber = (page - 1) * 6;
-      //   const result = await Orderhistory.find().skip(SkipNumber).limit(6);
-      //   return res.status(200).json(result);
-      // }
-
-      // var condition = codeOrders
-      //   ? { codeOrders: { $regex: new RegExp(codeOrders), $options: "i" } }
-      //   : {};
-
-      // Orderhistory.find(condition)
-      //   .then((data) => {
-      //     return res.send(data);
-      //   })
-      //   .catch((err) => {
-      //     res.status(500).send({
-      //       message:
-      //         err.message || "Some error occurred while retrieving products.",
-      //     });
-      //   });
+          Orderhistory.find(condition)
+            .then((data) => {
+              return res.send(data);
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving products.",
+              });
+            });
+        }
+      } else {
+        const allOrderhistory = await Orderhistory.find();
+        return res.status(200).json(allOrderhistory);
+      }
     } catch (error) {
       res.status(500).json(error);
     }
