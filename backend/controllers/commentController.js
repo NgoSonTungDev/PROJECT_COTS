@@ -14,14 +14,6 @@ const commentController = {
       res.status(500).json(error);
     }
   },
-  GetAllCmt: async (req, res) => {
-    try {
-      const allMovie = await Comment.find();
-      res.status(200).json(allMovie);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
   Deletecmt: async (req, res) => {
     try {
         await Products.updateMany(
