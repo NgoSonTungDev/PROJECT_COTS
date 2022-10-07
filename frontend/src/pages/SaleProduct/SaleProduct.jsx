@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
-import "./SaleProduct.scss"
+import "./SaleProduct.scss";
 import CardProduct from "../../components/CardProduct/CardProduct";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const SaleProduct = () => {
   const [data, setData] = useState([]);
-
   const [search, setSearch] = useState("");
 
   let active = 2;
@@ -18,13 +17,13 @@ const SaleProduct = () => {
     items.push(
       <Pagination.Item key={number} active={number === active}>
         {number}
-      </Pagination.Item>,
+      </Pagination.Item>
     );
   }
 
   const onPress_ENTER = (e) => {
     var keyPressed = e.keyCode || e.which;
-    if (keyPressed = setSearch) {
+    if ((keyPressed = setSearch)) {
       setSearch(e.target.value);
       console.log(e.target.value);
       alert("thanh cong");
@@ -93,14 +92,12 @@ const SaleProduct = () => {
           </div>
         </div>
         <div className="container_SaleProduct_product_card">
-          {
-            data.map((item) => (
-              <CardProduct dataProduct={item} />
-            ))
-          }
+          {data.map((item) => (
+            <CardProduct dataProduct={item} />
+          ))}
         </div>
         <div className="navigation_page">
-          <Stack spacing={2}>
+          <Stack >
             <Pagination count={3} variant="outlined" shape="rounded" />
           </Stack>
         </div>

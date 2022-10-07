@@ -30,13 +30,33 @@ const Payment = () => {
   const location = useLocation();
   const navigation = useNavigate();
   const ProductID = location.pathname.split("/")[3];
+  var objDataOrder = [];
 
   var a = false,
     b = false,
     c = false;
 
   const movePaymentOrder = () => {
-    navigation("/productDetail/order/payment/1367563524");
+    navigation(`/productDetail/order/payment/${data.NameProduct}`);
+    var min = 1000;
+    var max = 9999;
+    var rand = parseInt(min + Math.random() * (max - min));
+    let objOrder = {
+      codeOrders: rand,
+      ProductID: ProductID,
+      NameProduct: data.NameProduct,
+      Image: image[0],
+      price: data.price,
+      Size: size,
+      Color: color,
+      Amount: Amount,
+      Total: totalOrder,
+      NameUser: user.username,
+      AccountUSer: user._id,
+    };
+    var dataOrder = JSON.stringify(objOrder);
+    objDataOrder.push(dataOrder);
+    localStorage.setItem("dataOrder", objDataOrder);
   };
 
   const handleOnClickButtonGetInformation = () => {
@@ -136,6 +156,7 @@ const Payment = () => {
           Amount: Amount,
           Total: totalOrder,
           Story: "Chờ xác nhận",
+          NameUser: user.username,
           AccountUSer: user._id,
         })
         .then(function (response) {
@@ -156,11 +177,13 @@ const Payment = () => {
                     position: toast.POSITION.BOTTOM_LEFT,
                   }
                 );
-                alert(
-                  "Chúng tôi vừa cập nhật thông tin cho bạn. Bạn cần đăng nhập lại được đảm bảo dử liệu !!!"
-                );
-                localStorage.clear();
-                navigation("/login");
+                setTimeout(() => {
+                  alert(
+                    "Chúng tôi vừa cập nhật thông tin cho bạn. Bạn cần đăng nhập lại được đảm bảo dử liệu !!!"
+                  );
+                  localStorage.clear();
+                  navigation("/login");
+                }, 2000);
               })
               .catch(function (error) {
                 toast.error(
@@ -200,7 +223,7 @@ const Payment = () => {
     fetchData();
     setAddress(user.address);
     setNumberPhone(user.numberPhone);
-    if(Address!= "" && NumberPhone!=""){
+    if (Address !== "" && NumberPhone !== "") {
       setSuccessFor(address);
       setSuccessFor(numberPhone);
     }
@@ -442,7 +465,13 @@ const Payment = () => {
                       Đặt hàng
                     </LoadingButton>
                   ) : (
-                    <button onClick={movePaymentOrder}>Thanh Toán</button>
+                    <LoadingButton
+                      className="buttonCheckOrder"
+                      onClick={movePaymentOrder}
+                      variant="outlined"
+                    >
+                      Thanh toán online
+                    </LoadingButton>
                   )}
                 </div>
               </div>
@@ -450,7 +479,7 @@ const Payment = () => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={1000} />
+      <ToastContainer autoClose={500} />
       <Footer />
     </div>
   );

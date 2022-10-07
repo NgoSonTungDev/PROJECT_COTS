@@ -18,7 +18,7 @@ const ProductsController = {
       if (productName || page) {
         if (page) {
           page = parseInt(page);
-          var SkipNumber = (page - 1) * 9;
+          var SkipNumber = (page - 1) * 6;
           const result = await Products.find().skip(SkipNumber).limit(9);
           return res.status(200).json(result);
         }

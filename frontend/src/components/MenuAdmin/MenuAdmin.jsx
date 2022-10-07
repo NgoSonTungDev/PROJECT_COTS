@@ -32,7 +32,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(1);
-              navigation("/admin/home")
+              navigation("/admin/home");
             }}
           >
             <i class="bx bx-home"></i> <span>Trang Chủ</span>
@@ -63,8 +63,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(4);
-              navigation("/admin/account")
-
+              navigation("/admin/account");
             }}
           >
             <i class="bx bxs-package"></i> <span>Quản lý đơn hàng</span>

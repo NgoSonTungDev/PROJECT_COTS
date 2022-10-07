@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/Navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
 import "./PaymentOrders.scss";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const PaymentOrders = () => {
-  const [data, setdata] = useState([]);
   const [number, setNumber] = useState("");
   const [date, setDate] = useState("");
   const [Name, setName] = useState("");
@@ -17,10 +16,8 @@ const PaymentOrders = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigation = useNavigate();
-  const username = localStorage.getItem("username");
-  const MovieID = data.movieID;
-  const location = useLocation();
-  // const id = location.pathname.split("/payment-orders/")[1];
+  const dataOrder = JSON.parse(localStorage.getItem("dataOrder"));
+
   var today = new Date();
   var timenow =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -37,13 +34,59 @@ const PaymentOrders = () => {
     }
   };
 
-  const cancelPay = () => {
-    setCheck(2);
-    setMesage("hủy");
-    handleShow();
+  const handleOpenModal = () => {
+    axios
+      .post("http://localhost:8000/api/History/addToHistory", {
+        codeOrders: dataOrder.codeOrders,
+        ProductID: dataOrder.ProductID,
+        NameProduct: dataOrder.NameProduct,
+        Image: dataOrder.Image,
+        price: dataOrder.price,
+        Size: dataOrder.Size,
+        Color: dataOrder.Color,
+        Amount: dataOrder.Amount,
+        Total: dataOrder.Total,
+        Story: "Đã Thanh Toán",
+        NameUser: dataOrder.NameUser,
+        AccountUSer: dataOrder.AccountUSer,
+      })
+      .then(function (response) {
+        handleClose();
+        toast.success("Đặt hàng thành công !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        pushPaymentManager();
+      })
+      .catch(function (error) {
+        toast.error("Lỗi mất rồi, làm lại nha 😉", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        console.log(error);
+      });
   };
-
-  const handleOpenModal = () => {};
+  const pushPaymentManager = () => {
+    axios
+      .post("http://localhost:8000/api/TotalOrder/addToOrder", {
+        NameAccount: dataOrder.NameUser,
+        NameProduct: dataOrder.NameProduct,
+        price: dataOrder.price,
+        size: dataOrder.Size,
+        color: dataOrder.Color,
+        Amount: dataOrder.Amount,
+        total: dataOrder.Total,
+        dateTime: datenow + " " + timenow,
+      })
+      .then(function (response) {
+        localStorage.removeItem("dataOrder");
+        setTimeout(() => {
+          navigation("/home");
+        }, 2000);
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="paymentOrders-container">
@@ -105,8 +148,10 @@ const PaymentOrders = () => {
           <div>
             <span style={{ fontSize: "17px" }}>Thanh toán trực tuyến</span>
             <br />
-            <span style={{ fontSize: "25px", fontWeight: "700" }}>
-              {data.price} VND
+            <span
+              style={{ fontSize: "25px", fontWeight: "700", color: "#d63031" }}
+            >
+              {dataOrder.Total} VND
             </span>
           </div>
           <div className="paymentOrders-input">
@@ -138,7 +183,15 @@ const PaymentOrders = () => {
           <div className="paymentOrders-button">
             <button onClick={checkInput}>XÁC THỰC</button>
             <i>Hoặc</i>
-            <button onClick={cancelPay}>HỦY</button>
+            <button
+              onClick={() => {
+                setCheck(2);
+                setMesage("hủy");
+                handleShow();
+              }}
+            >
+              HỦY
+            </button>
           </div>
         </div>
       </div>
@@ -168,6 +221,7 @@ const PaymentOrders = () => {
           )}
         </Modal.Footer>
       </Modal>
+      <ToastContainer autoClose={1000} />
     </div>
   );
 };

@@ -112,10 +112,6 @@ const PurchaseHistory = new mongoose.Schema(
       type: String,
       required: true,
     },
-    NameUser: {
-      type: String,
-      required: true,
-    },
     AccountUSer: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
