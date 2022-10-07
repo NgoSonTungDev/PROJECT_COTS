@@ -10,6 +10,7 @@ import CardCarouselDetail from "../../components/CardCarouselDetail/CardCarousel
 import CommentProduct from "../../components/Comment/Comment";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 const responsive = {
   superLargeDesktop: {
@@ -43,10 +44,38 @@ const ProductDetail = () => {
   const [dataImage, setDataImage] = useState([]);
   const NewProduct = data2.filter((item) => item.story === "NEW");
   const user = JSON.parse(localStorage.getItem("dataUser"));
-
+  const ProductID = location.pathname.split("/")[2];
+  console.log(dataImage[0]);
   const handleMoveBuy = () => {
     navigate(`/productDetail/payment/${id}`);
   };
+
+  const handleAddcart = () => {
+    axios
+      .post(`http://localhost:8000/api/cart/addToCart`, {
+        ProductID: ProductID,
+        NameProduct: data.NameProduct,
+        Image: dataImage[0],
+        price: data.price,
+        Size: dataSize,
+        Color: dataColor,
+        AccountUSer: user._id,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        toast.success("Thêm sản phẩm thành công ", {
+          position: toast.POSITION.BOTTOM_LEFT
+
+        });
+
+      })
+      .catch(function (error) {
+        toast.error("Thêm sản phẩm thất bại", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+
+      })
+  }
 
   const handleSeeMore = () => {
     if (seeMore === false) {
@@ -159,7 +188,8 @@ const ProductDetail = () => {
                   </td>
                   <td>
                     {user != null ? (
-                      <button className="addcart">THÊM VÀO GIỎ HÀNG</button>
+                      <button className="addcart" onClick={handleAddcart}>
+                        THÊM VÀO GIỎ HÀNG</button>
                     ) : (
                       <button
                         className="addcart"
@@ -356,8 +386,11 @@ const ProductDetail = () => {
       </div>
       <Icon />
       <Footer />
+      <ToastContainer
+        autoClose={500}
+      />
     </div>
-  );
+  ); 
 };
 
 export default ProductDetail;
