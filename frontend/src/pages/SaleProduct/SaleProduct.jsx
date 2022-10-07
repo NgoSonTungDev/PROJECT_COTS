@@ -13,17 +13,6 @@ const SaleProduct = () => {
   const [pageNumber, setpageNumber] = useState(1);
   const [selectOption, setSelectOption] = useState("all");
 
-<<<<<<< HEAD
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-=======
-
   const handleSearch = () => {
     {
       axios
@@ -35,20 +24,12 @@ const SaleProduct = () => {
           console.log(error);
         });
     }
->>>>>>> tanphu
   }
 
   const onPress_ENTER = (e) => {
     var keyPressed = e.keyCode || e.which;
-<<<<<<< HEAD
-    if ((keyPressed = setSearch)) {
-      setSearch(e.target.value);
-      console.log(e.target.value);
-      alert("thanh cong");
-=======
     if (keyPressed === 13) {
       handleSearch();
->>>>>>> tanphu
     } else {
       return false;
     }
@@ -174,16 +155,11 @@ const SaleProduct = () => {
           ))}
         </div>
         <div className="navigation_page">
-<<<<<<< HEAD
-          <Stack >
-            <Pagination count={3} variant="outlined" shape="rounded" />
-=======
           <Stack>
             <Pagination count={Math.floor(data.length/9+1)} variant="outlined" shape="rounded"
               page={pageNumber}
               onChange={handleChangePageNumer}
             />
->>>>>>> tanphu
           </Stack>
         </div>
       </div>
