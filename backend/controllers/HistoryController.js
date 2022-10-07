@@ -56,7 +56,7 @@ const OrderhistoryController = {
               res.status(500).send({
                 message:
                   err.message ||
-                  "Some error occurred while retrieving products.",
+                  "Some error occurred while retrieving history.",
               });
             });
         }
