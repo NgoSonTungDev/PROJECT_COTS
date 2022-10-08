@@ -109,7 +109,7 @@ const ProductDetail = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [ProductID]);
 
   return (
     <div>
