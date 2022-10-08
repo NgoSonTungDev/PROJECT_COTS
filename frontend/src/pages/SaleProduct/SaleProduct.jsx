@@ -10,43 +10,96 @@ import Stack from "@mui/material/Stack";
 const SaleProduct = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
+  const [pageNumber, setpageNumber] = useState(1);
+  const [selectOption, setSelectOption] = useState("all");
 
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
+  const handleSearch = () => {
+    axios
+      .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
+      .then(function (response) {
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const onPress_ENTER = (e) => {
     var keyPressed = e.keyCode || e.which;
-    if ((keyPressed = setSearch)) {
-      setSearch(e.target.value);
-      console.log(e.target.value);
-      alert("thanh cong");
+    if (keyPressed === 13) {
+      handleSearch();
     } else {
-      alert("that bai");
+      return false;
     }
   };
 
-  // const onPress_ENTER = (e) => {
-  //   var keyPressed = e.keyCode || e.which;
-  //   if (keyPressed === 13) {
-  //     alert("akjshdakjh");
-  //     keyPressed = null;
-  //   } else {
-  //     return false;
-  //   }
-  // };
+  const handleCheckSelect = () => {
+    if (selectOption === "all") {
+      setpageNumber(1);
+      axios
+        .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
+        .then(function (response) {
+          setData(response.data.sort((a, b) => b.price - a.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
 
-  const fetchData = () => {
+    if (selectOption === "tang") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.sort((a, b) => a.price - b.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    if (selectOption === "giam") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.sort((a, b) => b.price - a.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    if (selectOption === "new") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.filter((e) => e.story === "NEW"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    if (selectOption === "sale") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.filter((e) => e.story === "SALE"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
+  const handleChangePageNumer = (event, value) => {
+    setpageNumber(value);
+    let url = `http://localhost:8000/api/product/allproduct?pageNumber=${value}`;
+    fetchData(url);
+  };
+
+  const fetchData = (url) => {
     axios
-      .get(`http://localhost:8000/api/product?NameProduct=${search}`)
+      .get(`${url}`)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {
@@ -55,15 +108,9 @@ const SaleProduct = () => {
   };
 
   useEffect(() => {
-    fetchData();
-    axios
-      .get("http://localhost:8000/api/product/allproduct")
-      .then(function (response) {
-        setData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    window.scrollTo(0, 0);
+    let url = "http://localhost:8000/api/product/allproduct?pageNumber=1";
+    fetchData(url);
   }, []);
 
   return (
@@ -78,15 +125,23 @@ const SaleProduct = () => {
                 type="text"
                 placeholder="Search . . ."
                 onKeyDown={(e) => onPress_ENTER(e)}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <div className="container_SaleProduct_top_search_2">
-              <select name="" id="">
-                <option value="">All</option>
-                <option value="">New</option>
-                <option value="">Sale</option>
-                <option value="">Giá Tăng dần</option>
-                <option value="">Giá giảm dần</option>
+              <select
+                name=""
+                id=""
+                value={selectOption}
+                onChange={(e) => setSelectOption(e.target.value)}
+                onClick={handleCheckSelect}
+              >
+                <option value="all">All</option>
+                <option value="new">New</option>
+                <option value="sale">Sale</option>
+                <option value="tang">Giá Tăng dần</option>
+                <option value="giam">Giá giảm dần</option>
               </select>
             </div>
           </div>
@@ -97,8 +152,14 @@ const SaleProduct = () => {
           ))}
         </div>
         <div className="navigation_page">
-          <Stack >
-            <Pagination count={3} variant="outlined" shape="rounded" />
+          <Stack>
+            <Pagination
+              count={Math.floor(data.length / 9 + 1)}
+              variant="outlined"
+              shape="rounded"
+              page={pageNumber}
+              onChange={handleChangePageNumer}
+            />
           </Stack>
         </div>
       </div>
