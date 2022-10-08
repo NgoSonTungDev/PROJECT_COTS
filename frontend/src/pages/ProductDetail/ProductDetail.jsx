@@ -9,8 +9,8 @@ import "react-multi-carousel/lib/styles.css";
 import CardCarouselDetail from "../../components/CardCarouselDetail/CardCarouselDetail";
 import CommentProduct from "../../components/Comment/Comment";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
 
 const responsive = {
   superLargeDesktop: {
@@ -36,7 +36,6 @@ const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [dataSize, setDataSize] = useState([]);
@@ -45,9 +44,8 @@ const ProductDetail = () => {
   const NewProduct = data2.filter((item) => item.story === "NEW");
   const user = JSON.parse(localStorage.getItem("dataUser"));
   const ProductID = location.pathname.split("/")[2];
-  console.log(dataImage[0]);
   const handleMoveBuy = () => {
-    navigate(`/productDetail/payment/${id}`);
+    navigate(`/productDetail/payment/${ProductID}`);
   };
 
   const handleAddcart = () => {
@@ -88,10 +86,37 @@ const ProductDetail = () => {
     }
   };
 
+  const handleAddCart = () => {
+    axios
+      .post(`http://localhost:8000/api/cart/addToCart`, {
+        ProductID: ProductID,
+        NameProduct: data.NameProduct,
+        Image: dataImage[0],
+        price: data.price,
+        Size: dataSize,
+        Color: dataColor,
+        AccountUSer: user._id,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        toast.success("Thêm sản phẩm thành công ", {
+          position: toast.POSITION.BOTTOM_LEFT
+
+        });
+
+      })
+      .catch(function (error) {
+        toast.error("Thêm sản phẩm thất bại", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+
+      })
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
     axios
-      .get(`http://localhost:8000/api/product/${id}`)
+      .get(`http://localhost:8000/api/product/${ProductID}`)
       .then(function (response) {
         setData(response.data);
         setDataColor(response.data.Color);
@@ -110,7 +135,7 @@ const ProductDetail = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [ProductID]);
 
   return (
     <div>
@@ -188,8 +213,8 @@ const ProductDetail = () => {
                   </td>
                   <td>
                     {user != null ? (
-                      <button className="addcart" onClick={handleAddcart}>
-                        THÊM VÀO GIỎ HÀNG</button>
+
+                      <button className="addcart" onClick={handleAddCart}>THÊM VÀO GIỎ HÀNG</button>
                     ) : (
                       <button
                         className="addcart"
@@ -386,9 +411,8 @@ const ProductDetail = () => {
       </div>
       <Icon />
       <Footer />
-      <ToastContainer
-        autoClose={500}
-      />
+
+      <ToastContainer autoClose={500} />
     </div>
   ); 
 };

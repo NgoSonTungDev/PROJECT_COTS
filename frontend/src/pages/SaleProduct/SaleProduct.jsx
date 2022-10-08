@@ -14,17 +14,15 @@ const SaleProduct = () => {
   const [selectOption, setSelectOption] = useState("all");
 
   const handleSearch = () => {
-    {
-      axios
-        .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
-        .then(function (response) {
-          setData(response.data)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  }
+    axios
+      .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
+      .then(function (response) {
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const onPress_ENTER = (e) => {
     var keyPressed = e.keyCode || e.which;
@@ -41,8 +39,7 @@ const SaleProduct = () => {
       axios
         .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
         .then(function (response) {
-          setData(response.data.sort((a, b) => b.price - a.price)
-          )
+          setData(response.data.sort((a, b) => b.price - a.price));
         })
         .catch(function (error) {
           console.log(error);
@@ -53,8 +50,7 @@ const SaleProduct = () => {
       axios
         .get(`http://localhost:8000/api/product/allproduct`)
         .then(function (response) {
-          setData(response.data.sort((a, b) => a.price - b.price)
-          )
+          setData(response.data.sort((a, b) => a.price - b.price));
         })
         .catch(function (error) {
           console.log(error);
@@ -65,8 +61,7 @@ const SaleProduct = () => {
       axios
         .get(`http://localhost:8000/api/product/allproduct`)
         .then(function (response) {
-          setData(response.data.sort((a, b) => b.price - a.price)
-          )
+          setData(response.data.sort((a, b) => b.price - a.price));
         })
         .catch(function (error) {
           console.log(error);
@@ -76,8 +71,7 @@ const SaleProduct = () => {
       axios
         .get(`http://localhost:8000/api/product/allproduct`)
         .then(function (response) {
-          setData(response.data.filter((e) => e.story === "NEW")
-          )
+          setData(response.data.filter((e) => e.story === "NEW"));
         })
         .catch(function (error) {
           console.log(error);
@@ -88,20 +82,17 @@ const SaleProduct = () => {
       axios
         .get(`http://localhost:8000/api/product/allproduct`)
         .then(function (response) {
-          setData(response.data.filter((e) => e.story === "SALE")
-          )
-
+          setData(response.data.filter((e) => e.story === "SALE"));
         })
         .catch(function (error) {
           console.log(error);
         });
     }
-
-  }
+  };
 
   const handleChangePageNumer = (event, value) => {
     setpageNumber(value);
-    let url = `http://localhost:8000/api/product/allproduct?pageNumber=${value}`
+    let url = `http://localhost:8000/api/product/allproduct?pageNumber=${value}`;
     fetchData(url);
   };
 
@@ -109,7 +100,7 @@ const SaleProduct = () => {
     axios
       .get(`${url}`)
       .then(function (response) {
-        setData(response.data)
+        setData(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -118,7 +109,7 @@ const SaleProduct = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    let url = "http://localhost:8000/api/product/allproduct?pageNumber=1"
+    let url = "http://localhost:8000/api/product/allproduct?pageNumber=1";
     fetchData(url);
   }, []);
 
@@ -135,12 +126,18 @@ const SaleProduct = () => {
                 placeholder="Search . . ."
                 onKeyDown={(e) => onPress_ENTER(e)}
                 value={search}
-                onChange={e => setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <div className="container_SaleProduct_top_search_2">
-              <select name="" id="" value={selectOption} onChange={(e) => setSelectOption(e.target.value)} onClick={handleCheckSelect}  >
-                <option value="all" >All</option>
+              <select
+                name=""
+                id=""
+                value={selectOption}
+                onChange={(e) => setSelectOption(e.target.value)}
+                onClick={handleCheckSelect}
+              >
+                <option value="all">All</option>
                 <option value="new">New</option>
                 <option value="sale">Sale</option>
                 <option value="tang">Giá Tăng dần</option>
@@ -156,7 +153,10 @@ const SaleProduct = () => {
         </div>
         <div className="navigation_page">
           <Stack>
-            <Pagination count={Math.floor(data.length/9+1)} variant="outlined" shape="rounded"
+            <Pagination
+              count={Math.floor(data.length / 9 + 1)}
+              variant="outlined"
+              shape="rounded"
               page={pageNumber}
               onChange={handleChangePageNumer}
             />
