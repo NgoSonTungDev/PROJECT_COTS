@@ -21,7 +21,6 @@
       margin-left: 12.5%;
 
       .container_narbar_intro_1_contact {
-
         // transform: translateY(0px);
         i {
           transform: translateY(2px);
@@ -35,10 +34,12 @@
           border-radius: 3px;
 
           background: rgb(249, 237, 50);
-          background: linear-gradient(50deg,
-              rgba(249, 237, 50, 1) 0%,
-              rgba(238, 42, 123, 1) 49%,
-              rgba(0, 42, 255, 1) 100%);
+          background: linear-gradient(
+            50deg,
+            rgba(249, 237, 50, 1) 0%,
+            rgba(238, 42, 123, 1) 49%,
+            rgba(0, 42, 255, 1) 100%
+          );
         }
 
         .bxl-skype:hover {
@@ -170,7 +171,7 @@
         color: #0082e6;
       }
 
-      #check:checked~ul {
+      #check:checked ~ ul {
         left: 0;
       }
     }

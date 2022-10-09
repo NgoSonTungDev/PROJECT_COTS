@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigation = useNavigate();
   const [offset, setOffset] = useState(0);
   const user = JSON.parse(localStorage.getItem("dataUser"));
+  const [checkMenu, setCheckMenu] = useState(1);
 
   const movelogin = () => {
     navigation("/login");
@@ -65,7 +66,7 @@ const Navbar = () => {
                   navigation("/sale-product");
                 }}
               >
-                <p>product</p>
+                <p className="colorLi">product</p>
               </li>
               <li>
                 <p
@@ -92,7 +93,7 @@ const Navbar = () => {
               ) : (
                 <li
                   onClick={() => {
-                    navigation("/home")
+                    navigation("/home");
                     window.location.reload();
                     localStorage.clear();
                   }}
