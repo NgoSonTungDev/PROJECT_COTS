@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./History.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import axios from "axios";
 
 const History = () => {
+  const [data, setdData] = useState([]);
+  const user = JSON.parse(localStorage.getItem("dataUser"));
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/user/${user._id}`)
+      .then(function (response) {
+        setdData(response.data.history);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -20,21 +35,22 @@ const History = () => {
             </div>
             <div className="container_history_user_card_img_text">
               <div className="container_history_user_card_img_text_name">
-                <p>NgoSonTung</p>
-                <p>user</p>
+                <p>{user.username}</p>
+                <p>{user.admin === false && <span>user</span>}</p>
               </div>
               <div className="container_history_user_card_information">
                 <div className="container_history_user_card_information_text">
                   <b>Email:</b>
-                  <i>ngosontung0309@gmail.com</i>
+                  <i>{user.email
+}</i>
                 </div>
                 <div className="container_history_user_card_information_text">
                   <b>số điện thoại:</b>
-                  <i>012345678</i>
+                  <i>{user.numberPhone}</i>
                 </div>
                 <div className="container_history_user_card_information_text">
                   <b>Địa chỉ:</b>
-                  <i>225/10 Nguyễn phước nguyên</i>
+                  <i>{user.address}</i>
                 </div>
               </div>
             </div>
@@ -51,49 +67,55 @@ const History = () => {
                 <th>Mã đơn hàng</th>
                 <th>Tên sản phẩm</th>
                 <th>Số lượng</th>
-                <th>Giá bán</th>
                 <th>Size</th>
                 <th>Màu</th>
+                <th>Giá bán</th>
                 <th>Tổng tiền</th>
                 <th>Tình trạng</th>
                 <th>Chức năng</th>
               </tr>
-              <tr>
-                <td>m01</td>
-                <td>áo </td>
-                <td>5</td>
-                <td>120</td>
-                <td>L</td>
-                <td>Đỏ</td>
-                <td>600</td>
-                <td>Chờ xác nhận</td>
-                <td>
-                  <button>
-                    <i class="bx bx-pencil"></i> <span>Sửa</span>
-                  </button>
-                  <button>
-                    <i className="bx bxs-trash"></i> <span>Xóa</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>m01</td>
-                <td>áo </td>
-                <td>5</td>
-                <td>120</td>
-                <td>L</td>
-                <td>Đỏ</td>
-                <td>600</td>
-                <td>Chờ xác nhận</td>
-                <td>
-                  <button>
-                    <i class="bx bx-pencil"></i> <span>Sửa</span>
-                  </button>
-                  <button>
-                    <i className="bx bxs-trash"></i> <span>Xóa</span>
-                  </button>
-                </td>
-              </tr>
+
+              {data.map((item) => (
+                <tr>
+                  <td>{item.codeOrders}</td>
+                  <td>{item.NameProduct} </td>
+                  <td>{item.Amount}</td>
+                  <td>{item.Size}</td>
+                  <td>{item.Color}</td>
+                  <td>{item.price}</td>
+                  <td>{item.Total}</td>
+                  <td>
+                    {item.Story === "Chờ xác nhận" && (
+                      <span style={{ color: "#2ecc71" }}>{item.Story}</span>
+                    )}
+                    {item.Story === "Đã Thanh Toán" && (
+                      <span style={{ color: "#3498db" }}>{item.Story}</span>
+                    )}
+                    {item.Story === "Giao Hàng Thành Công" && (
+                      <span style={{ color: "#00b894" }}>{item.Story}</span>
+                    )}
+                  </td>
+                  <td>
+                    {item.Story === "Chờ xác nhận" && (
+                      <button className="cancle">
+                        <i class='bx bx-low-vision'></i> <span>Hủy đơn hàng</span>
+                      </button>
+                    )}
+                    {item.Story === "Đã Thanh Toán" && (
+                      <button className="CheckOrder">
+                        <i class="bx bx-check"></i>{" "}
+                        <span>Đã nhận được hàng</span>
+                      </button>
+                    )}
+                    {item.Story === "Giao Hàng Thành Công" && (
+                      <button className="DanhGia">
+                        <i class="bx bx-star"></i>
+                        <span>Đánh giá</span>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </table>
           </div>
         </div>
