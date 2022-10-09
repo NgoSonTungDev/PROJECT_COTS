@@ -21,7 +21,7 @@ const History = () => {
   return (
     <div>
       <Navbar />
-      <div className="container_history_user">
+      {/* <div className="container_history_user">
         <div className="container_history_user_card">
           <div className="container_history_user_card_text">
             <h6>Thông tin khách hàng</h6>
@@ -119,7 +119,7 @@ const History = () => {
             </table>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
