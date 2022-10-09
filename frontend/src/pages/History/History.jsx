@@ -1,13 +1,52 @@
 import React, { useState, useEffect } from "react";
 import "./History.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 const History = () => {
   const [data, setdData] = useState([]);
   const user = JSON.parse(localStorage.getItem("dataUser"));
 
-  useEffect(() => {
+  const handleCancleOrder = (e) => {
+    axios
+      .put(`http://localhost:8000/api/History/${e}`, {
+        Story: "Đã hủy đơn hàng",
+      })
+      .then(function (response) {
+        toast.success("Đã hủy đơn hàng !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Lỗi", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+    fetchData();
+  };
+
+  const handleShipMent = (e) => {
+    axios
+      .put(`http://localhost:8000/api/History/${e}`, {
+        Story: "Giao hàng thành công",
+      })
+      .then(function (response) {
+        toast.success("Đã hủy đơn hàng !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Lỗi", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+    fetchData();
+  };
+
+  const fetchData = () => {
     axios
       .get(`http://localhost:8000/api/user/${user._id}`)
       .then(function (response) {
@@ -16,6 +55,10 @@ const History = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
@@ -87,27 +130,40 @@ const History = () => {
                     {item.Story === "Chờ xác nhận" && (
                       <span style={{ color: "#2ecc71" }}>{item.Story}</span>
                     )}
+                    {item.Story === "Đã hủy đơn hàng" && (
+                      <span style={{ color: "#d63031" }}>{item.Story}</span>
+                    )}
                     {item.Story === "Đã Thanh Toán" && (
                       <span style={{ color: "#3498db" }}>{item.Story}</span>
                     )}
-                    {item.Story === "Giao Hàng Thành Công" && (
+                    {item.Story === "Giao hàng thành công" && (
                       <span style={{ color: "#00b894" }}>{item.Story}</span>
                     )}
                   </td>
                   <td>
                     {item.Story === "Chờ xác nhận" && (
-                      <button className="cancle">
+                      <button
+                        className="cancle"
+                        onClick={() => {
+                          handleCancleOrder(item._id);
+                        }}
+                      >
                         <i class="bx bx-low-vision"></i>{" "}
                         <span>Hủy đơn hàng</span>
                       </button>
                     )}
                     {item.Story === "Đã Thanh Toán" && (
-                      <button className="CheckOrder">
+                      <button
+                        className="CheckOrder"
+                        onClick={() => {
+                          handleShipMent(item._id);
+                        }}
+                      >
                         <i class="bx bx-check"></i>{" "}
                         <span>Đã nhận được hàng</span>
                       </button>
                     )}
-                    {item.Story === "Giao Hàng Thành Công" && (
+                    {item.Story === "Giao hàng thành công" && (
                       <button className="DanhGia">
                         <i class="bx bx-star"></i>
                         <span>Đánh giá</span>
@@ -120,6 +176,7 @@ const History = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={500} />
     </div>
   );
 };

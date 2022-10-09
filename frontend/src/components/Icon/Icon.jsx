@@ -14,19 +14,19 @@ const Icon = () => {
           <div
             className="container_icon_cart"
             onClick={() => {
-              navigation("/history");
+              navigation("/cart");
             }}
           >
-            <i class="bx bx-history"></i>
+            <i class="bx bx-cart-alt"></i>
           </div>
 
           <div
             className="container_icon_cart"
             onClick={() => {
-              navigation("/cart");
+              navigation("/history");
             }}
           >
-            <i class="bx bx-cart-alt"></i>
+            <i class="bx bx-history"></i>
           </div>
         </div>
       )}

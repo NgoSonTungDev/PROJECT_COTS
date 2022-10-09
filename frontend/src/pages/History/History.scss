@@ -141,6 +141,12 @@
             outline: none;
             background-color: transparent;
             font-size: 15px;
+            i {
+              transform: translateY(1px);
+            }
+            span {
+              margin-left: 3px;
+            }
           }
 
           .cancle:hover {

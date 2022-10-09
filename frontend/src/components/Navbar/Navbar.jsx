@@ -6,7 +6,6 @@ const Navbar = () => {
   const navigation = useNavigate();
   const [offset, setOffset] = useState(0);
   const user = JSON.parse(localStorage.getItem("dataUser"));
-  const [checkMenu, setCheckMenu] = useState(1);
 
   const movelogin = () => {
     navigation("/login");
@@ -52,7 +51,14 @@ const Navbar = () => {
         </div>
         <div className="container_narbar_main">
           <nav>
-            <label class="logo">MAFLINE</label>
+            <label
+              class="logo"
+              onClick={() => {
+                navigation("/home");
+              }}
+            >
+              MAFLINE
+            </label>
             <ul>
               <li
                 onClick={() => {
@@ -66,25 +72,21 @@ const Navbar = () => {
                   navigation("/sale-product");
                 }}
               >
-                <p className="colorLi">product</p>
+                <p>product</p>
               </li>
-              <li>
-                <p
-                  onClick={() => {
-                    navigation("/size-check");
-                  }}
-                >
-                  Size check
-                </p>
+              <li
+                onClick={() => {
+                  navigation("/size-check");
+                }}
+              >
+                <p>Size check</p>
               </li>
-              <li>
-                <p
-                  onClick={() => {
-                    navigation("/about");
-                  }}
-                >
-                  About
-                </p>
+              <li
+                onClick={() => {
+                  navigation("/about");
+                }}
+              >
+                <p>About</p>
               </li>
               {user === null ? (
                 <li onClick={movelogin}>
