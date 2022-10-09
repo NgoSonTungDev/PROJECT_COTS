@@ -21,7 +21,7 @@ const History = () => {
   return (
     <div>
       <Navbar />
-      {/* <div className="container_history_user">
+      <div className="container_history_user">
         <div className="container_history_user_card">
           <div className="container_history_user_card_text">
             <h6>Thông tin khách hàng</h6>
@@ -41,8 +41,7 @@ const History = () => {
               <div className="container_history_user_card_information">
                 <div className="container_history_user_card_information_text">
                   <b>Email:</b>
-                  <i>{user.email
-}</i>
+                  <i>{user.email}</i>
                 </div>
                 <div className="container_history_user_card_information_text">
                   <b>số điện thoại:</b>
@@ -98,7 +97,8 @@ const History = () => {
                   <td>
                     {item.Story === "Chờ xác nhận" && (
                       <button className="cancle">
-                        <i class='bx bx-low-vision'></i> <span>Hủy đơn hàng</span>
+                        <i class="bx bx-low-vision"></i>{" "}
+                        <span>Hủy đơn hàng</span>
                       </button>
                     )}
                     {item.Story === "Đã Thanh Toán" && (
@@ -119,7 +119,7 @@ const History = () => {
             </table>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

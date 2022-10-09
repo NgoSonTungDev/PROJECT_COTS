@@ -141,21 +141,18 @@
             outline: none;
             background-color: transparent;
             font-size: 15px;
+          }
 
-            i {
-              font-size: 20px;
-              transform: translate(-10px, 4px);
-            }
+          .cancle:hover {
+            color: #fb0000;
+          }
 
-            &:nth-child(2):hover {
-              cursor: pointer;
-              color: #fb0000;
-            }
+          .CheckOrder:hover {
+            color: #2ecc71;
+          }
 
-            &:nth-child(1):hover {
-              cursor: pointer;
-              color: #0984e3;
-            }
+          .DanhGia:hover {
+            color: #e67e22;
           }
         }
 
