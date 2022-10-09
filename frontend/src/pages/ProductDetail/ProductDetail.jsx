@@ -36,7 +36,6 @@ const ProductDetail = () => {
   const [seeMore, setSeeMore] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const ProductID = location.pathname.split("/")[2];
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [dataSize, setDataSize] = useState([]);
@@ -44,10 +43,37 @@ const ProductDetail = () => {
   const [dataImage, setDataImage] = useState([]);
   const NewProduct = data2.filter((item) => item.story === "NEW");
   const user = JSON.parse(localStorage.getItem("dataUser"));
-
+  const ProductID = location.pathname.split("/")[2];
   const handleMoveBuy = () => {
     navigate(`/productDetail/payment/${ProductID}`);
   };
+
+  const handleAddcart = () => {
+    axios
+      .post(`http://localhost:8000/api/cart/addToCart`, {
+        ProductID: ProductID,
+        NameProduct: data.NameProduct,
+        Image: dataImage[0],
+        price: data.price,
+        Size: dataSize,
+        Color: dataColor,
+        AccountUSer: user._id,
+      })
+      .then(function (response) {
+        console.log(response.data)
+        toast.success("Thêm sản phẩm thành công ", {
+          position: toast.POSITION.BOTTOM_LEFT
+
+        });
+
+      })
+      .catch(function (error) {
+        toast.error("Thêm sản phẩm thất bại", {
+          position: toast.POSITION.BOTTOM_LEFT
+        });
+
+      })
+  }
 
   const handleSeeMore = () => {
     if (seeMore === false) {
@@ -187,6 +213,7 @@ const ProductDetail = () => {
                   </td>
                   <td>
                     {user != null ? (
+
                       <button className="addcart" onClick={handleAddCart}>THÊM VÀO GIỎ HÀNG</button>
                     ) : (
                       <button
@@ -384,10 +411,10 @@ const ProductDetail = () => {
       </div>
       <Icon />
       <Footer />
-      <ToastContainer autoClose={500} />
 
+      <ToastContainer autoClose={500} />
     </div>
-  );
+  ); 
 };
 
 export default ProductDetail;
