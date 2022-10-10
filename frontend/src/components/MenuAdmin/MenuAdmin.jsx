@@ -43,6 +43,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(2);
+              navigation("/admin/catalog");
             }}
           >
             <i class="bx bx-list-plus"></i> <span>Quản lý danh mục</span>
