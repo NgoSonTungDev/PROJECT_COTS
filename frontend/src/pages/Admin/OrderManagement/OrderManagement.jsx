@@ -3,7 +3,6 @@ import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
 import "./OrderManagement.scss";
 
 const OrderManagement = () => {
-
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
@@ -13,7 +12,7 @@ const OrderManagement = () => {
       return false;
     }
   };
-  
+
   return (
     <div>
       <div className="container_OrderManagement">
@@ -33,7 +32,32 @@ const OrderManagement = () => {
             </div>
           </div>
           <div className="container_OrderManagement_body_main">
-            {/* code design in here */}
+            <div className="container_OrderManagement_user_right_table">
+              <table>
+                <tr>
+                  <th>Hình ảnh</th>
+                  <th>Tên sản phẩm</th>
+                  <th>các Size</th>
+                  <th>các Màu</th>
+                  <th>Giá bán</th>
+                  <th>Chức năng</th>
+                </tr>
+                {/* {data.map((item) => ( */}
+                <tr>
+                  <td className="OrderManagement_product">
+                    <img src="" />
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td style={{ color: "#d63031", fontWeight: "600" }}></td>
+                  <td className="OrderManagement_btn">
+                    <button>Xóa</button>
+                  </td>
+                </tr>
+                {/* ))} */}
+              </table>
+            </div>
           </div>
         </div>
       </div>
