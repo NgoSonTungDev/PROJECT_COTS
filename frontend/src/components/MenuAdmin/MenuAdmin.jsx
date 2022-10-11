@@ -54,6 +54,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(3);
+              navigation("/admin/account");
             }}
           >
             <i class="bx bxs-user-account"></i> <span>Quản lý tài khoản</span>
@@ -64,7 +65,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(4);
-              navigation("/admin/account");
+              navigation("/admin/order");
             }}
           >
             <i class="bx bxs-package"></i> <span>Quản lý đơn hàng</span>

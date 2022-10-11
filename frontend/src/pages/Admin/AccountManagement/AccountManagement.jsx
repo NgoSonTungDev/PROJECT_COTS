@@ -1,18 +1,90 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
-
+import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { toast, ToastContainer } from "react-toastify";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "./AccountManagement.scss";
 
 const AccountManagement = () => {
+  const [data, setData] = useState([]);
+  const [total, setTotal] = useState([]);
+  const [show, setShow] = useState(false);
+  const [id, SetId] = useState("");
+  const [pageNumber, setpageNumber] = useState(1);
+  const [nameSearch, setNameSearch] = useState("");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
-      alert("akjshdakjh");
+      handleSearch();
       keyPressed = null;
     } else {
       return false;
     }
   };
+
+  const handleSearch = () => {
+    let url = `http://localhost:8000/api/user/all-user?userName=${nameSearch}`;
+    fetchData(url)
+  };
+
+  const handleChangePageNumer = (event, value) => {
+    setpageNumber(value);
+    let url = `http://localhost:8000/api/user/all-user?pageNumber=${value}`;
+    fetchData(url);
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8000/api/user/${id}`)
+      .then(function (response) {
+        toast.success("Success Notification !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        handleClose();
+        fetchData();
+      })
+      .catch(function (error) {
+        toast.error("Error Notification !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+  };
+
+  const getLength = () => {
+    axios
+      .get("http://localhost:8000/api/user/all-user")
+      .then(function (response) {
+        setTotal(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const fetchData = (url) => {
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let url = "http://localhost:8000/api/user/all-user?pageNumber=1";
+    fetchData(url);
+    getLength();
+  }, []);
 
   return (
     <div>
@@ -27,16 +99,81 @@ const AccountManagement = () => {
               <input
                 type="text"
                 placeholder="Search . . ."
+                value={nameSearch}
+                onChange={(e)=>{setNameSearch(e.target.value)}}
                 onKeyDown={(e) => onPress_ENTER(e)}
               />{" "}
-              <i class="bx bx-search-alt-2"></i>
+              <i class="bx bx-search-alt-2" onClick={handleSearch}></i>
             </div>
           </div>
           <div className="container_AccountManagement_body_main">
-            {/* code design body in here */}
+            <div className="container_AccountManagement_user_right_table">
+              <table>
+                <tr>
+                  <th>UserName</th>
+                  <th>Image</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Number Phone</th>
+                  <th>Chức năng</th>
+                </tr>
+                {data.map((item) => (
+                  <tr>
+                    <td>{item.username}</td>
+                    <td className="AccountManagement_product">
+                      <img src={item.image} />
+                    </td>
+                    <td>{item.email}</td>
+                    <td>{item.address}</td>
+                    <td>{item.numberPhone}</td>
+                    <td className="AccountManagement_btn">
+                      <button
+                        onClick={() => {
+                          handleShow();
+                          SetId(item._id);
+                        }}
+                      >
+                        Xóa
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+            <div className="AccountManagement_pagination">
+              <Stack>
+                <Pagination
+                  count={Math.floor(total.length / 4 + 0.5)}
+                  variant="outlined"
+                  shape="rounded"
+                  page={pageNumber}
+                  onChange={handleChangePageNumer}
+                />
+              </Stack>
+            </div>
           </div>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <ToastContainer autoClose={500} />
     </div>
   );
 };

@@ -16,6 +16,7 @@ import History from "./pages/History/History";
 import AdminHome from "./pages/Admin/AdminHome/AdminHome";
 import SaleProduct from "./pages/SaleProduct/SaleProduct";
 import CatalogManagement from "./pages/Admin/CatalogManagement/CatalogManagement";
+import OrderManagement from "./pages/Admin/OrderManagement/OrderManagement";
 
 function App() {
   const admin = localStorage.getItem("admin");
@@ -38,7 +39,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/account" element={<AccountManagement />} />
-          <Route path="/admin/order" element={<AccountManagement />} />
+          <Route path="/admin/order" element={<OrderManagement />} />
           <Route path="/admin/catalog" element={<CatalogManagement />} />
           <Route path="/history" element={<History />} />
           <Route path="*" element={<PageNotFound />} />
