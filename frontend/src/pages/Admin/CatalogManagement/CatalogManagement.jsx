@@ -2,11 +2,36 @@ import React, { useState, useEffect } from "react";
 import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
 import "./CatalogManagement.scss";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 const CatalogManagement = () => {
     const [data, setData] = useState([]);
 
-    useEffect(() => {
+    const handleDelete = () => {
+        axios
+            .then(function (response) {
+                toast.success("Xóa sản phẩm thành công ", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error)
+                toast.error("Xóa sản phẩm thất bại", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
+            })
+        fetchData();
+    }
+
+    const handleAdd = () => {
+
+    }
+    const handleUpdate = () => {
+
+    }
+
+    const fetchData = () => {
         window.scrollTo(0, 0);
         axios
             .get("http://localhost:8000/api/product/allproduct")
@@ -18,8 +43,13 @@ const CatalogManagement = () => {
             .catch(function (error) {
                 console.log(error);
             });
-    }, []);
+    };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        fetchData();
+
+    }, []);
     return (
         <div>
             <div className="container_catalog">
@@ -29,18 +59,18 @@ const CatalogManagement = () => {
                 <div className="container_catalog_body">
                     <div className="container_catalog_body_search">
                         <p>Trang chủ</p>
-                        {/* <div className="container_catalog_body_search_input">
+                        <div className="container_catalog_body_search_input">
                             <input
                                 type="text"
                                 placeholder="Search . . ."
-                                // onKeyDown={(e) => onPress_ENTER(e)}
+                            // onKeyDown={(e) => onPress_ENTER(e)}
                             />{" "}
                             <i class="bx bx-search-alt-2"></i>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="container_catalog_body_main">
                         <div className="btn_add">
-                            <button>+</button>
+                            <button onClick={handleAdd}>Thêm mới</button>
                         </div>
                         <div className="container_catalog_user_right_table">
                             <table>
@@ -70,8 +100,8 @@ const CatalogManagement = () => {
                                         <td style={{ color: "#d63031", fontWeight: "600" }}>
                                             {item.price}</td>
                                         <td className="catalog_btn">
-                                            <button>Xóa</button>
-                                            <button>Sửa</button>
+                                            <button onClick={handleDelete}>Xóa</button>
+                                            <button onClick={handleUpdate}>Sửa</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -80,6 +110,9 @@ const CatalogManagement = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                autoClose={500}
+            />
         </div>
     );
 };
