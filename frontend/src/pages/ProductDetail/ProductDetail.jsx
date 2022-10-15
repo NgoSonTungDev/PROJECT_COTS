@@ -47,34 +47,7 @@ const ProductDetail = () => {
   const handleMoveBuy = () => {
     navigate(`/productDetail/payment/${ProductID}`);
   };
-
-  const handleAddcart = () => {
-    axios
-      .post(`http://localhost:8000/api/cart/addToCart`, {
-        ProductID: ProductID,
-        NameProduct: data.NameProduct,
-        Image: dataImage[0],
-        price: data.price,
-        Size: dataSize,
-        Color: dataColor,
-        AccountUSer: user._id,
-      })
-      .then(function (response) {
-        console.log(response.data)
-        toast.success("Thêm sản phẩm thành công ", {
-          position: toast.POSITION.BOTTOM_LEFT
-
-        });
-
-      })
-      .catch(function (error) {
-        toast.error("Thêm sản phẩm thất bại", {
-          position: toast.POSITION.BOTTOM_LEFT
-        });
-
-      })
-  }
-
+ 
   const handleSeeMore = () => {
     if (seeMore === false) {
       setSeeMore(true);

@@ -15,6 +15,10 @@ const Cart = () => {
     navigate(`/productDetail/payment/${e}`);
   };
 
+  const handleMoveDetail=(e)=>{
+    navigate(`/productDetail/${e}`);
+  }
+
   const handleDeleteCart = async (e) => {
     await axios
       .delete(`http://localhost:8000/api/cart/${e}`)
@@ -111,12 +115,18 @@ const Cart = () => {
                     />
                   </td>
                   <td> {item.NameProduct}</td>
-                  <td>{item.Size}</td>
-                  <td>{item.Color}</td>
+                  <td>{item.Size.map((item)=>(
+                    <span>{item} </span>
+                  ))}</td>
+                  <td>{item.Color.map((item) => (
+                    <span> {item}  </span>
+                  ))}
+                  </td>
                   <td style={{ color: "#d63031", fontWeight: "600" }}>
                     {item.price}</td>
                   <td className="cart_btn">
-                    <button onClick={()=>{handleMoveBuy(item.ProductID)}}>Xem chi tiết</button>
+                    <button onClick={() => { handleMoveDetail(item.ProductID) }}>Xem chi tiết</button>
+                    <button onClick={() => { handleMoveBuy(item.ProductID) }}>Mua ngay</button>
                     <button onClick={() => {
                       handleDeleteCart(item._id)
                     }}>Xóa</button>
