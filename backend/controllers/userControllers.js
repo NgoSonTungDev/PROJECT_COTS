@@ -10,8 +10,8 @@ const userController = {
       if (userName || page) {
         if (page) {
           page = parseInt(page);
-          var SkipNumber = (page - 1) * 6;
-          const result = await Products.find().skip(SkipNumber).limit(6);
+          var SkipNumber = (page - 1) * 4;
+          const result = await Users.find().skip(SkipNumber).limit(4);
           return res.status(200).json(result);
         }
 
@@ -27,8 +27,7 @@ const userController = {
             .catch((err) => {
               res.status(500).send({
                 message:
-                  err.message ||
-                  "Some error occurred while retrieving user.",
+                  err.message || "Some error occurred while retrieving user.",
               });
             });
         }

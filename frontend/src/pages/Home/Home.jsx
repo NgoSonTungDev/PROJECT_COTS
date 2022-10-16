@@ -7,9 +7,11 @@ import "./Home.scss";
 import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const navigation = useNavigate();
   const NewProduct = data.filter((item) => item.story === "NEW");
   const SaleProduct = data.filter((item) => item.story === "SALE");
 
@@ -41,8 +43,7 @@ const Home = () => {
             </h2>
             <button
               onClick={() => {
-                // console.log(data);
-                // console.log(newProduct);
+                navigation("/sale-product");
               }}
             >
               GET STARTED

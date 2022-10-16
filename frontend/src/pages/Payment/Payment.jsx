@@ -37,7 +37,7 @@ const Payment = () => {
     c = false;
 
   const movePaymentOrder = () => {
-    navigation(`/productDetail/order/payment/${data.NameProduct}`);
+    navigation(`/productDetail/order/payment/${ProductID}`);
     var min = 1000;
     var max = 9999;
     var rand = parseInt(min + Math.random() * (max - min));
@@ -164,6 +164,10 @@ const Payment = () => {
           toast.success("Đặt hàng thành công !", {
             position: toast.POSITION.BOTTOM_LEFT,
           });
+          setTimeout(() => {
+            navigation("/home");
+          }, 1000);
+
           if (user.address === "" && user.numberPhone === "") {
             axios
               .put(`http://localhost:8000/api/user/${user._id}`, {
