@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const PaymentOrders = () => {
+  const [data, setData] = useState([]);
   const [number, setNumber] = useState("");
   const [date, setDate] = useState("");
   const [Name, setName] = useState("");
@@ -16,7 +17,10 @@ const PaymentOrders = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigation = useNavigate();
+  const location = useLocation();
   const dataOrder = JSON.parse(localStorage.getItem("dataOrder"));
+  const ProductID = location.pathname.split("/")[4];
+  const SumWarehouse = data.warehouse - dataOrder.Amount;
 
   var today = new Date();
   var timenow =
@@ -56,6 +60,7 @@ const PaymentOrders = () => {
           position: toast.POSITION.BOTTOM_LEFT,
         });
         pushPaymentManager();
+        SetWarehouseAPIProduct();
       })
       .catch(function (error) {
         toast.error("Lỗi mất rồi, làm lại nha 😉", {
@@ -64,6 +69,20 @@ const PaymentOrders = () => {
         console.log(error);
       });
   };
+
+  const SetWarehouseAPIProduct = () => {
+    axios
+      .put(`http://localhost:8000/api/product/${ProductID}`, {
+        warehouse: SumWarehouse,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const pushPaymentManager = () => {
     axios
       .post("http://localhost:8000/api/TotalOrder/addToOrder", {
@@ -81,12 +100,27 @@ const PaymentOrders = () => {
         setTimeout(() => {
           navigation("/home");
         }, 2000);
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
+  const fetchData = () => {
+    axios
+      .get(`http://localhost:8000/api/product/${ProductID}`)
+      .then(function (response) {
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="paymentOrders-container">
