@@ -13,36 +13,34 @@ const AccountManagement = () => {
   const [total, setTotal] = useState([]);
   const [show, setShow] = useState(false);
   const [id, SetId] = useState("");
-  const [pageNumber, setpageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
   const [nameSearch, setNameSearch] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(pageNumber);
 
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
-      handleSearch();
+      handleSearch(pageNumber);
       keyPressed = null;
     } else {
       return false;
     }
   };
 
-  const handleSearch = () => {
-    let url = `http://localhost:8000/api/user/all-user?userName=${nameSearch}&pageNumber=${pageNumber}`;
-    setpageNumber(1);
+  const handleSearch = (number) => {
+    let url = `http://localhost:8000/api/user/all-user?userName=${nameSearch}&pageNumber=${number}`;
     fetchData(url);
+    setPageNumber(1);
   };
 
   const handleChangePageNumer = (event, value) => {
-    setpageNumber(value);
-    // if (nameSearch === "") {
-    //   let url = `http://localhost:8000/api/user/all-user?pageNumber=${value}`;
-    //   fetchData(url);
-    // } else {
-    //   setpageNumber(value);
-    // }
+    setPageNumber(value);
+    if (nameSearch === "") {
+      fetchData(`http://localhost:8000/api/user/all-user?pageNumber=${value}`);
+    } else {
+      handleSearch(value);
+    }
   };
 
   const handleDelete = () => {
@@ -77,7 +75,6 @@ const AccountManagement = () => {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {
@@ -87,8 +84,7 @@ const AccountManagement = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    let url = `http://localhost:8000/api/user/all-user?pageNumber=${pageNumber}`;
-    fetchData(url);
+    fetchData("http://localhost:8000/api/user/all-user?pageNumber=1");
     getLength();
   }, []);
 
