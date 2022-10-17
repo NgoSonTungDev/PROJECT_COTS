@@ -17,6 +17,7 @@ const AccountManagement = () => {
   const [nameSearch, setNameSearch] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log(pageNumber);
 
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
@@ -29,14 +30,19 @@ const AccountManagement = () => {
   };
 
   const handleSearch = () => {
-    let url = `http://localhost:8000/api/user/all-user?userName=${nameSearch}`;
-    fetchData(url)
+    let url = `http://localhost:8000/api/user/all-user?userName=${nameSearch}&pageNumber=${pageNumber}`;
+    setpageNumber(1);
+    fetchData(url);
   };
 
   const handleChangePageNumer = (event, value) => {
     setpageNumber(value);
-    let url = `http://localhost:8000/api/user/all-user?pageNumber=${value}`;
-    fetchData(url);
+    // if (nameSearch === "") {
+    //   let url = `http://localhost:8000/api/user/all-user?pageNumber=${value}`;
+    //   fetchData(url);
+    // } else {
+    //   setpageNumber(value);
+    // }
   };
 
   const handleDelete = () => {
@@ -81,7 +87,7 @@ const AccountManagement = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    let url = "http://localhost:8000/api/user/all-user?pageNumber=1";
+    let url = `http://localhost:8000/api/user/all-user?pageNumber=${pageNumber}`;
     fetchData(url);
     getLength();
   }, []);
@@ -100,7 +106,9 @@ const AccountManagement = () => {
                 type="text"
                 placeholder="Search . . ."
                 value={nameSearch}
-                onChange={(e)=>{setNameSearch(e.target.value)}}
+                onChange={(e) => {
+                  setNameSearch(e.target.value);
+                }}
                 onKeyDown={(e) => onPress_ENTER(e)}
               />{" "}
               <i class="bx bx-search-alt-2" onClick={handleSearch}></i>

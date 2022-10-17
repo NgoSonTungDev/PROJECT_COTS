@@ -8,28 +8,32 @@ const userController = {
       var page = req.query?.pageNumber;
 
       if (userName || page) {
-        if (page) {
+        if (userName && page) {
+          var condition = userName
+            ? { username: { $regex: new RegExp(userName), $options: "i" } }
+            : {};
+          page = parseInt(page);
+          var SkipNumber = (page - 1) * 4;
+
+          const result = await Users.find(condition).skip(SkipNumber).limit(4);
+          return res.status(200).json(result);
+
+          // Users.find(condition)
+          //   .then((data) => {
+          //     const result = data.limit(4);
+          //     return res.send(result);
+          //   })
+          //   .catch((err) => {
+          //     res.status(500).send({
+          //       message:
+          //         err.message || "Some error occurred while retrieving user.",
+          //     });
+          //   });
+        } else if (page) {
           page = parseInt(page);
           var SkipNumber = (page - 1) * 4;
           const result = await Users.find().skip(SkipNumber).limit(4);
           return res.status(200).json(result);
-        }
-
-        if (userName) {
-          var condition = userName
-            ? { username: { $regex: new RegExp(userName), $options: "i" } }
-            : {};
-
-          Users.find(condition)
-            .then((data) => {
-              return res.send(data);
-            })
-            .catch((err) => {
-              res.status(500).send({
-                message:
-                  err.message || "Some error occurred while retrieving user.",
-              });
-            });
         }
       } else {
         const allUSer = await Users.find();
@@ -39,6 +43,7 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
   getAnUser: async (req, res) => {
     try {
       const user = await Users.findById(req.params.id).populate([
@@ -50,6 +55,7 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
   updateUser: async (req, res) => {
     console.log("er", req.body);
     try {
@@ -71,6 +77,7 @@ const userController = {
       res.status(500).json(error);
     }
   },
+
   deleteUser: async (req, res) => {
     try {
       await Users.findByIdAndDelete(req.params.id);
