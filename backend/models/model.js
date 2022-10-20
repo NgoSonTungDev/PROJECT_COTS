@@ -147,7 +147,7 @@ const Product = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  story:{
+  story: {
     type: String,
     required: true,
   },

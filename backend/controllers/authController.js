@@ -3,10 +3,18 @@ const bcrypt = require("bcrypt");
 
 const authControllers = {
   register: async (req, res) => {
+    const username = await Users.findOne({
+      username: req.body.username,
+    });
+    const email = await Users.findOne({
+      email: req.body.email,
+    });
+    if (username) return res.status(400).json({ msg: "Tên đã tồn tại" });
+    if (email) return res.status(400).json({ msg: "Email đã tồn tại" });
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       const newUSer = await new Users({
-        image : req.body.image,
+        image: req.body.image,
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
@@ -38,7 +46,6 @@ const authControllers = {
       res.status(500).json(error);
     }
   },
-
 };
 
 module.exports = authControllers;

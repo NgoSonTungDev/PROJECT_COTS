@@ -41,13 +41,14 @@ const ProductDetail = () => {
   const [dataSize, setDataSize] = useState([]);
   const [dataColor, setDataColor] = useState([]);
   const [dataImage, setDataImage] = useState([]);
+  const [dataComments, setDataComments] = useState([]);
   const NewProduct = data2.filter((item) => item.story === "NEW");
   const user = JSON.parse(localStorage.getItem("dataUser"));
   const ProductID = location.pathname.split("/")[2];
   const handleMoveBuy = () => {
     navigate(`/productDetail/payment/${ProductID}`);
   };
- 
+
   const handleSeeMore = () => {
     if (seeMore === false) {
       setSeeMore(true);
@@ -71,20 +72,17 @@ const ProductDetail = () => {
         AccountUSer: user._id,
       })
       .then(function (response) {
-        console.log(response.data)
+        console.log(response.data);
         toast.success("Thêm sản phẩm thành công ", {
-          position: toast.POSITION.BOTTOM_LEFT
-
+          position: toast.POSITION.BOTTOM_LEFT,
         });
-
       })
       .catch(function (error) {
         toast.error("Thêm sản phẩm thất bại", {
-          position: toast.POSITION.BOTTOM_LEFT
+          position: toast.POSITION.BOTTOM_LEFT,
         });
-
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,6 +93,7 @@ const ProductDetail = () => {
         setDataColor(response.data.Color);
         setDataSize(response.data.Size);
         setDataImage(response.data.image);
+        setDataComments(response.data.comment);
       })
       .catch(function (error) {
         console.log(error);
@@ -186,8 +185,9 @@ const ProductDetail = () => {
                   </td>
                   <td>
                     {user != null ? (
-
-                      <button className="addcart" onClick={handleAddCart}>THÊM VÀO GIỎ HÀNG</button>
+                      <button className="addcart" onClick={handleAddCart}>
+                        THÊM VÀO GIỎ HÀNG
+                      </button>
                     ) : (
                       <button
                         className="addcart"
@@ -352,15 +352,9 @@ const ProductDetail = () => {
               </p>
             </div>
             <div className="container_productDetail_intro_product_one_comment">
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
-              <CommentProduct />
+              {dataComments.map((item) => (
+                <CommentProduct dataComment={item} />
+              ))}
             </div>
           </div>
         </div>
@@ -387,7 +381,7 @@ const ProductDetail = () => {
 
       <ToastContainer autoClose={500} />
     </div>
-  ); 
+  );
 };
 
 export default ProductDetail;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigation = useNavigate();
@@ -51,7 +51,14 @@ const Navbar = () => {
         </div>
         <div className="container_narbar_main">
           <nav>
-            <label class="logo">MAFLINE</label>
+            <label
+              class="logo"
+              onClick={() => {
+                navigation("/home");
+              }}
+            >
+              MAFLINE
+            </label>
             <ul>
               <li
                 onClick={() => {
@@ -67,23 +74,19 @@ const Navbar = () => {
               >
                 <p>product</p>
               </li>
-              <li>
-                <p
-                  onClick={() => {
-                    navigation("/size-check");
-                  }}
-                >
-                  Size check
-                </p>
+              <li
+                onClick={() => {
+                  navigation("/size-check");
+                }}
+              >
+                <p>Size check</p>
               </li>
-              <li>
-                <p
-                  onClick={() => {
-                    navigation("/about");
-                  }}
-                >
-                  About
-                </p>
+              <li
+                onClick={() => {
+                  navigation("/about");
+                }}
+              >
+                <p>About</p>
               </li>
               {user === null ? (
                 <li onClick={movelogin}>
@@ -92,7 +95,7 @@ const Navbar = () => {
               ) : (
                 <li
                   onClick={() => {
-                    navigation("/home")
+                    navigation("/home");
                     window.location.reload();
                     localStorage.clear();
                   }}

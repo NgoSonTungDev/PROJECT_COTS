@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import "./Footer.scss";
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+  const navigation = useNavigate();
 
   return (
     <div>
@@ -23,23 +26,35 @@ const Footer = () => {
             <ul>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <span>Home</span>
+                <span
+                  onClick={() => {
+                    navigation("/home");
+                  }}
+                >Home</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <span>About</span>
+                <span
+                  onClick={() => {
+                    navigation("/sale-product");
+                  }}
+                >Product</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <span>Services</span>
+                <span
+                  onClick={() => {
+                    navigation("/size-check");
+                  }}
+                >Size Check</span>
               </li>
               <li>
                 <i class="fa-solid fa-reply"></i>
-                <span>Team</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-reply"></i>
-                <span>Contact</span>
+                <span
+                  onClick={() => {
+                    navigation("/about");
+                  }}
+                >About</span>
               </li>
             </ul>
           </div>

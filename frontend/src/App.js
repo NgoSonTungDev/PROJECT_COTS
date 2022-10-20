@@ -34,7 +34,10 @@ function App() {
           <Route path="/size-check" element={<Sizecheck />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/productDetail/payment/:id" element={<Payment />} />
-          <Route path="/productDetail/order/payment/:id" element={<PaymentOrders />} />
+          <Route
+            path="/productDetail/order/payment/:id"
+            element={<PaymentOrders />}
+          />
           <Route path="/sale-product" element={<SaleProduct />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />

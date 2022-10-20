@@ -3,12 +3,16 @@ import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
 import "./CatalogManagement.scss";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const CatalogManagement = () => {
     const [data, setData] = useState([]);
+    const user = JSON.parse(localStorage.getItem("dataUser"));
 
-    const handleDelete = () => {
-        axios
+    const handleDelete = async (e) => {
+        await axios
+            // .delete(`http://localhost:8000/api/product${e}`)
             .then(function (response) {
                 toast.success("Xóa sản phẩm thành công ", {
                     position: toast.POSITION.BOTTOM_LEFT
@@ -50,6 +54,7 @@ const CatalogManagement = () => {
         fetchData();
 
     }, []);
+
     return (
         <div>
             <div className="container_catalog">
@@ -100,7 +105,7 @@ const CatalogManagement = () => {
                                         <td style={{ color: "#d63031", fontWeight: "600" }}>
                                             {item.price}</td>
                                         <td className="catalog_btn">
-                                            <button onClick={handleDelete}>Xóa</button>
+                                            <button onClick={() => { handleDelete(item._id) }}>Xóa</button>
                                             <button onClick={handleUpdate}>Sửa</button>
                                         </td>
                                     </tr>
@@ -109,6 +114,17 @@ const CatalogManagement = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="navigation_page">
+                <Stack>
+                    <Pagination
+                        count={Math.floor(data.length / 9 + 1)}
+                        variant="outlined"
+                        shape="rounded"
+                        page={""}
+                        onChange={""}
+                    />
+                </Stack>
             </div>
             <ToastContainer
                 autoClose={500}

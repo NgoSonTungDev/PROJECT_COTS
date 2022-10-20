@@ -54,6 +54,7 @@ const Register = () => {
         numberPhone: "",
       })
       .then(function (response) {
+        // console.log(response);
         setCheck(false);
         handleClick();
         setMessage("Đăng Kí Thành công !!!");
@@ -64,16 +65,22 @@ const Register = () => {
       })
       .catch(function (error) {
         setCheck(false);
-        handleClick();
-        setMessage("Đăng kí thất bại !!!");
-        setStory("error");
+        if (error.response.status == 400) {
+          handleClick();
+          setMessage(`${error.response.data.msg}`);
+          setStory("error");
+        } else if (error.response.status == 500) {
+          handleClick();
+          setMessage(`Đăng Kí Không Thành Công `);
+          setStory("error");
+        }
       });
   };
 
   const handleOnClickButtonRegister = async () => {
     await checkInputs();
     if (a === true && b === true && c === true && d === true) {
-      setCheck(true)
+      setCheck(true);
       handleRegister();
     }
   };

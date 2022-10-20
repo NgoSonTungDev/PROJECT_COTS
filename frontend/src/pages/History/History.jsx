@@ -1,21 +1,127 @@
 import React, { useState, useEffect } from "react";
 import "./History.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import Rating from "@mui/material/Rating";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
-  const [data, setdData] = useState([]);
+  const [data, setData] = useState([]);
+  const [rating, setRating] = useState(3);
+  const [content, setContent] = useState("");
+  const [prodctID, setProdctID] = useState("");
+  const [historyID, setHistoryID] = useState("");
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const [show, setShow] = useState(false);
+  const navigation = useNavigate();
   const user = JSON.parse(localStorage.getItem("dataUser"));
+  var today = new Date();
+  var timenow =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var datenow =
+    today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
 
-  useEffect(() => {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleCancleOrder = (e) => {
     axios
-      .get(`http://localhost:8000/api/user/${user._id}`)
+      .put(`http://localhost:8000/api/History/${e}`, {
+        Story: "Đã hủy đơn hàng",
+      })
       .then(function (response) {
-        setdData(response.data.history);
+        toast.success(" !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        fetchData();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Lỗi", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+  };
+
+  const handleShipMent = (e) => {
+    axios
+      .put(`http://localhost:8000/api/History/${e}`, {
+        Story: "Giao hàng thành công",
+      })
+      .then(function (response) {
+        toast.success("Chúc mừng bạn đã nhận được hàng !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        fetchData();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Lỗi", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+  };
+
+  const handleEvaluated = () => {
+    axios
+      .put(`http://localhost:8000/api/History/${historyID}`, {
+        Story: "Đã đánh giá sản phẩm",
+      })
+      .then(function (response) {
+        console.log(response);
+        fetchData();
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const handleSubmitEvaluate = () => {
+    axios
+      .post(`http://localhost:8000/api/comment/add-comment`, {
+        nameUser: user.username,
+        content: content,
+        rating: rating,
+        color: color,
+        size: size,
+        datetime: datenow + " " + timenow,
+        ProductID: prodctID,
+      })
+      .then(function (response) {
+        toast.success("Cảm ơn bạn đã đánh giá !", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+        fetchData();
+        handleClose();
+        handleEvaluated();
+      })
+      .catch(function (error) {
+        console.log(error);
+        handleClose();
+        toast.error("Lỗi", {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
+  };
+
+  const fetchData = () => {
+    axios
+      .get(`http://localhost:8000/api/user/${user._id}`)
+      .then(function (response) {
+        setData(response.data.history);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
@@ -87,30 +193,68 @@ const History = () => {
                     {item.Story === "Chờ xác nhận" && (
                       <span style={{ color: "#2ecc71" }}>{item.Story}</span>
                     )}
+                    {item.Story === "Đã hủy đơn hàng" && (
+                      <span style={{ color: "#d63031" }}>{item.Story}</span>
+                    )}
                     {item.Story === "Đã Thanh Toán" && (
                       <span style={{ color: "#3498db" }}>{item.Story}</span>
                     )}
-                    {item.Story === "Giao Hàng Thành Công" && (
+                    {item.Story === "Giao hàng thành công" && (
                       <span style={{ color: "#00b894" }}>{item.Story}</span>
+                    )}
+                    {item.Story === "Đã đánh giá sản phẩm" && (
+                      <span style={{ color: "#f39c12" }}>{item.Story}</span>
                     )}
                   </td>
                   <td>
                     {item.Story === "Chờ xác nhận" && (
-                      <button className="cancle">
+                      <button
+                        className="cancle"
+                        onClick={() => {
+                          handleCancleOrder(item._id);
+                        }}
+                      >
                         <i class="bx bx-low-vision"></i>{" "}
                         <span>Hủy đơn hàng</span>
                       </button>
                     )}
                     {item.Story === "Đã Thanh Toán" && (
-                      <button className="CheckOrder">
+                      <button
+                        className="CheckOrder"
+                        onClick={() => {
+                          handleShipMent(item._id);
+                        }}
+                      >
                         <i class="bx bx-check"></i>{" "}
                         <span>Đã nhận được hàng</span>
                       </button>
                     )}
-                    {item.Story === "Giao Hàng Thành Công" && (
-                      <button className="DanhGia">
+                    {item.Story === "Giao hàng thành công" && (
+                      <button
+                        className="DanhGia"
+                        onClick={() => {
+                          handleShow();
+                          setSize(item.Size);
+                          setColor(item.Color);
+                          setProdctID(item.ProductID);
+                          setHistoryID(item._id);
+                        }}
+                      >
                         <i class="bx bx-star"></i>
                         <span>Đánh giá</span>
+                      </button>
+                    )}
+                    {item.Story === "Đã đánh giá sản phẩm" && (
+                      <button
+                        className="shopping"
+                        onClick={() => {
+                          navigation(
+                            `/productDetail/payment/${item.ProductID}`
+                          );
+                        }}
+                      >
+                        <i class="bx bx-shopping-bag"></i>
+                        <span>Mua lại</span>
                       </button>
                     )}
                   </td>
@@ -120,6 +264,51 @@ const History = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={500} />
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Đánh Giá</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Số sao : </Form.Label>
+              <Rating
+                name="simple-controlled"
+                style={{
+                  fontSize: "10px important",
+                  transform: "translateY(6px)",
+                  marginLeft: "5px",
+                }}
+                value={rating}
+                onChange={(event, newValue) => {
+                  setRating(newValue);
+                }}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Nội dung</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSubmitEvaluate}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -21,7 +21,6 @@
       margin-left: 12.5%;
 
       .container_narbar_intro_1_contact {
-
         // transform: translateY(0px);
         i {
           transform: translateY(2px);
@@ -35,10 +34,12 @@
           border-radius: 3px;
 
           background: rgb(249, 237, 50);
-          background: linear-gradient(50deg,
-              rgba(249, 237, 50, 1) 0%,
-              rgba(238, 42, 123, 1) 49%,
-              rgba(0, 42, 255, 1) 100%);
+          background: linear-gradient(
+            50deg,
+            rgba(249, 237, 50, 1) 0%,
+            rgba(238, 42, 123, 1) 49%,
+            rgba(0, 42, 255, 1) 100%
+          );
         }
 
         .bxl-skype:hover {
@@ -73,6 +74,26 @@
       background: #333333;
       height: 80px;
       width: 100%;
+
+      .logo::after,
+      .logo::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        letter-spacing: 2px;
+        opacity: 0.7;
+      }
+      .logo::before {
+        animation: lagAnimation 675ms infinite;
+        transform: translate(-3px, -3px);
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      }
+      .logo::after {
+        animation: lagAnimation 333ms infinite;
+        transform: translate(3px, 3px);
+        clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+      }
     }
 
     label.logo {
@@ -81,6 +102,8 @@
       line-height: 80px;
       padding: 0 100px;
       font-weight: bold;
+      position: relative;
+      animation: lagAnimation 525ms infinite;
     }
 
     nav ul {
@@ -170,7 +193,7 @@
         color: #0082e6;
       }
 
-      #check:checked~ul {
+      #check:checked ~ ul {
         left: 0;
       }
     }
@@ -181,4 +204,25 @@
   // display: none;
   margin-top: -40px;
   transform: 0.5s;
+}
+
+@keyframes lagAnimation {
+  0% {
+    text-shadow: 4px 0 0 #ff0000, -4px -2px 0 #00ff00, 4px 2px 0 #0000ff;
+  }
+  14% {
+    text-shadow: 4px 0 0 #ff0000, -4px -2px 0 #00ff00, 4px 2px 0 #0000ff;
+  }
+  15% {
+    text-shadow: 4px 0 0 #ff0000, 4px 2px 0 #00ff00, -4px -2px 0 #0000ff;
+  }
+  49% {
+    text-shadow: -4px -2px 0 #ff0000, 4px 2px 0 #00ff00, -4px -2px 0 #0000ff;
+  }
+  50% {
+    text-shadow: 4px 2px 0 #ff0000, 4px 2px 0 #00ff00, 4px 2px 0 #0000ff;
+  }
+  100% {
+    text-shadow: -4px 0 0 #ff0000, -4px -2px 0 #00ff00, -4px -2px 0 #0000ff;
+  }
 }

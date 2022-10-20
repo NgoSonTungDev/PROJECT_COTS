@@ -16,12 +16,12 @@ const MenuAdmin = () => {
         <div className="container_menu_admin_intro">
           <div className="container_menu_admin_intro_img">
             <img
-              src="https://scontent.fdad3-4.fna.fbcdn.net/v/t1.15752-9/307387297_1139238373678346_6367312610972623543_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=tbXeh8OMFQUAX_mMjT7&_nc_ht=scontent.fdad3-4.fna&oh=03_AVKWa7kGw5nnct3dxWES6JDLy-eMdoNzzEhHKTWFMhmSdQ&oe=634E3724"
+              src="https://sme.hust.edu.vn/wp-content/uploads/2022/02/Avatar-Facebook-trang.jpg"
               alt=""
             />
           </div>
           <div className="container_menu_admin_intro_text">
-            <p>Mỹ Hương</p>
+            <p>ADMIN</p>
             <i>admin</i>
           </div>
         </div>

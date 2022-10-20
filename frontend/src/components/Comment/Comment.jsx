@@ -1,10 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
 import "./Comment.scss";
 
-const CommentProduct = () => {
-  const [value, setValue] = React.useState(2);
+const CommentProduct = ({ dataComment }) => {
   return (
     <div>
       <div className="container_comment">
@@ -17,26 +15,23 @@ const CommentProduct = () => {
         <div className="container_comment_content">
           <div className="container_comment_content_name">
             <p>
-              <b>NgoSonTung </b> &nbsp;
+              <b>{dataComment.nameUser} </b> &nbsp;
               <Rating
                 name="simple-controlled"
-                style={{ fontSize: "20px important",marginTop:"-2px"}}
-                value={value}
-                // onChange={(event, newValue) => {
-                //   setValue(newValue);
-                // }}
+                style={{ fontSize: "20px important", marginTop: "-2px" }}
+                value={dataComment.rating}
               />
             </p>
-
-            <span>2022-09-04 13:21</span>
+            <span>{dataComment.datetime}</span>
           </div>
           <div className="container_comment_content_type">
             <p>
-              Phân loại hàng : <span>màu Đen</span> | size XL
+              Phân loại hàng : <span>{dataComment.color}</span> | size{" "}
+              {dataComment.size}
             </p>
           </div>
           <div className="container_comment_content_content">
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur numquam facere explicabo quia soluta voluptates asperiores ut neque, minima rerum fuga, suscipit quod eius cumque magnam harum veniam officia odit. </p>
+            <p>{dataComment.content}</p>
           </div>
         </div>
       </div>
