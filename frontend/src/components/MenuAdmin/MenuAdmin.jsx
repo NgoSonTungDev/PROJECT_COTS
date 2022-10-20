@@ -76,6 +76,7 @@ const MenuAdmin = () => {
             }`}
             onClick={() => {
               handleAcctive(5);
+              navigation("/admin/payment");
             }}
           >
             <i class="bx bx-wallet-alt"></i> <span>Quản lý thanh toán</span>
