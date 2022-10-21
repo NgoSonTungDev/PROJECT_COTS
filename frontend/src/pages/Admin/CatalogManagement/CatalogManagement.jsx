@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
 import "./CatalogManagement.scss";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -9,6 +11,27 @@ import Stack from "@mui/material/Stack";
 const CatalogManagement = () => {
     const [data, setData] = useState([]);
     const user = JSON.parse(localStorage.getItem("dataUser"));
+    const [total, setTotal] = useState([]);
+    const [pageNumber, setpageNumber] = useState(1);
+    const [show, setShow] = useState(false);
+    const [search, setSearch] = useState("");
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const onPress_ENTER = (event) => {
+        var keyPressed = event.keyCode || event.which;
+        if (keyPressed === 13) {
+            handleSearch();
+            keyPressed = null;
+        } else {
+            return false;
+        }
+    };
+
+    const handleSearch = () => {
+        let url = `http://localhost:8000/api/product/allproduct?productName=${search}`;
+        fetchData(url)
+    };
 
     const handleDelete = async (e) => {
         await axios
@@ -35,12 +58,27 @@ const CatalogManagement = () => {
 
     }
 
-    const fetchData = () => {
-        window.scrollTo(0, 0);
+    const getLength = () => {
         axios
             .get("http://localhost:8000/api/product/allproduct")
             .then(function (response) {
-                // console.log(response.data);
+                setTotal(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const handleChangePageNumer = (event, value) => {
+        setpageNumber(value);
+        let url = `http://localhost:8000/api/product/allproduct?pageNumber=${value}`;
+        fetchData(url);
+    };
+
+    const fetchData = (url) => {
+        axios
+            .get(url)
+            .then(function (response) {
                 setData(response.data);
                 console.log(response.data);
             })
@@ -51,8 +89,9 @@ const CatalogManagement = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        fetchData();
-
+        let url = "http://localhost:8000/api/product/allproduct?pageNumber=1";
+        fetchData(url);
+        getLength();
     }, []);
 
     return (
@@ -68,9 +107,11 @@ const CatalogManagement = () => {
                             <input
                                 type="text"
                                 placeholder="Search . . ."
-                            // onKeyDown={(e) => onPress_ENTER(e)}
+                                value={search}
+                                onChange={(e) => { setSearch(e.target.value) }}
+                                onKeyDown={(e) => onPress_ENTER(e)}
                             />{" "}
-                            <i class="bx bx-search-alt-2"></i>
+                            <i class="bx bx-search-alt-2" onClick={handleSearch}></i>
                         </div>
                     </div>
                     <div className="container_catalog_body_main">
@@ -105,27 +146,52 @@ const CatalogManagement = () => {
                                         <td style={{ color: "#d63031", fontWeight: "600" }}>
                                             {item.price}</td>
                                         <td className="catalog_btn">
-                                            <button onClick={() => { handleDelete(item._id) }}>Xóa</button>
+                                            <button onClick={() => {
+                                                handleShow();
+                                                handleDelete(item._id);
+                                            }}
+                                            >
+                                                Xóa
+                                            </button>
                                             <button onClick={handleUpdate}>Sửa</button>
                                         </td>
                                     </tr>
                                 ))}
                             </table>
                         </div>
+                        <div className="navigation_page">
+                            <Stack>
+                                <Pagination
+                                    count={Math.floor(total.length / 9 + 1)}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    page={pageNumber}
+                                    onChange={handleChangePageNumer}
+                                />
+                            </Stack>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="navigation_page">
-                <Stack>
-                    <Pagination
-                        count={Math.floor(data.length / 9 + 1)}
-                        variant="outlined"
-                        shape="rounded"
-                        page={""}
-                        onChange={""}
-                    />
-                </Stack>
-            </div>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Thông báo!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <ToastContainer
                 autoClose={500}
             />
