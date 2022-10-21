@@ -15,14 +15,14 @@ const SaleProduct = () => {
   const [selectOption, setSelectOption] = useState("all");
 
   const handleSearch = () => {
-    // axios
-    //   .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
-    //   .then(function (response) {
-    //     setData(response.data.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
+      .then(function (response) {
+        setData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const onPress_ENTER = (e) => {
@@ -35,57 +35,57 @@ const SaleProduct = () => {
   };
 
   const handleCheckSelect = () => {
-    // if (selectOption === "all") {
-    //   setpageNumber(1);
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
-    //     .then(function (response) {
-    //       setData(response.data.data.sort((a, b) => b.price - a.price));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
-    // if (selectOption === "tang") {
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct`)
-    //     .then(function (response) {
-    //       setData(response.data.data.sort((a, b) => a.price - b.price));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
-    // if (selectOption === "giam") {
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct`)
-    //     .then(function (response) {
-    //       setData(response.data.data.sort((a, b) => b.price - a.price));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
-    // if (selectOption === "new") {
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct`)
-    //     .then(function (response) {
-    //       setData(response.data.data.filter((e) => e.story === "NEW"));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
-    // if (selectOption === "sale") {
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct`)
-    //     .then(function (response) {
-    //       setData(response.data.data.filter((e) => e.story === "SALE"));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
+    if (selectOption === "all") {
+      setpageNumber(1);
+      axios
+        .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
+        .then(function (response) {
+          setData(response.data.data.sort((a, b) => b.price - a.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    if (selectOption === "tang") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.sort((a, b) => a.price - b.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    if (selectOption === "giam") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.sort((a, b) => b.price - a.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    if (selectOption === "new") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.filter((e) => e.story === "NEW"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    if (selectOption === "sale") {
+      axios
+        .get(`http://localhost:8000/api/product/allproduct`)
+        .then(function (response) {
+          setData(response.data.filter((e) => e.story === "SALE"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   const handleChangePageNumer = (event, value) => {
