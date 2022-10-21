@@ -33,7 +33,7 @@ const ProductsController = {
 
           Products.find(condition)
             .then((data) => {
-              return res.send(data);
+              return res.send({ data: data });
             })
             .catch((err) => {
               res.status(500).send({
