@@ -35,17 +35,17 @@ const SaleProduct = () => {
   };
 
   const handleCheckSelect = () => {
-    // if (selectOption === "all") {
-    //   setpageNumber(1);
-    //   axios
-    //     .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
-    //     .then(function (response) {
-    //       setData(response.data.data.sort((a, b) => b.price - a.price));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
+    if (selectOption === "all") {
+      setpageNumber(1);
+      axios
+        .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
+        .then(function (response) {
+          setData(response.data.data.sort((a, b) => b.price - a.price));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
     // if (selectOption === "tang") {
     //   axios
     //     .get(`http://localhost:8000/api/product/allproduct`)
