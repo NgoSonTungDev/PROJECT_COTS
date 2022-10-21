@@ -11,17 +11,18 @@ const SaleProduct = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [pageNumber, setpageNumber] = useState(1);
+  const [total, setTotal] = useState(0);
   const [selectOption, setSelectOption] = useState("all");
 
   const handleSearch = () => {
-    axios
-      .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
-      .then(function (response) {
-        setData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .get(`http://localhost:8000/api/product/allproduct?productName=${search}`)
+    //   .then(function (response) {
+    //     setData(response.data.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
 
   const onPress_ENTER = (e) => {
@@ -34,60 +35,57 @@ const SaleProduct = () => {
   };
 
   const handleCheckSelect = () => {
-    if (selectOption === "all") {
-      setpageNumber(1);
-      axios
-        .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
-        .then(function (response) {
-          setData(response.data.sort((a, b) => b.price - a.price));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    if (selectOption === "tang") {
-      axios
-        .get(`http://localhost:8000/api/product/allproduct`)
-        .then(function (response) {
-          setData(response.data.sort((a, b) => a.price - b.price));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    if (selectOption === "giam") {
-      axios
-        .get(`http://localhost:8000/api/product/allproduct`)
-        .then(function (response) {
-          setData(response.data.sort((a, b) => b.price - a.price));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-    if (selectOption === "new") {
-      axios
-        .get(`http://localhost:8000/api/product/allproduct`)
-        .then(function (response) {
-          setData(response.data.filter((e) => e.story === "NEW"));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-
-    if (selectOption === "sale") {
-      axios
-        .get(`http://localhost:8000/api/product/allproduct`)
-        .then(function (response) {
-          setData(response.data.filter((e) => e.story === "SALE"));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+    // if (selectOption === "all") {
+    //   setpageNumber(1);
+    //   axios
+    //     .get(`http://localhost:8000/api/product/allproduct?pageNumber=1`)
+    //     .then(function (response) {
+    //       setData(response.data.data.sort((a, b) => b.price - a.price));
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
+    // if (selectOption === "tang") {
+    //   axios
+    //     .get(`http://localhost:8000/api/product/allproduct`)
+    //     .then(function (response) {
+    //       setData(response.data.data.sort((a, b) => a.price - b.price));
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
+    // if (selectOption === "giam") {
+    //   axios
+    //     .get(`http://localhost:8000/api/product/allproduct`)
+    //     .then(function (response) {
+    //       setData(response.data.data.sort((a, b) => b.price - a.price));
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
+    // if (selectOption === "new") {
+    //   axios
+    //     .get(`http://localhost:8000/api/product/allproduct`)
+    //     .then(function (response) {
+    //       setData(response.data.data.filter((e) => e.story === "NEW"));
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
+    // if (selectOption === "sale") {
+    //   axios
+    //     .get(`http://localhost:8000/api/product/allproduct`)
+    //     .then(function (response) {
+    //       setData(response.data.data.filter((e) => e.story === "SALE"));
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // }
   };
 
   const handleChangePageNumer = (event, value) => {
@@ -100,7 +98,8 @@ const SaleProduct = () => {
     axios
       .get(`${url}`)
       .then(function (response) {
-        setData(response.data);
+        setData(response.data.data);
+        setTotal(response.data.total);
       })
       .catch(function (error) {
         console.log(error);
@@ -154,7 +153,7 @@ const SaleProduct = () => {
         <div className="navigation_page">
           <Stack>
             <Pagination
-              count={Math.floor(data.length / 9 + 1)}
+              count={Math.floor(total / 9 + 1)}
               variant="outlined"
               shape="rounded"
               page={pageNumber}
