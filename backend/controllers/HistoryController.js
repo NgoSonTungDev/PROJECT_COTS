@@ -12,7 +12,7 @@ const OrderhistoryController = {
           var SkipNumber = (page - 1) * 6;
           const sum = (await Orderhistory.find()).length;
           const result = await Orderhistory.find().skip(SkipNumber).limit(6);
-          return res.status(200).json({ total: sum, data: result });
+          return res.status(200).json({ total: sum, data: result.reverse() });
         }
         if (codeOrders) {
           var condition = codeOrders

@@ -10,10 +10,10 @@ const OrderConsolidationController = {
       res.status(500).json(error);
     }
   },
-  getAllOrder : async (req, res) => {
+  getAllOrder: async (req, res) => {
     try {
       const allOrder = await OrderConsolidation.find();
-      res.status(200).json(allOrder);
+      res.status(200).json(allOrder.reverse());
     } catch (error) {
       res.status(500).json(error);
     }

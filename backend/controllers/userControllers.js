@@ -16,7 +16,7 @@ const userController = {
           var SkipNumber = (page - 1) * 4;
 
           const result = await Users.find(condition).skip(SkipNumber).limit(4);
-          return res.status(200).json(result);
+          return res.status(200).json(result.reverse());
 
           // Users.find(condition)
           //   .then((data) => {

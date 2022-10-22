@@ -21,7 +21,7 @@ const ProductsController = {
           var SkipNumber = (page - 1) * 9;
           const sum = (await Products.find()).length;
           const result = await Products.find().skip(SkipNumber).limit(9);
-          return res.status(200).json({ total: sum, data: result });
+          return res.status(200).json({ total: sum, data: result.reverse() });
         }
 
         if (productName) {
