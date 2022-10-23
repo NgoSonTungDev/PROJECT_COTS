@@ -3,37 +3,23 @@ const { Users, Orderhistory } = require("../models/model");
 const OrderhistoryController = {
   getAllHistory: async (req, res) => {
     try {
-      var codeOrders = req.query?.codeOrders;
+      var storyOrder = req.query?.storyOrder;
       var page = req.query?.pageNumber;
+      page = parseInt(page);
+      var SkipNumber = (page - 1) * 5;
+      var condition = storyOrder
+        ? { Story: { $regex: new RegExp(storyOrder), $options: "i" } }
+        : {};
 
-      if (codeOrders || page) {
-        if (page) {
-          page = parseInt(page);
-          var SkipNumber = (page - 1) * 6;
-          const sum = (await Orderhistory.find()).length;
-          const result = await Orderhistory.find().skip(SkipNumber).limit(6);
-          return res.status(200).json({ total: sum, data: result.reverse() });
-        }
-        if (codeOrders) {
-          var condition = codeOrders
-            ? { codeOrders: { $regex: new RegExp(codeOrders), $options: "i" } }
-            : {};
-
-          Orderhistory.find(condition)
-            .then((data) => {
-              return res.send(data);
-            })
-            .catch((err) => {
-              res.status(500).send({
-                message:
-                  err.message ||
-                  "Some error occurred while retrieving history.",
-              });
-            });
-        }
+      if (storyOrder === "") {
+        const sum = (await Orderhistory.find()).length;
+        const result = await Orderhistory.find().skip(SkipNumber).limit(5);
+        return res.status(200).json({ total: sum, data: result.reverse() });
       } else {
-        const allOrderhistory = await Orderhistory.find();
-        return res.status(200).json(allOrderhistory);
+        const result = await Orderhistory.find(condition)
+          .skip(SkipNumber)
+          .limit(5);
+        return res.status(200).json({ data: result.reverse() });
       }
     } catch (error) {
       res.status(500).json(error);
