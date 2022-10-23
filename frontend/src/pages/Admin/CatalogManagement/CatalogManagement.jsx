@@ -4,6 +4,7 @@ import "./CatalogManagement.scss";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 import { ToastContainer, toast } from 'react-toastify';
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -17,6 +18,19 @@ const CatalogManagement = () => {
     const [search, setSearch] = useState("");
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [sowadd, setShowAdd] = useState(false);
+    const handleCloseAdd = () => setShowAdd(false);
+    const handleShowAdd = () => setShowAdd(true);
+    const [nameproduct, setNameProduct] = useState("");
+    const [image, setImage] = useState("");
+    const [price, setPrice] = useState("");
+    const [size, setSize] = useState("");
+    const [color, setColor] = useState("");
+    const [story, setStory] = useState("");
+    const [warehouse, setWarehouse] = useState("");
+    const [comment, setComment] = useState("");
+
+
 
     const onPress_ENTER = (event) => {
         var keyPressed = event.keyCode || event.which;
@@ -51,8 +65,31 @@ const CatalogManagement = () => {
         fetchData();
     }
 
-    const handleAdd = () => {
+    const handleAdd = async (e) => {
+        await axios
+            .post(`http://localhost:8000/api/product/addproduct`, {
+                NameProduct: nameproduct,
+                image: image.split(";"),
+                price: price,
+                Size: size.split(";"),
+                Color: color.split(";"),
+                story: story,
+                warehouse: warehouse,
+                comment: comment,
+            })
+            .then(function (response) {
+                toast.success("Thêm sản phẩm thành công ", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
 
+            })
+            .catch(function (error) {
+                console.log(error)
+                toast.error("Thêm sản phẩm thất bại", {
+                    position: toast.POSITION.BOTTOM_LEFT
+                });
+            })
+        fetchData();
     }
     const handleUpdate = () => {
 
@@ -79,7 +116,7 @@ const CatalogManagement = () => {
         axios
             .get(url)
             .then(function (response) {
-                setData(response.data);
+                setData(response.data.data);
                 console.log(response.data);
             })
             .catch(function (error) {
@@ -116,7 +153,10 @@ const CatalogManagement = () => {
                     </div>
                     <div className="container_catalog_body_main">
                         <div className="btn_add">
-                            <button onClick={handleAdd}>Thêm mới</button>
+                            <button
+                                onClick={() => {
+                                    handleShowAdd();
+                                }}>Thêm mới</button>
                         </div>
                         <div className="container_catalog_user_right_table">
                             <table>
@@ -192,6 +232,94 @@ const CatalogManagement = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+
+            {/* thêm mới */}
+            <Modal show={sowadd}
+                onHide={handleCloseAdd}
+                >
+                <Modal.Header closeButton>
+                    <Modal.Title>Thêm Mới Sản Phẩm</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Tên Sản Phẩm</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={nameproduct}
+                            onChange={(e) => { setNameProduct(e.target.value) }}
+                        />
+                    </Form.Group>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>ẢNH</Form.Label>
+                            <Form.Control type="file"
+                                value={image}
+                                onChange={(e) => { setImage(e.target.value) }} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Giá</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={price}
+                                onChange={(e) => { setPrice(e.target.value) }}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Size</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={size}
+                                onChange={(e) => { setSize(e.target.value) }}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Màu</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={color}
+                                onChange={(e) => { setColor(e.target.value) }}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>story</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={story}
+                                onChange={(e) => { setStory(e.target.value) }}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>warehouse</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={warehouse}
+                                onChange={(e) => { setWarehouse(e.target.value) }}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>comment</Form.Label>
+                            <Form.Control
+                                type="string"
+                                value={comment}
+                                onChange={(e) => { setComment(e.target.value) }}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAdd}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleAdd}>
+                        Add
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+
+
             <ToastContainer
                 autoClose={500}
             />
