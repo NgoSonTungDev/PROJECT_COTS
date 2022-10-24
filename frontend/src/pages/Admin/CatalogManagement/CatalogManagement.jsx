@@ -29,8 +29,8 @@ const CatalogManagement = () => {
   const [story, setStory] = useState("");
   const [warehouse, setWarehouse] = useState(1000);
   const [sowupdate, setShowUpdate] = useState(false);
-  const handleCloseUpdate = () => setShowAdd(false);
-  const handleShowUpdate = () => setShowAdd(true);
+  const handleCloseUpdate = () => setShowUpdate(false);
+  const handleShowUpdate = () => setShowUpdate(true);
 
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
@@ -61,7 +61,7 @@ const CatalogManagement = () => {
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Delete failed products !!! ", {
+        toast.error("Xóa sản phẩm thất bại !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
       });
@@ -79,7 +79,7 @@ const CatalogManagement = () => {
         warehouse: warehouse,
       })
       .then(function (response) {
-        toast.success("Add product successfully !!! ", {
+        toast.success("Thêm sản phẩm thành công !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
         handleCloseAdd();
@@ -89,11 +89,12 @@ const CatalogManagement = () => {
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Add product failed !!! ", {
+        toast.error("Thêm sản phẩm thất bại !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
       });
   };
+
   const handleUpdate = (e) => {
     axios
       .put(`http://localhost:8000/api/product/${id}`, {
@@ -139,12 +140,29 @@ const CatalogManagement = () => {
     fetchData(url);
   };
 
+  const handleGetApiUpdate = (ProductId) => {
+    axios
+      .get(`http://localhost:8000/api/product/${ProductId}`)
+      .then(function (response) {
+        setImage(response.data.image);
+        setNameProduct(response.data.NameProduct);
+        setSize(response.data.Size);
+        setColor(response.data.Color);
+        setPrice(response.data.price);
+        setWarehouse(response.data.warehouse);
+        setStory(response.data.story);
+        handleShowUpdate();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const fetchData = (url) => {
     axios
       .get(url)
       .then(function (response) {
         setData(response.data.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -182,13 +200,7 @@ const CatalogManagement = () => {
           </div>
           <div className="container_catalog_body_main">
             <div className="btn_add">
-              <button
-                onClick={() => {
-                  handleShowAdd();
-                }}
-              >
-                Thêm mới
-              </button>
+              <button onClick={handleShowAdd}>Thêm mới</button>
             </div>
             <div className="container_catalog_user_right_table">
               <table>
@@ -198,6 +210,8 @@ const CatalogManagement = () => {
                   <th>các Size</th>
                   <th>các Màu</th>
                   <th>Giá bán</th>
+                  <th>Story</th>
+                  <th>Tổng kho</th>
                   <th>Chức năng</th>
                 </tr>
                 {data.map((item) => (
@@ -219,6 +233,8 @@ const CatalogManagement = () => {
                     <td style={{ color: "#d63031", fontWeight: "600" }}>
                       {item.price}
                     </td>
+                    <td>{item.story}</td>
+                    <td>{item.warehouse}</td>
                     <td className="catalog_btn">
                       <button
                         onClick={() => {
@@ -230,8 +246,7 @@ const CatalogManagement = () => {
                       </button>
                       <button
                         onClick={() => {
-                          handleShowUpdate();
-                          SetId(item._id);
+                          handleGetApiUpdate(item._id);
                         }}
                       >
                         Sửa
@@ -366,9 +381,9 @@ const CatalogManagement = () => {
       </Modal>
 
       {/* update  */}
-      <Modal show={sowadd} onHide={handleCloseUpdate}>
+      <Modal show={sowupdate} onHide={handleCloseUpdate}>
         <Modal.Header closeButton>
-          <Modal.Title>Sứa Sản Phẩm</Modal.Title>
+          <Modal.Title>Sửa Sản Phẩm</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -393,9 +408,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>
-                Giá
-              </Form.Label>
+              <Form.Label>Giá</Form.Label>
               <Form.Control
                 type="text"
                 value={price}
