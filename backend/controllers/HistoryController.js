@@ -6,20 +6,21 @@ const OrderhistoryController = {
       var storyOrder = req.query?.storyOrder;
       var page = req.query?.pageNumber;
       page = parseInt(page);
-      var SkipNumber = (page - 1) * 5;
+      var SkipNumber = (page - 1) * 4;
       var condition = storyOrder
         ? { Story: { $regex: new RegExp(storyOrder), $options: "i" } }
         : {};
 
       if (storyOrder === "") {
         const sum = (await Orderhistory.find()).length;
-        const result = await Orderhistory.find().skip(SkipNumber).limit(5);
+        const result = await Orderhistory.find().skip(SkipNumber).limit(4);
         return res.status(200).json({ total: sum, data: result.reverse() });
       } else {
+        const sum = (await Orderhistory.find(condition)).length;
         const result = await Orderhistory.find(condition)
           .skip(SkipNumber)
-          .limit(5);
-        return res.status(200).json({ data: result.reverse() });
+          .limit(4);
+        return res.status(200).json({ total: sum, data: result.reverse() });
       }
     } catch (error) {
       res.status(500).json(error);

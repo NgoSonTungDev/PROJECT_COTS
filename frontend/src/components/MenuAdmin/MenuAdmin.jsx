@@ -81,7 +81,14 @@ const MenuAdmin = () => {
           >
             <i class="bx bx-wallet-alt"></i> <span>Quản lý thanh toán</span>
           </li>
-          <li className="option_menu_admin">
+          <li
+            className="option_menu_admin"
+            onClick={() => {
+              navigation("/home");
+              window.location.reload();
+              localStorage.clear();
+            }}
+          >
             <i class="bx bx-log-out"></i> <span>Đăng xuất</span>
           </li>
         </div>

@@ -67,14 +67,20 @@ const History = () => {
       });
   };
 
-  const handleEvaluated = () => {
+  const pushPaymentManager = (item) => {
     axios
-      .put(`http://localhost:8000/api/History/${historyID}`, {
-        Story: "Đã đánh giá sản phẩm",
+      .post("http://localhost:8000/api/TotalOrder/addToOrder", {
+        NameAccount: item.NameUser,
+        NameProduct: item.NameProduct,
+        price: item.price,
+        size: item.Size,
+        color: item.Color,
+        Amount: item.Amount,
+        total: item.Total,
+        dateTime: datenow + " " + timenow,
       })
       .then(function (response) {
         console.log(response);
-        fetchData();
       })
       .catch(function (error) {
         console.log(error);
@@ -98,7 +104,6 @@ const History = () => {
         });
         fetchData();
         handleClose();
-        handleEvaluated();
       })
       .catch(function (error) {
         console.log(error);
@@ -193,6 +198,9 @@ const History = () => {
                     {item.Story === "Chờ xác nhận" && (
                       <span style={{ color: "#2ecc71" }}>{item.Story}</span>
                     )}
+                    {item.Story === "Đã xác nhận" && (
+                      <span style={{ color: "#27ae60" }}>{item.Story}</span>
+                    )}
                     {item.Story === "Đã hủy đơn hàng" && (
                       <span style={{ color: "#d63031" }}>{item.Story}</span>
                     )}
@@ -216,6 +224,18 @@ const History = () => {
                       >
                         <i class="bx bx-low-vision"></i>{" "}
                         <span>Hủy đơn hàng</span>
+                      </button>
+                    )}
+                    {item.Story === "Đã xác nhận" && (
+                      <button
+                        className="CheckOrder"
+                        onClick={() => {
+                          pushPaymentManager(item);
+                          handleShipMent(item._id);
+                        }}
+                      >
+                        <i class="bx bx-check"></i>{" "}
+                        <span>Đã nhận được hàng</span>
                       </button>
                     )}
                     {item.Story === "Đã Thanh Toán" && (
@@ -242,19 +262,6 @@ const History = () => {
                       >
                         <i class="bx bx-star"></i>
                         <span>Đánh giá</span>
-                      </button>
-                    )}
-                    {item.Story === "Đã đánh giá sản phẩm" && (
-                      <button
-                        className="shopping"
-                        onClick={() => {
-                          navigation(
-                            `/productDetail/payment/${item.ProductID}`
-                          );
-                        }}
-                      >
-                        <i class="bx bx-shopping-bag"></i>
-                        <span>Mua lại</span>
                       </button>
                     )}
                   </td>

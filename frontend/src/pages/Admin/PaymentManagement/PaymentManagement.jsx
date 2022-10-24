@@ -33,8 +33,6 @@ const PaymentManagement = () => {
       .get("http://localhost:8000/api/TotalOrder/GetAllToOrder")
       .then(function (response) {
         setData(response.data);
-
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

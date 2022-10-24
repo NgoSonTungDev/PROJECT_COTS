@@ -54,91 +54,111 @@
   .container_OrderManagement_body_main {
     width: 100%;
     height: 92%;
-
-    .btn_add {
-      button {
-        float: right;
-      }
-    }
-
-    .container_OrderManagement_user_right_table {
-      margin-top: 50px;
+    .container_OrderManagement_body_main_Order {
       width: 100%;
-      height: 550px;
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        width: 6px;
-        background-color: #f5f5f5;
-      }
-
-      table {
-        width: 90%;
-        margin: 0 auto;
-
-        th {
-          text-align: center;
-        }
-
-        td,
-        th {
-          border: 1px solid #dddddd;
+      height: 100%;
+      background-color: #fcfffc;
+      .container_OrderManagement_body_main_button {
+        width: 80%;
+        height: 40px;
+        margin-left: 10%;
+        display: flex;
+        justify-content: space-between;
+        button {
+          cursor: pointer;
+          padding: 0px 15px;
+          margin-top: 10px;
+          background-color: #fcfffc;
+          border: 1px solid #333333;
+          border-radius: 3px;
           text-transform: capitalize;
-          padding: 10px;
-          font-size: 13px;
-          font-weight: 700;
+          font-weight: 400;
         }
-
-        td {
-          img {
-            width: 100px;
-          }
-
-          text-align: center;
+        .OrderManagement_btn1:hover {
+          color: #fcfffc;
+          background-color: #b2bec3;
+          border: 1px solid #b2bec3;
         }
-
-        .OrderManagement_btn {
-          width: 200px;
-
-          button {
-            width: 120px;
-            cursor: pointer;
-            padding: 5px 10px;
-            margin-top: 10px;
+        .OrderManagement_btn2:hover {
+          color: #fcfffc;
+          background-color: #2ecc71;
+          border: 1px solid #2ecc71;
+        }
+        .OrderManagement_btn6:hover {
+          color: #fcfffc;
+          background-color: #27ae60;
+          border: 1px solid #27ae60;
+        }
+        .OrderManagement_btn3:hover {
+          color: #fcfffc;
+          background-color: #c0392b;
+          border: 1px solid #c0392b;
+        }
+        .OrderManagement_btn4:hover {
+          color: #fcfffc;
+          background-color: #0984e3;
+          border: 1px solid #0984e3;
+        }
+        .OrderManagement_btn5:hover {
+          color: #fcfffc;
+          background-color: #27ae60;
+          border: 1px solid #27ae60;
+        }
+      }
+      .container_OrderManagement_body_main_table {
+        width: 95%;
+        margin-left: 2.5%;
+        height: 80%;
+        margin-top: 20px;
+        table {
+          width: 100%;
+          td,
+          th {
+            font-size: 13px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
             text-align: center;
-            border-radius: 5px;
-            font-size: 15px;
-            font-weight: 500;
-            background-color: transparent;
-
-            &:nth-child(2) {
-              border: 1px solid #0984e3;
-              color: #0984e3;
-            }
-
-            &:nth-child(1) {
-              border: 1px solid #ea2027;
-              color: #ea2027;
-            }
-
-            &:nth-child(2):hover {
-              color: #fff;
-              cursor: pointer;
-              background-color: #0984e3;
-            }
-
-            &:nth-child(1):hover {
-              color: #fff;
-              cursor: pointer;
-              background-color: #ea2027;
+            img {
+              width: 100px;
+              object-fit: cover;
             }
           }
-
-          i {
-            font-size: 20px;
-            margin-top: 2px;
+          td {
+            .button_OrderManagement {
+              flex-direction: column;
+              button {
+                margin: auto;
+                cursor: pointer;
+                background-color: transparent;
+                text-transform: capitalize;
+                display: block;
+                padding: 3px 10px;
+                border: 1px solid rgba(146, 144, 144, 0.867);
+                width: 100px;
+              }
+              .accept_order:hover {
+                color: #fff;
+                background-color: #27ae60;
+              }
+              .cancel_order:hover {
+                color: #fff;
+                background-color: #c0392b;
+              }
+              .Complete_order:hover {
+                color: #fff;
+                background-color: #0984e3;
+              }
+            }
           }
         }
+      }
+      .container_OrderManagement_body_main_pagination {
+        width: 100%;
+        height: 10%;
+        margin-top: 0px;
+        display: grid;
+        place-items: center;
       }
     }
   }
