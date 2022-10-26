@@ -51,6 +51,29 @@ const ProductsController = {
       res.status(500).json(error);
     }
   },
+  getAllAdmin: async (req, res) => {
+    try {
+      var NameProduct = req.query?.nameProduct;
+      var page = req.query?.pageNumber;
+      page = parseInt(page);
+      var SkipNumber = (page - 1) * 4;
+      var condition = NameProduct
+        ? { NameProduct: { $regex: new RegExp(NameProduct), $options: "i" } }
+        : {};
+
+      if (NameProduct === "") {
+        const sum = (await Products.find()).length;
+        const result = await Products.find().skip(SkipNumber).limit(4);
+        return res.status(200).json({ total: sum, data: result.reverse() });
+      } else {
+        const sum = (await Products.find(condition)).length;
+        const result = await Products.find(condition).skip(SkipNumber).limit(4);
+        return res.status(200).json({ total: sum, data: result.reverse() });
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   GetAnProducts: async (req, res) => {
     try {
       const Product = await Products.findById(req.params.id).populate(
