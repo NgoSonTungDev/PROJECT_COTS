@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { ToastContainer, toast } from "react-toastify";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 const CatalogManagement = () => {
   const [data, setData] = useState([]);
@@ -31,6 +32,13 @@ const CatalogManagement = () => {
   const [sowupdate, setShowUpdate] = useState(false);
   const handleCloseUpdate = () => setShowUpdate(false);
   const handleShowUpdate = () => setShowUpdate(true);
+  const [sowupdatetb, setShowUpdateTB] = useState(false);
+  const handleCloseUpdateTB = () => setShowUpdateTB(false);
+  const handleShowUpdateTB = () => setShowUpdateTB(true);
+  const [sowaddtb, setShowAddTB] = useState(false);
+  const handleCloseAddTB = () => setShowAddTB(false);
+  const handleShowAddTB = () => setShowAddTB(true);
+  const navigation = useNavigate();
 
   const onPress_ENTER = (event) => {
     var keyPressed = event.keyCode || event.which;
@@ -70,10 +78,10 @@ const CatalogManagement = () => {
   const handleAdd = (e) => {
     axios
       .post(`http://localhost:8000/api/product/addproduct`, {
-        Color: color.split(";"),
+        Color: color.split(","),
         NameProduct: nameproduct,
-        Size: size.split(";"),
-        image: image.split(";"),
+        Size: size.split(","),
+        image: image.split(","),
         price: price,
         story: story,
         warehouse: warehouse,
@@ -86,38 +94,42 @@ const CatalogManagement = () => {
         fetchData(
           `http://localhost:8000/api/product/allproduct?pageNumber=${pageNumber}`
         );
+        handleCloseAddTB();
       })
       .catch(function (error) {
         console.log(error);
         toast.error("Thêm sản phẩm thất bại !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
+        handleCloseAddTB();
       });
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = () => {
     axios
       .put(`http://localhost:8000/api/product/${id}`, {
-        Color: color.split(";"),
+        Color: color.split(","),
         NameProduct: nameproduct,
-        Size: size.split(";"),
-        image: image.split(";"),
+        Size: size.split(","),
+        image: image.split(","),
         price: price,
         story: story,
         warehouse: warehouse,
       })
       .then(function (response) {
-        toast.success("Update product successfully !!! ", {
+        toast.success("Chỉnh sửa sản phẩm thành công !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
         handleCloseUpdate();
+        handleCloseUpdateTB()
         fetchData(
           `http://localhost:8000/api/product/allproduct?pageNumber=${pageNumber}`
         );
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Update failed products !!! ", {
+        handleCloseUpdateTB()
+        toast.error("Chỉnh sửa sản phẩm thất bại !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
       });
@@ -144,10 +156,10 @@ const CatalogManagement = () => {
     axios
       .get(`http://localhost:8000/api/product/${ProductId}`)
       .then(function (response) {
-        setImage(response.data.image);
         setNameProduct(response.data.NameProduct);
-        setSize(response.data.Size);
-        setColor(response.data.Color);
+        setImage(response.data.image.toString());
+        setSize(response.data.Size.toString());
+        setColor(response.data.Color.toString());
         setPrice(response.data.price);
         setWarehouse(response.data.warehouse);
         setStory(response.data.story);
@@ -184,7 +196,13 @@ const CatalogManagement = () => {
         </div>
         <div className="container_catalog_body">
           <div className="container_catalog_body_search">
-            <p>Trang chủ</p>
+            <p
+              onClick={() => {
+                navigation("/home");
+              }}
+            >
+              Trang chủ
+            </p>
             <div className="container_catalog_body_search_input">
               <input
                 type="text"
@@ -207,10 +225,10 @@ const CatalogManagement = () => {
                 <tr>
                   <th>Hình ảnh</th>
                   <th>Tên sản phẩm</th>
-                  <th>các Size</th>
-                  <th>các Màu</th>
+                  <th>Các Size</th>
+                  <th>Các Màu</th>
                   <th>Giá bán</th>
-                  <th>Story</th>
+                  <th>Loại</th>
                   <th>Tổng kho</th>
                   <th>Chức năng</th>
                 </tr>
@@ -246,7 +264,9 @@ const CatalogManagement = () => {
                       </button>
                       <button
                         onClick={() => {
+                          // handleShowUpdate();
                           handleGetApiUpdate(item._id);
+                          SetId(item._id);
                         }}
                       >
                         Sửa
@@ -270,6 +290,7 @@ const CatalogManagement = () => {
           </div>
         </div>
       </div>
+      {/* modle xóa */}
       <Modal
         show={show}
         onHide={handleClose}
@@ -282,15 +303,36 @@ const CatalogManagement = () => {
         <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Đóng
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            Xóa
           </Button>
         </Modal.Footer>
       </Modal>
 
-      {/* thêm mới */}
+      {/* module thông báo thêm */}
+      <Modal
+        show={sowaddtb}
+        onHide={handleCloseAddTB}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có muốn thêm sản phẩm này không?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAddTB}>
+            Đóng
+          </Button>
+          <Button variant="danger" onClick={handleAdd}>
+            Thêm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/*module thêm mới */}
 
       <Modal show={sowadd} onHide={handleCloseAdd}>
         <Modal.Header closeButton>
@@ -298,7 +340,7 @@ const CatalogManagement = () => {
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Tên Sản Phẩm</Form.Label>
+            <Form.Label>Tên Sản Phẩm Cần Thêm</Form.Label>
             <Form.Control
               type="text"
               value={nameproduct}
@@ -309,7 +351,7 @@ const CatalogManagement = () => {
           </Form.Group>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>ẢNH</Form.Label>
+              <Form.Label>Ảnh Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={image}
@@ -319,7 +361,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Giá</Form.Label>
+              <Form.Label>Giá Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={price}
@@ -329,7 +371,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Size</Form.Label>
+              <Form.Label>Size Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={size}
@@ -339,7 +381,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Màu</Form.Label>
+              <Form.Label>Màu Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={color}
@@ -349,7 +391,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>story</Form.Label>
+              <Form.Label>Loại Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={story}
@@ -359,7 +401,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>warehouse</Form.Label>
+              <Form.Label>Tổng Kho Sản Phẩm Cần Thêm</Form.Label>
               <Form.Control
                 type="text"
                 value={warehouse}
@@ -372,22 +414,49 @@ const CatalogManagement = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseAdd}>
-            Close
+            Đóng
           </Button>
-          <Button variant="primary" onClick={handleAdd}>
-            Add
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleShowAddTB();
+              handleCloseAdd();
+            }}
+          >
+            Thêm
           </Button>
         </Modal.Footer>
       </Modal>
 
-      {/* update  */}
+      {/* modle thông báo */}
+      <Modal
+        show={sowupdatetb}
+        onHide={handleCloseUpdateTB}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Thông báo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Bạn có muốn cập nhật không?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdateTB}>
+            Đóng
+          </Button>
+          <Button variant="danger" onClick={handleUpdate}>
+            Cập nhật
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* module update  */}
+
       <Modal show={sowupdate} onHide={handleCloseUpdate}>
         <Modal.Header closeButton>
-          <Modal.Title>Sửa Sản Phẩm</Modal.Title>
+          <Modal.Title>Cập Nhật Thông Tin Sản Phẩm</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Tên Sản Phẩm</Form.Label>
+            <Form.Label>Tên Sản Phẩm Cần Cập Nhật</Form.Label>
             <Form.Control
               type="text"
               value={nameproduct}
@@ -398,7 +467,7 @@ const CatalogManagement = () => {
           </Form.Group>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>ẢNH</Form.Label>
+              <Form.Label>Ảnh Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={image}
@@ -408,7 +477,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Giá</Form.Label>
+              <Form.Label>Giá Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={price}
@@ -418,7 +487,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Size</Form.Label>
+              <Form.Label>Size Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={size}
@@ -428,7 +497,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Màu</Form.Label>
+              <Form.Label>Màu Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={color}
@@ -438,7 +507,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>story</Form.Label>
+              <Form.Label>Loại Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={story}
@@ -448,7 +517,7 @@ const CatalogManagement = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>warehouse</Form.Label>
+              <Form.Label>Tổng Kho Sản Phẩm Cần Cập Nhật</Form.Label>
               <Form.Control
                 type="text"
                 value={warehouse}
@@ -461,10 +530,13 @@ const CatalogManagement = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseUpdate}>
-            Close
+            Đóng
           </Button>
-          <Button variant="primary" onClick={handleUpdate}>
-            Update
+          <Button variant="primary" onClick={()=>{
+            handleShowUpdateTB()
+            handleCloseUpdate()
+          }}>
+            Cập nhật
           </Button>
         </Modal.Footer>
       </Modal>
