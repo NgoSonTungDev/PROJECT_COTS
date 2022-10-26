@@ -59,20 +59,29 @@
     }
   }
 
-  .container_SaleProduct_product_card {
-    width: 90%;
-    margin-left: 5%;
+  .container_SaleProduct_product_card_main {
+    width: 100%;
     height: cover;
-    display: flex;
-    flex-wrap: wrap;
+    .container_SaleProduct_product_card {
+      width: 90%;
+      margin-left: 5%;
+      height: cover;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
 
-    .container_CardProduct {
-      margin-left: 100px;
+    .navigation_page {
+      width: 90%;
+      margin-left: 5%;
+      height: 40px;
+      display: grid;
+      place-items: center;
     }
   }
+}
 
-  .navigation_page {
-    width: 200px;
-    margin: 0 auto;
-  }
+.PuffLoader {
+  position: relative;
+  margin-top: 100px;
 }

@@ -7,10 +7,12 @@ import "./Home.scss";
 import CardHome from "../../components/CardHome/CardHome";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
+import PuffLoader from "react-spinners/PuffLoader";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigate();
   const NewProduct = data.filter((item) => item.story === "NEW");
   const SaleProduct = data.filter((item) => item.story === "SALE");
@@ -20,8 +22,8 @@ const Home = () => {
     axios
       .get("http://localhost:8000/api/product/allproduct")
       .then(function (response) {
-        // console.log(response.data);
         setData(response.data);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -53,18 +55,41 @@ const Home = () => {
         <div className="container_home_product">
           <h1>NEW ARRIVAL</h1>
           <div className="container_home_product_card">
-            {/* <CardHome /> */}
-
-            {NewProduct.map((item) => (
-              <CardHome datacard={item} />
-            ))}
+            <PuffLoader
+              color="#00a78e"
+              className="PuffLoader"
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />{" "}
           </div>
+          {loading === false && (
+            <div className="container_home_product_card">
+              {NewProduct.map((item) => (
+                <CardHome datacard={item} />
+              ))}
+            </div>
+          )}
+
           <h1>BEST SELLER </h1>
           <div className="container_home_product_card">
-            {SaleProduct.map((item) => (
-              <CardHome datacard={item} />
-            ))}
+            <PuffLoader
+              color="#00a78e"
+              className="PuffLoader"
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />{" "}
           </div>
+          {loading === false && (
+            <div className="container_home_product_card">
+              {SaleProduct.map((item) => (
+                <CardHome datacard={item} />
+              ))}
+            </div>
+          )}
           <h1>INSTAGRAM : MAFLINE </h1>
           <div className="container_home_product_card_image">
             <ResponsiveMasonry

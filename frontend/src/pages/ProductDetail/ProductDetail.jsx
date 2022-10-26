@@ -162,7 +162,7 @@ const ProductDetail = () => {
                 <tr>
                   <td>Giá:</td>
                   <td>
-                    <i>180.000₫ </i> <b>{data.price}</b>
+                    <i>180.000₫ </i> <b>{data.price}₫</b>
                   </td>
                 </tr>
                 <br />

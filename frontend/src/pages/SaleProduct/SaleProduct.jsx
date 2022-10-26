@@ -6,11 +6,13 @@ import "./SaleProduct.scss";
 import CardProduct from "../../components/CardProduct/CardProduct";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import PuffLoader from "react-spinners/PuffLoader";
 
 const SaleProduct = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [pageNumber, setpageNumber] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
   const [selectOption, setSelectOption] = useState("all");
 
@@ -100,6 +102,7 @@ const SaleProduct = () => {
       .then(function (response) {
         setData(response.data.data);
         setTotal(response.data.total);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -145,21 +148,35 @@ const SaleProduct = () => {
             </div>
           </div>
         </div>
-        <div className="container_SaleProduct_product_card">
-          {data.map((item) => (
-            <CardProduct dataProduct={item} />
-          ))}
-        </div>
-        <div className="navigation_page">
-          <Stack>
-            <Pagination
-              count={Math.floor(total / 9 + 1)}
-              variant="outlined"
-              shape="rounded"
-              page={pageNumber}
-              onChange={handleChangePageNumer}
-            />
-          </Stack>
+        <div className="container_SaleProduct_product_card_main">
+          <PuffLoader
+            color="#00a78e"
+            className="PuffLoader"
+            loading={loading}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />{" "}
+          {loading === false && (
+            <div className="container_SaleProduct_product_card">
+              {data.map((item) => (
+                <CardProduct dataProduct={item} />
+              ))}
+            </div>
+          )}
+          {loading === false && (
+            <div className="navigation_page">
+              <Stack>
+                <Pagination
+                  count={Math.floor(total / 9 + 1)}
+                  variant="outlined"
+                  shape="rounded"
+                  page={pageNumber}
+                  onChange={handleChangePageNumer}
+                />
+              </Stack>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
