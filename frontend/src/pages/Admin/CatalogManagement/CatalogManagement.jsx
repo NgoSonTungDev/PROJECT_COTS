@@ -51,7 +51,7 @@ const CatalogManagement = () => {
   };
 
   const handleSearch = () => {
-    let url = `http://localhost:8000/api/product/allproduct?productName=${search}`;
+    let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${search}`;
     fetchData(url);
   };
 
@@ -64,7 +64,7 @@ const CatalogManagement = () => {
         });
         handleClose();
         fetchData(
-          `http://localhost:8000/api/product/allproduct?pageNumber=${pageNumber}`
+          `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${pageNumber}`
         );
       })
       .catch(function (error) {
@@ -92,7 +92,7 @@ const CatalogManagement = () => {
         });
         handleCloseAdd();
         fetchData(
-          `http://localhost:8000/api/product/allproduct?pageNumber=${pageNumber}`
+          `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${pageNumber}`
         );
         handleCloseAddTB();
       })
@@ -121,14 +121,14 @@ const CatalogManagement = () => {
           position: toast.POSITION.BOTTOM_LEFT,
         });
         handleCloseUpdate();
-        handleCloseUpdateTB()
+        handleCloseUpdateTB();
         fetchData(
-          `http://localhost:8000/api/product/allproduct?pageNumber=${pageNumber}`
+          `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${pageNumber}`
         );
       })
       .catch(function (error) {
         console.log(error);
-        handleCloseUpdateTB()
+        handleCloseUpdateTB();
         toast.error("Chỉnh sửa sản phẩm thất bại !!! ", {
           position: toast.POSITION.BOTTOM_LEFT,
         });
@@ -148,7 +148,7 @@ const CatalogManagement = () => {
 
   const handleChangePageNumer = (event, value) => {
     setpageNumber(value);
-    let url = `http://localhost:8000/api/product/allproduct?pageNumber=${value}`;
+    let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${value}`;
     fetchData(url);
   };
 
@@ -183,7 +183,8 @@ const CatalogManagement = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    let url = "http://localhost:8000/api/product/allproduct?pageNumber=1";
+    let url =
+      "http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=1";
     fetchData(url);
     getLength();
   }, []);
@@ -279,7 +280,7 @@ const CatalogManagement = () => {
             <div className="navigation_page">
               <Stack>
                 <Pagination
-                  count={Math.floor(total.length / 9 + 1)}
+                  count={Math.floor(total.length / 4 + 1)}
                   variant="outlined"
                   shape="rounded"
                   page={pageNumber}
@@ -532,10 +533,13 @@ const CatalogManagement = () => {
           <Button variant="secondary" onClick={handleCloseUpdate}>
             Đóng
           </Button>
-          <Button variant="primary" onClick={()=>{
-            handleShowUpdateTB()
-            handleCloseUpdate()
-          }}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleShowUpdateTB();
+              handleCloseUpdate();
+            }}
+          >
             Cập nhật
           </Button>
         </Modal.Footer>
