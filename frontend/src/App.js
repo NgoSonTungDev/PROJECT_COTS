@@ -36,15 +36,15 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/size-check" element={<Sizecheck />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
-          {admin === false && (
+          {/* {admin === false && ( */}
             <Route path="/productDetail/payment/:id" element={<Payment />} />
-          )}
-          {admin === false && (
+          {/* )} */}
+          {/* {admin === false && ( */}
             <Route
               path="/productDetail/order/payment/:id"
               element={<PaymentOrders />}
             />
-          )}
+          {/* )} */}
           <Route path="/sale-product" element={<SaleProduct />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
