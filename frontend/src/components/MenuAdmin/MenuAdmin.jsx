@@ -5,6 +5,7 @@ import "./MenuAdmin.scss";
 const MenuAdmin = () => {
   const navigation = useNavigate();
   const [check, setCheck] = useState(1);
+  const username = localStorage.getItem("username");
 
   const handleAcctive = (e) => {
     setCheck(e);
@@ -21,7 +22,7 @@ const MenuAdmin = () => {
             />
           </div>
           <div className="container_menu_admin_intro_text">
-            <p>ADMIN</p>
+            <p>{username}</p>
             <i>admin</i>
           </div>
         </div>

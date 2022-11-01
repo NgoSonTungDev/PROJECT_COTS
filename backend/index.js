@@ -11,6 +11,7 @@ const CommentRouter = require("./routes/cmt");
 const CartRouter = require("./routes/cart");
 const HistoryRouter = require("./routes/history");
 const TotalRouter = require("./routes/total");
+const StaticRouter = require("./routes/static");
 
 const app = express();
 app.use(cors());
@@ -39,8 +40,4 @@ app.use("/api/comment", CommentRouter);
 app.use("/api/cart", CartRouter);
 app.use("/api/History", HistoryRouter);
 app.use("/api/TotalOrder", TotalRouter);
-
-
-
-
-
+app.use("/api/TotalStatic", StaticRouter);
