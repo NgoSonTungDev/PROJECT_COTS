@@ -51,7 +51,7 @@ const CatalogManagement = () => {
   };
 
   const handleSearch = () => {
-    let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${search}`;
+    let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=${search}&pageNumber=1`;
     fetchData(url);
   };
 

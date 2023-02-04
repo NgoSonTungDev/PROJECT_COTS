@@ -1,4 +1,4 @@
-const { Products, Users, Cart } = require("../models/model");
+const { Products, Cart } = require("../models/model");
 
 const ProductsController = {
   addProducts: async (req, res) => {
@@ -96,11 +96,14 @@ const ProductsController = {
   },
   deleteProducts: async (req, res) => {
     try {
-      await Cart.updateMany(
-        { ProductID: req.params.id },
-        { $pull: { ProductID: req.params.id } }
+      const listIdCart = await Cart.find({ ProductID: req.params.id });
+
+      Promise.all(
+        listIdCart.map((productId) => Cart.findByIdAndDelete(productId._id))
       );
+
       await Products.findByIdAndDelete(req.params.id);
+
       res.status(200).json("Delete Succesfully !!!");
     } catch (error) {
       res.status(500).json(error);
