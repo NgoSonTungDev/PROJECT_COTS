@@ -58,7 +58,7 @@ const PaymentManagement = () => {
         </div>
         <div className="container_PaymentManagement_body">
           <div className="container_PaymentManagement_body_search">
-            <p>Trang chủ</p>
+            <p>Quản lý thanh toán</p>
             <div className="container_PaymentManagement_body_search_input">
               <input
                 type="text"

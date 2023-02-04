@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "../../../components/Chart/Chart";
 import MenuAdmin from "../../../components/MenuAdmin/MenuAdmin";
+import axios from "axios";
 import "./AdminHome.scss";
 
 const AdminHome = () => {
+  const [data, setData] = useState([]);
+
+  const fetchData = () => {
+    window.scrollTo(0, 0);
+    axios
+      .get("http://localhost:8000/api/TotalStatic/static")
+      .then(function (response) {
+        setData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className="container_AdminHome">
@@ -18,17 +37,17 @@ const AdminHome = () => {
             <div className="container_AdminHome_body_main_statistics">
               <div className="container_AdminHome_body_main_card">
                 <i class="bx bxs-user-account"></i>
-                <p>15</p>
+                <p>{data.Users}</p>
                 <span>Tài khoản</span>
               </div>
               <div className="container_AdminHome_body_main_card">
                 <i class="bx bx-folder"></i>
-                <p>20</p>
+                <p>{data.Products}</p>
                 <span>Sản phẩm</span>
               </div>
               <div className="container_AdminHome_body_main_card">
                 <i class="bx bxs-package"></i>
-                <p>190</p>
+                <p>{data.History}</p>
                 <span>Đơn Hàng</span>
               </div>
             </div>

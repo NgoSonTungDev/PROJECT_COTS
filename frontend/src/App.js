@@ -21,9 +21,6 @@ import PaymentManagement from "./pages/Admin/PaymentManagement/PaymentManagement
 
 function App() {
   const admin = localStorage.getItem("admin");
-  console.log("====================================");
-  console.log(admin);
-  console.log("====================================");
 
   return (
     <div>
@@ -37,17 +34,18 @@ function App() {
           <Route path="/size-check" element={<Sizecheck />} />
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           {/* {admin === false && ( */}
-            <Route path="/productDetail/payment/:id" element={<Payment />} />
+          <Route path="/productDetail/payment/:id" element={<Payment />} />
           {/* )} */}
           {/* {admin === false && ( */}
-            <Route
-              path="/productDetail/order/payment/:id"
-              element={<PaymentOrders />}
-            />
+          <Route
+            path="/productDetail/order/payment/:id"
+            element={<PaymentOrders />}
+          />
           {/* )} */}
           <Route path="/sale-product" element={<SaleProduct />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
+
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/account" element={<AccountManagement />} />
           <Route path="/admin/order" element={<OrderManagement />} />

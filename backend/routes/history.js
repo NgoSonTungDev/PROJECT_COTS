@@ -1,14 +1,14 @@
-const OrderhistoryController = require("../controllers/HistoryController")
+const OrderhistoryController = require("../controllers/historyController");
 const router = require("express").Router();
 
-router.post("/addToHistory",OrderhistoryController.addToOrderhistory)
+router.post("/addToHistory", OrderhistoryController.addToOrderhistory);
 
-router.get("/allHistory",OrderhistoryController.getAllHistory)
+router.get("/allHistory", OrderhistoryController.getAllHistory);
 
-router.get("/:id", OrderhistoryController.GetAnHistory)
+router.get("/:id", OrderhistoryController.GetAnHistory);
 
-router.put("/:id",OrderhistoryController.UpdateHistory)
+router.put("/:id", OrderhistoryController.UpdateHistory);
 
-router.delete("/:id",OrderhistoryController.DeleteFromOrderhistory)
+router.delete("/:id", OrderhistoryController.DeleteFromOrderhistory);
 
-module.exports = router
+module.exports = router;

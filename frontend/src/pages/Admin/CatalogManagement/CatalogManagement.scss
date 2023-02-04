@@ -17,7 +17,6 @@
     .container_catalog_body_search {
       width: 100%;
       height: 8%;
-      background-color: #fcfffc;
       border-bottom: 1px solid #a0a0a0b6;
       display: flex;
       position: relative;
@@ -69,7 +68,7 @@
       }
     }
     // tab-port
-  
+
     // //  tab-land
     // @media (min-width: 1200px) {
     //   .container_catalog_body_search {
@@ -113,10 +112,9 @@
 
     @media (min-width: 1800px) {
       .container_catalog_body_search {
-        background-color: yellow;
         width: 100%;
         p {
-          position: absolute; 
+          position: absolute;
           margin: 35px 55px;
         }
         .container_catalog_body_search_input {
