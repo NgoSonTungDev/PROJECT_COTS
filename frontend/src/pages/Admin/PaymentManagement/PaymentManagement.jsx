@@ -91,17 +91,19 @@ const PaymentManagement = () => {
                     </td>
                     <td>{item.size}</td>
                     <td>{item.color}</td>
-                    <td>{item.price}</td>
+                    <td className="color">{item.price}</td>
                     <td>{item.Amount}</td>
                     <td>{item.dateTime}</td>
-                    <td>{item.total}</td>
+                    <td className="color">{item.total}</td>
                   </tr>
                 ))}
               </table>
             </div>
 
             <div className="PaymentManagement_total">
-              <p>Tổng doanh thu: {sumAll}</p>
+              <p>
+                Tổng doanh thu: <span className="color">{sumAll} VND</span>{" "}
+              </p>
             </div>
             <div className="PaymentManagement_pagination">
               {/* <Stack>
