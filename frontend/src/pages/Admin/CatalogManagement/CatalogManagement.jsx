@@ -51,8 +51,13 @@ const CatalogManagement = () => {
   };
 
   const handleSearch = () => {
-    let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=&pageNumber=${search}`;
-    fetchData(url);
+    if (search === "") {
+      alert("Nhập sản phẩm muốn tìm !!!");
+    } else {
+      setpageNumber(1);
+      let url = `http://localhost:8000/api/product/all_product_admin?nameProduct=${search}&pageNumber=1`;
+      fetchData(url);
+    }
   };
 
   const handleDelete = () => {
@@ -135,6 +140,16 @@ const CatalogManagement = () => {
       });
   };
 
+  function handleReset() {
+    setNameProduct("");
+    setImage("");
+    setPrice("");
+    setSize("");
+    setColor("");
+    setStory("");
+    setWarehouse("");
+  }
+
   const getLength = () => {
     axios
       .get("http://localhost:8000/api/product/allproduct")
@@ -202,7 +217,7 @@ const CatalogManagement = () => {
                 navigation("/home");
               }}
             >
-              Trang chủ
+              Quản Lý Danh Mục
             </p>
             <div className="container_catalog_body_search_input">
               <input
@@ -219,7 +234,10 @@ const CatalogManagement = () => {
           </div>
           <div className="container_catalog_body_main">
             <div className="btn_add">
-              <button onClick={handleShowAdd}>Thêm mới</button>
+              <button onClick={() => {
+                handleShowAdd();
+                handleReset();
+              }}>Thêm mới</button>
             </div>
             <div className="container_catalog_user_right_table">
               <table>

@@ -45,6 +45,7 @@ function App() {
           <Route path="/sale-product" element={<SaleProduct />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/cart" element={<Cart />} />
+
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/admin/account" element={<AccountManagement />} />
           <Route path="/admin/order" element={<OrderManagement />} />

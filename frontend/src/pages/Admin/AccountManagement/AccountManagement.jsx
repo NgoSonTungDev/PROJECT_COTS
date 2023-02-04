@@ -96,7 +96,7 @@ const AccountManagement = () => {
         </div>
         <div className="container_AccountManagement_body">
           <div className="container_AccountManagement_body_search">
-            <p>Trang chủ</p>
+            <p>Quản lý tài khoản</p>
             <div className="container_AccountManagement_body_search_input">
               <input
                 type="text"
