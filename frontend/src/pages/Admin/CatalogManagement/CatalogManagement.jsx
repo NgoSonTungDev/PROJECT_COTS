@@ -202,7 +202,7 @@ const CatalogManagement = () => {
                 navigation("/home");
               }}
             >
-              Trang chủ
+              Quản Lý Danh Mục
             </p>
             <div className="container_catalog_body_search_input">
               <input

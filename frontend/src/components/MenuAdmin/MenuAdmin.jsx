@@ -4,12 +4,8 @@ import "./MenuAdmin.scss";
 
 const MenuAdmin = () => {
   const navigation = useNavigate();
-  const [check, setCheck] = useState(1);
-  const username = localStorage.getItem("username");
 
-  const handleAcctive = (e) => {
-    setCheck(e);
-  };
+  const username = localStorage.getItem("username");
 
   return (
     <div>
@@ -28,55 +24,40 @@ const MenuAdmin = () => {
         </div>
         <div className="container_menu_admin_navbar">
           <li
-            className={`option_menu_admin  ${
-              check === 1 && "acctiveMenuAdmin"
-            }`}
+            className={`option_menu_admin `}
             onClick={() => {
-              handleAcctive(1);
               navigation("/admin/home");
             }}
           >
             <i class="bx bx-home"></i> <span>Trang Chủ</span>
           </li>
           <li
-            className={`option_menu_admin  ${
-              check === 2 && "acctiveMenuAdmin"
-            }`}
+            className={`option_menu_admin `}
             onClick={() => {
-              handleAcctive(2);
               navigation("/admin/catalog");
             }}
           >
             <i class="bx bx-list-plus"></i> <span>Quản lý danh mục</span>
           </li>
           <li
-            className={`option_menu_admin  ${
-              check === 3 && "acctiveMenuAdmin"
-            }`}
+            className={`option_menu_admin `}
             onClick={() => {
-              handleAcctive(3);
               navigation("/admin/account");
             }}
           >
             <i class="bx bxs-user-account"></i> <span>Quản lý tài khoản</span>
           </li>
           <li
-            className={`option_menu_admin  ${
-              check === 4 && "acctiveMenuAdmin"
-            }`}
+            className={`option_menu_admin  `}
             onClick={() => {
-              handleAcctive(4);
               navigation("/admin/order");
             }}
           >
             <i class="bx bxs-package"></i> <span>Quản lý đơn hàng</span>
           </li>
           <li
-            className={`option_menu_admin  ${
-              check === 5 && "acctiveMenuAdmin"
-            }`}
+            className={`option_menu_admin  $`}
             onClick={() => {
-              handleAcctive(5);
               navigation("/admin/payment");
             }}
           >
